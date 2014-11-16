@@ -2,6 +2,18 @@ doctype html
 html
     head
         title squeal
+        link(rel="stylesheet", href="/vendor/pure/pure-min.css")
         block headmatter
     body
-        block body
+        #layout.content.pure-g
+            #nav.pure-u-1
+                .pure-menu.pure-menu-open
+                    a.pure-menu-heading SQueaL
+                
+                    ul
+                        li: a(href="/console") Console
+                        li: a(href="/schema") Schema
+                        li: a(href="/settings") Settings
+            #main.pure-u-1
+                .l-box
+                    block content

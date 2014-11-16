@@ -1,0 +1,7 @@
+extend layout/main
+
+block content
+    form#console.pure-form.pure-form-stacked(action="/console", method="post")
+        label Query
+            textarea(name="query", rows=15, cols=80)=query
+        input.pure-button.pure-button-primary(type="submit", value="Go")
