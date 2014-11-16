@@ -1,0 +1,1 @@
+exports.staticAssetMaxAge = 604800000; // 1 week
