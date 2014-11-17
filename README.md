@@ -1,6 +1,8 @@
 squeal
 ======
 
+Example database: http://www.commandprompt.com/ppbook/booktown.sql
+
 Todo
 ====
 * Double-post protection / CSRF
@@ -8,9 +10,11 @@ Todo
 * Preconfigured database connections
 * Query timer
 * Auto-limit
+* Parameters
 * Sortable results
 * Error handling
 * Inline error tooltip?
+* Ask before leaving page
 * Query history per user (view, edit, delete)
 * Long running queries
 * Syntax highlighting

@@ -5,3 +5,7 @@ block content
         label Query
             textarea(name="query", rows=15, cols=80)=query
         input.pure-button.pure-button-primary(type="submit", value="Go")
+    #rows
+        if rows && rows.length
+            each row in rows
+                .row=JSON.stringify(row)
