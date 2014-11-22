@@ -17,7 +17,12 @@ Todo
 * Ask before leaving page
 * Query history per user (view, edit, delete)
 * Long running queries
-* Syntax highlighting
+* Syntax highlighting?
 * Schema browser (owner and est. row count info)
 * Plugins
 * Permissions (detect insert/update/delete)
+* Canned Reports
+* Export to csv
+* Raw output
+* Max field length (preference?)
+* Administration
