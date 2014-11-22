@@ -1,4 +1,4 @@
-squeal
+sqlinjector
 ======
 
 Example database: http://www.commandprompt.com/ppbook/booktown.sql
