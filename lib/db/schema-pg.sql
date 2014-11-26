@@ -1,11 +1,13 @@
-create database sqin;
+begin;
+
+create schema sqin;
 
 create table sqin.User (
     userId uuid primary key,
     username text not null unique,
     password text,
     preferences json,
-    inactiveDate timestamp with timezone
+    inactiveDate timestamp with time zone
 );
 
 create table sqin.Permission (
@@ -21,7 +23,7 @@ create table sqin.userPermission (
 
 create table sqin.DatabaseType (
     databaseType text primary key
-)
+);
 
 create table sqin.Connection (
     connectionId uuid primary key,
@@ -30,7 +32,7 @@ create table sqin.Connection (
     database text not null,
     username text not null,
     password text not null,
-    inactiveDate timestamp with timezone
+    inactiveDate timestamp with time zone
 );
 
 create table sqin.StatementType (
@@ -41,15 +43,15 @@ create table sqin.Statement (
     statementId uuid primary key,
     statementText text not null,
     parameters text[],
-    statementType not null references sqin.StatementType,
-    createDate timestamp with timezone not null default now()
+    statementType text not null references sqin.StatementType,
+    createDate timestamp with time zone not null default now()
 );
 
 create table sqin.Report (
     reportId uuid primary key,
     name text not null,
     description text,
-    inactiveDate timestamp with timezone
+    inactiveDate timestamp with time zone
 );
 
-
+commit;

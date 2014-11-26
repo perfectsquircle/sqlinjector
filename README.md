@@ -26,3 +26,4 @@ Todo
 * Raw output
 * Max field length (preference?)
 * Administration
+* Design logo (blocky font with syringe?)

@@ -13,10 +13,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var indexController = require("./routes/indexController");
 var consoleController = require("./routes/consoleController");
+var adminController = require("./routes/adminController");
 
 app.get("/", indexController.root);
 app.get("/console", consoleController.getConsole);
 app.post("/console", consoleController.postConsole);
+
+app.get("/admin", adminController.getadminPage);
 
 app.listen(3001, function() {
 	console.log("Express server listening on port 3001");

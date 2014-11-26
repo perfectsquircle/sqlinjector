@@ -1,9 +1,10 @@
 {
   "name": "sqlinjector",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "bluebird": "^2.3.11",
     "body-parser": "^1.9.2",
     "express": "^4.10.2",
     "jade": "^1.7.0",
