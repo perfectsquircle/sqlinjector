@@ -2,14 +2,18 @@ doctype html
 html
     head
         title SQL Injector
-        link(rel="stylesheet", href="/vendor/pure/pure-min.css")
-        block headmatter
+
+        block style
+            link(rel="stylesheet", href="/vendor/pure/pure-min.css")
+            link(rel="stylesheet", href="//fonts.googleapis.com/css?family=Ubuntu")
+            link(rel="stylesheet", href="/css/common.css")
+        block js
     body
         #layout.content.pure-g
             #nav.pure-u-1
-                .pure-menu.pure-menu-open
+                .pure-menu.pure-menu-open.pure-menu-horizontal
                     a.pure-menu-heading SQL Injector
-                
+
                     ul
                         li: a(href="/console") Console
                         li: a(href="/schema") Schema

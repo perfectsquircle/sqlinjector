@@ -1,0 +1,21 @@
+/*  FONTS  */
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: "Ubuntu", "Helvetica", sans-serif;
+    font-weight: 400;
+}
+
+.mono {
+    font-family: "Ubuntu Mono", monospace;
+}
+
+/*  MIXINS  */
+
+.scroll {
+    overflow: auto;
+}
+
+.l-box {
+    padding: 1em;
+}
