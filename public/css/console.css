@@ -2,3 +2,7 @@
 .console-input {
     width: 100%;
 }
+
+.result-area {
+    margin-top: 10px;
+}

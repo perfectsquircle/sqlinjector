@@ -5,10 +5,10 @@ block append style
 
 block content
     .console
-        form.pure-form.pure-form-stacked.pure-u-1(action="/console", method="post")
-            label Query
-                textarea.mono.console-input(name="query", rows=15, cols=80)=query
-            input.pure-button.pure-button-primary(type="submit", value="Go")
+        form.pure-form.pure-form-stacked(action="/console", method="post")
+            label Statement
+                textarea.mono.console-input(name="query", rows=15, cols=80, required, autofocus)=query
+            input.pure-button.pure-button-primary(type="submit", value="Execute")
     .result-area
         if error
             div.error
