@@ -3,7 +3,7 @@ sqlinjector
 
 Example database: http://www.commandprompt.com/ppbook/booktown.sql
 
-Todo
+Ideas
 ====
 * Double-post protection / CSRF
 * Users
@@ -18,14 +18,18 @@ Todo
 * Ask before leaving page
 * Query history per user (view, edit, delete)
 * Long running queries
+** Queue 
+** Notify when done
 * Syntax highlighting?
 ** http://codemirror.net/
 * Schema browser (owner and est. row count info)
 * Plugins
 * Permissions (detect insert/update/delete)
 * Canned Reports
-* Export to csv
+** Export to csv
+** Export to HTML (like pgadmin)
 * Raw output
 * Max field length (preference?)
 * Administration
 * Design logo (blocky font with syringe?)
+
