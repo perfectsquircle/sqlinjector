@@ -12,7 +12,10 @@
     "knex": "^0.7.3",
     "sqlite3": "^3.0.4"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

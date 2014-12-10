@@ -1,6 +1,6 @@
 //var permissions = require("../model/permissions");
 //var users = require("../model/users");
-var Promise = require("bluebird");
+//var Promise = require("bluebird");
 var User = require("../model/user");
 
 exports.getadminPage = function(req, res, next) {
@@ -19,4 +19,4 @@ exports.getadminPage = function(req, res, next) {
                 //reports: reports
             });
     }).error(next);       
-}
+};

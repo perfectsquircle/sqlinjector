@@ -8,4 +8,4 @@ exports.getActive = function() {
     }).then(function(result) {
         return result.rows;
     });
-}
+};
