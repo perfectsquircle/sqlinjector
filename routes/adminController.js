@@ -2,6 +2,7 @@
 //var users = require("../model/users");
 //var Promise = require("bluebird");
 var User = require("../model/user");
+var logger = require("../lib/logger");
 
 exports.getadminPage = function(req, res, next) {
     /*var user = res.locals.user;
@@ -12,7 +13,7 @@ exports.getadminPage = function(req, res, next) {
     //Promise.join(users.getActive(), //connections.getActive(), reports.getActive() ])
     //    function(users, connections, reports) {
 	User.forge({ inactiveDate: null }).fetchAll().then(function(users) {
-		console.dir(users);
+		logger.debug(users);
             res.render("admin/admin", {
                 users: users.toJSON(),
                 //connections: connections,

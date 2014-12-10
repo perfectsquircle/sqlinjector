@@ -10,7 +10,8 @@
     "express": "^4.10.2",
     "jade": "^1.7.0",
     "knex": "^0.7.3",
-    "sqlite3": "^3.0.4"
+    "sqlite3": "^3.0.4",
+    "winston": "^0.8.3"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

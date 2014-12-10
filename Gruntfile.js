@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 			files: [ "**/*.js", "!node_modules/**", "!bower_components/**" ]
 		},
 		clean: {
-			dist: [ "dist" ]
+			dist: [ "dist", "<%= pkg.name %>-<%= pkg.version %>.tgz" ]
 		},
 		copy: {
 			all: {

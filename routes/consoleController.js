@@ -1,4 +1,5 @@
 var db = require("../lib/example-db");
+var logger = require("../lib/logger");
 
 exports.getConsole = function(req, res, next) {
     res.render("console/console");
@@ -9,7 +10,7 @@ exports.postConsole = function(req, res, next) {
     
     if (query) {
         db.query(query, [], function(error, result) {
-            console.dir(result);
+            logger.debug(result);
             res.render("console/console", { error: error, query: query, result: result });
         });
     }

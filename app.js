@@ -2,6 +2,7 @@ var config = require("./config");
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
+var logger = require("./lib/logger");
 
 var app = express();
 
@@ -22,5 +23,5 @@ app.post("/console", consoleController.postConsole);
 app.get("/admin", adminController.getadminPage);
 
 app.listen(3001, function() {
-	console.log("Express server listening on port 3001");
+	logger.info("Express server listening on port 3001");
 });
