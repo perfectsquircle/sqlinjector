@@ -14,10 +14,10 @@ exports.getadminPage = function(req, res, next) {
     //    function(users, connections, reports) {
 	User.forge({ inactiveDate: null }).fetchAll().then(function(users) {
 		logger.debug(users);
-            res.render("admin/admin", {
-                users: users.toJSON(),
-                //connections: connections,
-                //reports: reports
-            });
+        res.render("admin/admin", {
+            users: users.toJSON(),
+            //connections: connections,
+            //reports: reports
+        });
     }).error(next);       
 };

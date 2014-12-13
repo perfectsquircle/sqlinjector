@@ -1,0 +1,11 @@
+extend ../layout/main
+
+block content
+    if error    
+        pre=error
+    form.pure-form.pure-form-stacked(method="post", action="/login")
+        label Username
+            input(type="text", name="username", value=username, required, autofocus)
+        label Password
+            input(type="password", name="password", required)
+        input.pure-btn(type="submit", value="Login")

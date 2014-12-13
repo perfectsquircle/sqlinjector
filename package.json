@@ -4,10 +4,12 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.1.0",
     "bluebird": "^2.3.11",
     "body-parser": "^1.9.2",
     "bookshelf": "^0.7.9",
     "express": "^4.10.2",
+    "express-session": "^1.9.3",
     "jade": "^1.7.0",
     "knex": "^0.7.3",
     "sqlite3": "^3.0.4",
