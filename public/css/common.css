@@ -19,3 +19,20 @@ html, button, input, select, textarea,
 .l-box {
     padding: 1em;
 }
+
+.block {
+    box-shadow: #ddd 1px 1px 8px;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
+
+.block .block-heading {
+    padding: 0.5em 1em;
+    border-bottom: 1px solid #aaa;
+}
+
+.block .block-body {
+    padding: 1em;
+    font-size: 9pt;
+}
+

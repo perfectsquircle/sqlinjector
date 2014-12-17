@@ -1,10 +1,10 @@
 //var permissions = require("../model/permissions");
 //var users = require("../model/users");
 //var Promise = require("bluebird");
-var User = require("../model/user");
+var User = require("../model/User");
 var logger = require("../lib/logger");
 
-exports.getadminPage = function(req, res, next) {
+exports.getAdminPage = function(req, res, next) {
     /*var user = res.locals.user;
     if (!user.hasPermission("admin")) {
         return next("You are not an admin.");

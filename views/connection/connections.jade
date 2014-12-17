@@ -1,0 +1,22 @@
+extend ../layout/main
+
+block content
+    section.connections
+        each connection in connections
+            .connection.pure-u-1-4.block
+                .block-heading #{connection.username}@#{connection.hostname}/#{connection.database}
+                .block-body
+                    .pure-u-1-2
+                        strong Hostname
+                    .pure-u-1-2
+                        span.mono=connection.hostname
+                    .pure-u-1-2
+                        strong Database
+                    .pure-u-1-2
+                        span.mono=connection.database
+                    .pure-u-1-2
+                        strong Username
+                    .pure-u-1-2
+                        span.mono=connection.username
+                    .pure-u-1
+                        a(href="#") connect
