@@ -3,26 +3,35 @@ extend ../layout/main
 block append style
     link(rel="stylesheet", href="/css/console.css")
 
+block append js
+    script.
+        App.connectionId = #{connection.connectionId};
+    script(src="/js/console.js")
+
 block content
-    .console
-        form.pure-form.pure-form-stacked(action="/console", method="post")
-            label Statement
-                textarea.mono.console-input(name="query", rows=15, cols=80, required, autofocus)=query
-            input.pure-button.pure-button-primary(type="submit", value="Execute")
-    .result-area
-        if error
-            div.error
-                pre=error
-        if result
-            - var fields = result.fields;
-            - var rows = result.rows;
-            .scroll
-                table.result-rows.pure-table.pure-table-horizontal.mono
-                    thead
-                        each field in fields
-                            th(title=JSON.stringify(field)) #{field.name}
-                    tbody
-                        each row in rows
-                            tr
-                                for value, key in row
-                                    td=value
+    if async
+        center.progress-area
+            div Establishing Connection
+            progress(value=12, max=100)
+    .console(hidden)
+        .statement-area
+            form.pure-form.pure-form-stacked.statement-form(action="~", method="post")
+                textarea.mono.console-input(name="query", rows=15, cols=80, placeholder="Statement..." required, autofocus)=query
+                input.pure-button.pure-button-primary(type="submit", value="Execute", title="Execute (ctrl+enter)")
+        .result-area
+            if error
+                div.error
+                    pre=error
+            if result
+                - var fields = result.fields;
+                - var rows = result.rows;
+                .scroll
+                    table.result-rows.pure-table.pure-table-horizontal.mono
+                        thead
+                            each field in fields
+                                th(title=JSON.stringify(field)) #{field.name}
+                        tbody
+                            each row in rows
+                                tr
+                                    for value, key in row
+                                        td=value

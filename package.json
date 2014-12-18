@@ -1,6 +1,6 @@
 {
   "name": "sqlinjector",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
@@ -14,7 +14,8 @@
     "jade": "^1.7.0",
     "knex": "^0.7.3",
     "sqlite3": "^3.0.4",
-    "winston": "^0.8.3"
+    "winston": "^0.8.3",
+    "ws": "~0.6.3"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

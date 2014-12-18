@@ -23,17 +23,19 @@ var connectionController = require("./routes/connectionController");
 app.get("/login", authController.getLogin);
 app.post("/login", authController.postLogin);
 
+if (app.get("env") === "development") {
+    // fake routes:
+    app.get("/console", consoleController.getConsole);
+    app.post("/console", consoleController.postConsole);
+}
+
 app.use(authController.authMiddleware);
 
 app.get("/", indexController.root);
 app.get("/connections", connectionController.getConnections);
+app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
 app.get("/admin", adminController.getAdminPage);
 
-// fake routes:
-app.get("/console", consoleController.getConsole);
-app.post("/console", consoleController.postConsole);
-
-
 app.listen(3001, function () {
-    logger.info("Express server listening on port 3001");
+    logger.info("Express server listening on port 3001 in %s mode", app.get("env"));
 });
