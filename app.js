@@ -19,6 +19,7 @@ var authController = require("./routes/authController");
 var consoleController = require("./routes/consoleController");
 var adminController = require("./routes/adminController");
 var connectionController = require("./routes/connectionController");
+var schemaController = require("./routes/schemaController");
 
 app.get("/login", authController.getLogin);
 app.post("/login", authController.postLogin);
@@ -34,6 +35,7 @@ app.use(authController.authMiddleware);
 app.get("/", indexController.root);
 app.get("/connections", connectionController.getConnections);
 app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
+app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
 app.get("/admin", adminController.getAdminPage);
 
 app.listen(3001, function () {

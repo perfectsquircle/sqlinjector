@@ -86,15 +86,7 @@ SocketController.prototype = {
             inactiveDate: null
         }).fetch().then(function(connection) {
             var cn = connection.toJSON();
-            self.knex = knex({
-                client: cn.databaseType,
-                connection: {
-                    host: cn.hostname,
-                    database: cn.database,
-                    user: cn.username,
-                    password: cn.password
-                }
-            });
+            self.knex = connection.getClient();
         }).then(function() {
             self.ws.send("connect");
         }).catch(function(error) {

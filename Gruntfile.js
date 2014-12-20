@@ -41,5 +41,5 @@ module.exports = function(grunt) {
     grunt.registerTask("dist", ["default", "clean", "copy"]);
     grunt.registerTask("package", ["dist", "compress"]);
 
-    grunt.registerTask("dev", ["jsbeautifier", "jshint"]);
+    grunt.registerTask("format", ["jsbeautifier", "jshint"]);
 };

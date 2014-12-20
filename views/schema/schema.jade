@@ -1,0 +1,16 @@
+extend ../layout/main
+
+block content
+    ul.schemas
+    li Schemas (#{schema.length})
+        ul.schema
+            each schemak in schema
+                li.schemak=schemak.name
+                    ul.relations(style="padding-left: 15px;")
+                        each array, key in schemak
+                            if key == "name" 
+                                - continue;
+                            li #{key} (#{array.length})
+                                ul.relations(style="padding-left: 15px")
+                                    each relation in array
+                                        li.relation #{relation.name}
