@@ -9,10 +9,18 @@ var app = express();
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
-app.use(express.static(path.join(__dirname, "public"), { maxAge: config.staticAssetMaxAge }));
-app.use("/vendor", express.static(path.join(__dirname, "bower_components"), { maxAge: config.staticAssetMaxAge }));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0" }));
+app.use(express.static(path.join(__dirname, "public"), {
+    maxAge: config.staticAssetMaxAge
+}));
+app.use("/vendor", express.static(path.join(__dirname, "bower_components"), {
+    maxAge: config.staticAssetMaxAge
+}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(session({
+    secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0"
+}));
 
 var indexController = require("./routes/indexController");
 var authController = require("./routes/authController");
@@ -38,6 +46,6 @@ app.get("/connection/:connectionId/console", consoleController.getConnectionCons
 app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
 app.get("/admin", adminController.getAdminPage);
 
-app.listen(3001, function () {
+app.listen(3001, function() {
     logger.info("Express server listening on port 3001 in %s mode", app.get("env"));
 });

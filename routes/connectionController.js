@@ -9,6 +9,8 @@ exports.getConnections = function(req, res, next) {
         inactiveDate: null,
         ownerId: user.userId
     }).fetchAll().then(function(connections) {
-        res.render("connection/connections", { connections: connections.toJSON() });
+        res.render("connection/connections", {
+            connections: connections.toJSON()
+        });
     }).catch(next);
 };

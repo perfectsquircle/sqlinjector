@@ -11,11 +11,15 @@ exports.getConsole = function(req, res, next) {
 
 exports.postConsole = function(req, res, next) {
     var query = req.body.query;
-    
+
     if (query) {
         db.query(query, [], function(error, result) {
             logger.debug(result);
-            res.render("console/demoConsole", { error: error, query: query, result: result });
+            res.render("console/demoConsole", {
+                error: error,
+                query: query,
+                result: result
+            });
         });
     }
 };
@@ -28,8 +32,13 @@ exports.getConnectionConsole = function(req, res, next) {
         connectionId: connectionId,
         ownerId: user.userId,
         inactiveDate: null
-    }).fetch({ required: true }).then(function(connection) {
-        res.render("console/console", { connection: connection.toJSON(), async: true });
+    }).fetch({
+        required: true
+    }).then(function(connection) {
+        res.render("console/console", {
+            connection: connection.toJSON(),
+            async: true
+        });
     }).catch(function(error) {
         next(error);
     });
@@ -76,7 +85,7 @@ SocketController.prototype = {
         }
     },
 
-    handleConnect: function (connectionId) {
+    handleConnect: function(connectionId) {
         var self = this;
 
         this.cleanup();

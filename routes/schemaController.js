@@ -10,12 +10,14 @@ exports.getConnectionSchema = function(req, res, next) {
         connectionId: connectionId,
         ownerId: user.userId,
         inactiveDate: null
-    }).fetch({ required: true }).then(function(connection) {
+    }).fetch({
+        required: true
+    }).then(function(connection) {
         return [connection, connection.getSchema()];
     }).spread(function(connection, schema) {
-        res.render("schema/schema", { 
-            connection: connection.toJSON(), 
-            schema: schema 
+        res.render("schema/schema", {
+            connection: connection.toJSON(),
+            schema: schema
         });
     }).catch(function(error) {
         next(error);

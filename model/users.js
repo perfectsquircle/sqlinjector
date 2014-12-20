@@ -15,13 +15,12 @@ exports.getActive = function() {
 exports.authenticate = function(username, password) {
     return db.getClient().spread(function(client, done) {
         return client.queryAsync(
-            "select * from sqin.User where username = $1 and inactiveDate is null",
-            [ username ]
+            "select * from sqin.User where username = $1 and inactiveDate is null", [username]
         ).finally(done);
     }).then(function(result) {
         var user = result && result.rows.length && result.rows[0];
         if (user) {
-            return [ user, bcrypt.compareAsync(password, user.password) ];
+            return [user, bcrypt.compareAsync(password, user.password)];
         }
     }).spread(function(user, correctPassword) {
         if (user && correctPassword) {
@@ -29,4 +28,3 @@ exports.authenticate = function(username, password) {
         }
     });
 };
-

@@ -5,7 +5,7 @@ var schema = require("../lib/schema");
 var Connection = bookshelf.Model.extend({
     tableName: "connection",
     idAttribute: "connectionId",
-    
+
     getClient: function() {
         return knex({
             client: this.get("databaseType"),
@@ -17,11 +17,10 @@ var Connection = bookshelf.Model.extend({
             }
         });
     },
-    
+
     getSchema: function() {
         return schema.getSchemaFromConnection(this);
     }
 });
 
 module.exports = Connection;
-
