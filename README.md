@@ -22,6 +22,7 @@ Ideas
   * Notify when done
 * Syntax highlighting?
   * http://codemirror.net/
+  * http://ace.c9.io/
 * Schema browser (owner and est. row count info)
 * Plugins
 * Permissions (detect insert/update/delete)
