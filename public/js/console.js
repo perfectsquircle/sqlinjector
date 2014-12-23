@@ -27,6 +27,12 @@ window.onload = function() {
             case "results":
                 handleResults(body);
                 break;
+            case "resultsHtml": 
+                handleResultsHtml(body);
+                break;
+            case "error":
+                handleError(body);
+                break;
         }
     });
 
@@ -35,12 +41,23 @@ window.onload = function() {
         $(".progress-area").setAttribute("hidden", "hidden");
     }
 
-    function handleResults() {
-
+    function handleResults(result) {
+        
+    }
+    
+    
+    function handleResultsHtml(resultHtml) {
+        $(".result-area").innerHTML = resultHtml;
+    }
+    
+    function handleError(error) {
+        console.error(error);
     }
 
+    var consoleInput = $(".console-input");
     $(".statement-form").on("submit", function(e) {
         e.preventDefault();
-        console.debug("form submit");
+        console.debug("form submit", consoleInput.value);
+        webSocket.send("query\n" + consoleInput.value);
     });
 };

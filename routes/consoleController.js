@@ -4,6 +4,10 @@ var Connection = require("../model/Connection");
 var webSocketServer = require("../lib/webSocketServer");
 var knex = require("knex");
 var Bluebird = require("bluebird");
+var app;
+process.nextTick(function() {
+    app = require("../app");
+});
 
 exports.getConsole = function(req, res, next) {
     res.render("console/demoConsole");
@@ -47,7 +51,8 @@ exports.getConnectionConsole = function(req, res, next) {
 // SOCKETS
 
 webSocketServer.on("connection", function connection(ws) {
-    console.log("webSocketServer received a connection");
+    logger.debug("webSocketServer received a connection");
+    // TODO: authenticate user
     var socketController = new SocketController(ws);
 });
 
@@ -69,6 +74,7 @@ SocketController.prototype = {
         if (!message || typeof message !== "string") {
             return;
         }
+        // TODO: use JSON format
         var split = message.split("\n", 2);
         var route = split[0];
         var body = split[1];
@@ -99,12 +105,25 @@ SocketController.prototype = {
         }).then(function() {
             self.ws.send("connect");
         }).catch(function(error) {
-            self.ws.send("error\n" + error);
+            self.ws.send("error\n" + JSON.stringify(error));
         });
     },
 
     handleQuery: function(queryText) {
-
+        var self = this;
+        // TODO: sanitize input
+        return this.knex.raw(queryText, [])
+            .options({ rowMode: "array" })
+            .then(function(result) {
+                self.ws.send("results\n" + JSON.stringify(result));
+                app.render("console/partial/resultsTable", { result: result }, function(error, html) {
+                    if (error) throw error;
+                    self.ws.send("resultsHtml\n" + html);
+                });
+        }).catch(function(error) {
+            logger.error(error);
+            self.ws.send("error\n" + JSON.stringify(error));
+        });
     },
 
     cleanup: function() {

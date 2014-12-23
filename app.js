@@ -49,3 +49,5 @@ app.get("/admin", adminController.getAdminPage);
 app.listen(3001, function() {
     logger.info("Express server listening on port 3001 in %s mode", app.get("env"));
 });
+
+module.exports = app;

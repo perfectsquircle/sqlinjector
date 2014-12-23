@@ -20,5 +20,10 @@ block content
                         span.mono=connection.username
                     .pure-u-1
                         a(href="/connection/" + connection.connectionId + "/console") console
-                        |  &bull;  
+                        |  &mdash;  
                         a(href="/connection/" + connection.connectionId + "/schema") schema
+                        |  &mdash;  
+                        a(href="/connection" + connection.connectionId + "/queries") queries
+                        |  &mdash;  
+                        a(href="/connection" + connection.connectionId + "/reports") reports
+                        
