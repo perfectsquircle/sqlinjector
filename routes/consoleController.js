@@ -1,13 +1,9 @@
 var db = require("../lib/example-db");
 var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
-var webSocketServer = require("../lib/webSocketServer");
 var knex = require("knex");
 var Bluebird = require("bluebird");
-var app;
-process.nextTick(function() {
-    app = require("../app");
-});
+var consoleSessionController = require("./consoleSessionController");
 
 exports.getConsole = function(req, res, next) {
     res.render("console/demoConsole");
@@ -39,8 +35,10 @@ exports.getConnectionConsole = function(req, res, next) {
     }).fetch({
         required: true
     }).then(function(connection) {
+        var consoleSessionKey = consoleSessionController.createSession(connection, user);
         res.render("console/console", {
             connection: connection.toJSON(),
+            consoleSessionKey: consoleSessionKey,
             async: true
         });
     }).catch(function(error) {
@@ -48,93 +46,19 @@ exports.getConnectionConsole = function(req, res, next) {
     });
 };
 
-// SOCKETS
-
-webSocketServer.on("connection", function connection(ws) {
-    logger.debug("webSocketServer received a connection");
-    // TODO: authenticate user
-    var socketController = new SocketController(ws);
-});
-
-function SocketController(ws) {
-    var self = this;
-    this.ws = ws;
-
-    ws.on("message", function incoming(message) {
-        self.route(message);
-    });
-
-    ws.on("close", function incoming(message) {
-        self.route(message);
-    });
-}
-
-SocketController.prototype = {
-    route: function(message) {
-        if (!message || typeof message !== "string") {
-            return;
-        }
-        // TODO: use JSON format
-        var split = message.split("\n", 2);
-        var route = split[0];
-        var body = split[1];
-        var promise;
-        switch (route) {
-            case "connect":
-                promise = this.handleConnect(body);
-                break;
-            case "query":
-                promise = this.handleQuery(body);
-                break;
-            case "close":
-                promise = this.cleanup(body);
-        }
-    },
-
-    handleConnect: function(connectionId) {
-        var self = this;
-
-        this.cleanup();
-
-        return Connection.forge({
-            connectionId: connectionId,
-            inactiveDate: null
-        }).fetch().then(function(connection) {
-            var cn = connection.toJSON();
-            self.knex = connection.getClient();
-        }).then(function() {
-            self.ws.send("connect");
-        }).catch(function(error) {
-            self.ws.send("error\n" + JSON.stringify(error));
-        });
-    },
-
-    handleQuery: function(queryText) {
-        var self = this;
-        // TODO: sanitize input
-        return this.knex.raw(queryText, [])
-            .options({ rowMode: "array" })
-            .then(function(result) {
-                self.ws.send("results\n" + JSON.stringify(result));
-                app.render("console/partial/resultsTable", { result: result }, function(error, html) {
-                    if (error) throw error;
-                    self.ws.send("resultsHtml\n" + html);
-                });
-        }).catch(function(error) {
-            logger.error(error);
-            self.ws.send("error\n" + JSON.stringify(error));
-        });
-    },
-
-    cleanup: function() {
-        var promise;
-        if (this.knex) {
-            promise = knex.destroy();
-            delete this.knex;
-        } else {
-            promise = Bluebird.resolve();
-        }
-
-        return promise;
+exports.postConsoleSessionQuery = function(req, res, next) {
+    if (!req.body || !req.body.consoleSessionKey) {
+        return next("Malformed request");
     }
+    var consoleSessionKey = req.params.consoleSessionKey;
+    var consoleSession = consoleSessionController.getSession(consoleSessionKey);
+    if (!consoleSession) {
+        return next("No such console session");
+    }
+
+    consoleSession.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
+        res.json({
+            rows: result.rows
+        });
+    });
 };

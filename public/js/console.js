@@ -6,7 +6,7 @@ window.onload = function() {
 
     webSocket.addEventListener("open", function() {
         console.debug("webSocket open");
-        webSocket.send("connect\n" + App.connectionId);
+        webSocket.send(App.consoleSessionKey);
     });
 
     webSocket.addEventListener("message", function(e) {
@@ -16,18 +16,19 @@ window.onload = function() {
         if (!message || typeof message !== "string") {
             return;
         }
-        var split = message.split("\n", 2);
-        var route = split[0];
-        var body = split[1];
+        var messageObj = JSON.parse(message);
+        var action = messageObj.action;
+        var params = messageObj.params;
+        var body = messageObj.body;
         var promise;
-        switch (route) {
-            case "connect":
-                handleConnect(body);
+        switch (action) {
+            case "establish":
+                handleEstablish(params, body);
                 break;
             case "results":
-                handleResults(body);
+                handleResults(params, body);
                 break;
-            case "resultsHtml": 
+            case "resultsHtml":
                 handleResultsHtml(body);
                 break;
             case "error":
@@ -36,20 +37,20 @@ window.onload = function() {
         }
     });
 
-    function handleConnect() {
+    function handleEstablish() {
         $(".console").removeAttribute("hidden");
         $(".progress-area").setAttribute("hidden", "hidden");
     }
 
     function handleResults(result) {
-        
+
     }
-    
-    
+
+
     function handleResultsHtml(resultHtml) {
         $(".result-area").innerHTML = resultHtml;
     }
-    
+
     function handleError(error) {
         console.error(error);
     }
@@ -58,6 +59,10 @@ window.onload = function() {
     $(".statement-form").on("submit", function(e) {
         e.preventDefault();
         console.debug("form submit", consoleInput.value);
-        webSocket.send("query\n" + consoleInput.value);
+        webSocket.send(JSON.stringify({
+            action: "query",
+            body: consoleInput.value
+        }));
+
     });
 };

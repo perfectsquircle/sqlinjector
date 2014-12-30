@@ -40,9 +40,10 @@ if (app.get("env") === "development") {
 
 app.use(authController.authMiddleware);
 
-app.get("/", indexController.root);
+app.get("/", connectionController.getConnections);
 app.get("/connections", connectionController.getConnections);
 app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
+//app.post("/consoleSession/:consoleSessionId/query", consoleController.postConsoleSessionQuery);
 app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
 app.get("/admin", adminController.getAdminPage);
 

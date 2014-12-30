@@ -6,6 +6,7 @@ block append style
 block append js
     script.
         App.connectionId = #{connection.connectionId};
+        App.consoleSessionKey = "#{consoleSessionKey}";
     script(src="/js/console.js")
 
 block content
@@ -16,7 +17,7 @@ block content
     .console(hidden)
         .statement-area
             form.pure-form.pure-form-stacked.statement-form(action="~", method="post")
-                textarea.mono.console-input(name="query", rows=15, cols=80, placeholder="Statement..." required, autofocus)=query
+                textarea.mono.console-input(name="query", rows=10, cols=80, placeholder="Statement..." required, autofocus)=query
                 input.pure-button.pure-button-primary(type="submit", value="Execute", title="Execute (ctrl+enter)")
         .result-area
             if error
