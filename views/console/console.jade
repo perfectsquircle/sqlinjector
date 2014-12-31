@@ -14,7 +14,7 @@ block content
         center.progress-area
             div Establishing Connection
             progress(value=12, max=100)
-    .console(hidden)
+    .console(hidden=async)
         .statement-area
             form.pure-form.pure-form-stacked.statement-form(action="~", method="post")
                 textarea.mono.console-input(name="query", rows=10, cols=80, placeholder="Statement..." required, autofocus)=query

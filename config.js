@@ -3,7 +3,9 @@ exports.dbConnectionString = "postgres://calvin:postgres@localhost/sqlinjector";
 exports.passwordHashRounds = 10;
 exports.connectionKeyTimeout = 10000;
 exports.consoleWebSocketPort = 3002;
+exports.prettyHtml = true;
 
 if (process.env.NODE_ENV === "production") {
     exports.staticAssetMaxAge = 604800000; // 1 week
+    exports.prettyHtml = false;
 }

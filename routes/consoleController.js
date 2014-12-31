@@ -39,7 +39,7 @@ exports.getConnectionConsole = function(req, res, next) {
         res.render("console/console", {
             connection: connection.toJSON(),
             consoleSessionKey: consoleSessionKey,
-            async: true
+            async: false
         });
     }).catch(function(error) {
         next(error);
@@ -47,7 +47,7 @@ exports.getConnectionConsole = function(req, res, next) {
 };
 
 exports.postConsoleSessionQuery = function(req, res, next) {
-    if (!req.body || !req.body.consoleSessionKey) {
+    if (!req.body) {
         return next("Malformed request");
     }
     var consoleSessionKey = req.params.consoleSessionKey;
@@ -57,8 +57,11 @@ exports.postConsoleSessionQuery = function(req, res, next) {
     }
 
     consoleSession.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
-        res.json({
-            rows: result.rows
+        // res.json({
+        //     rows: result.rows
+        // });
+        res.render("console/partial/resultsTable", {
+            result: result
         });
-    });
+    }).catch(next);
 };

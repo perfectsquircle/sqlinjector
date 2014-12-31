@@ -4,11 +4,14 @@ var bodyParser = require("body-parser");
 var session = require("cookie-session");
 var path = require("path");
 var logger = require("./lib/logger");
+var compression = require("compression");
 
 var app = express();
 
-app.set('view engine', 'jade');
-app.set('views', __dirname + '/views');
+app.set("view engine", "jade");
+app.set("views", path.join(__dirname, "/views"));
+app.locals.pretty = config.prettyHtml;
+app.use(compression());
 app.use(express.static(path.join(__dirname, "public"), {
     maxAge: config.staticAssetMaxAge
 }));
@@ -18,6 +21,7 @@ app.use("/vendor", express.static(path.join(__dirname, "bower_components"), {
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 app.use(session({
     secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0"
 }));
@@ -43,7 +47,7 @@ app.use(authController.authMiddleware);
 app.get("/", connectionController.getConnections);
 app.get("/connections", connectionController.getConnections);
 app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
-//app.post("/consoleSession/:consoleSessionId/query", consoleController.postConsoleSessionQuery);
+app.post("/consoleSession/:consoleSessionKey/query", consoleController.postConsoleSessionQuery);
 app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
 app.get("/admin", adminController.getAdminPage);
 
