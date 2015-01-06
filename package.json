@@ -13,6 +13,7 @@
     "express-session": "^1.9.3",
     "jade": "^1.7.0",
     "knex": "^0.7.3",
+    "lodash": "~2.4.1",
     "sqlite3": "^3.0.4",
     "winston": "^0.8.3",
     "ws": "~0.6.3"
@@ -26,7 +27,7 @@
     "grunt-jsbeautifier": "^0.2.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "grunt"
   },
   "author": "",
   "license": "MIT",
