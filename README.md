@@ -29,6 +29,7 @@ TODO
 * Administration
 * Easy install 
   * [cli](https://github.com/rlidwka/sinopia/blob/master/lib/cli.js)
+* Non-scrolling console interface (i.e. jsfiddle)
 
 ## Wishlist
 * Double-post protection / CSRF protection

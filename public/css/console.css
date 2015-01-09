@@ -1,6 +1,7 @@
 .result-area .result-rows,
 .console-input {
     width: 100%;
+    resize: none;
 }
 
 .result-area {
