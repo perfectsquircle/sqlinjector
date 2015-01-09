@@ -1,6 +1,33 @@
 window.onload = function() {
-    var $ = document.querySelector.bind(document);
+    $ = document.querySelector.bind(document);
     EventTarget.prototype.on = EventTarget.prototype.addEventListener;
+
+    //wsInit();
+    ajaxInit();
+};
+
+function ajaxInit() {
+    function handleResultsHtml(resultHtml) {
+        $(".result-area").innerHTML = resultHtml;
+    }
+
+    function handleError(error) {
+        console.error(error);
+    }
+
+    var consoleInput = $(".console-input");
+    $(".statement-form").on("submit", function(e) {
+        e.preventDefault();
+        console.debug("form submit", consoleInput.value);
+        ajax("post", "/consoleSession/" + App.consoleSessionKey + "/query", {
+            queryText: consoleInput.value,
+            queryParams: []
+        }).then(handleResultsHtml).catch(handleError);
+
+    });
+}
+
+function wsInit() {
 
     var webSocket = new WebSocket('ws://localhost:3002/console');
 
@@ -65,4 +92,4 @@ window.onload = function() {
         }));
 
     });
-};
+}
