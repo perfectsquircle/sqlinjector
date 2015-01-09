@@ -32,6 +32,7 @@ var consoleController = require("./routes/consoleController");
 var adminController = require("./routes/adminController");
 var connectionController = require("./routes/connectionController");
 var schemaController = require("./routes/schemaController");
+var errorController = require("./routes/errorController");
 
 app.get("/login", authController.getLogin);
 app.post("/login", authController.postLogin);
@@ -50,6 +51,8 @@ app.get("/connection/:connectionId/console", consoleController.getConnectionCons
 app.post("/consoleSession/:consoleSessionKey/query", consoleController.postConsoleSessionQuery);
 app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
 app.get("/admin", adminController.getAdminPage);
+
+app.use(errorController.errorHandler);
 
 app.listen(3001, function() {
     logger.info("Express server listening on port 3001 in %s mode", app.get("env"));

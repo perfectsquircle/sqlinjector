@@ -13,6 +13,9 @@ function ajaxInit() {
 
     function handleError(error) {
         console.error(error);
+        if (error && error.message) {
+            $(".result-area").innerHTML = "<pre>" + error.message + "</pre>";
+        }
     }
 
     var consoleInput = $(".console-input");

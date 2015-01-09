@@ -57,11 +57,12 @@ exports.postConsoleSessionQuery = function(req, res, next) {
     }
 
     consoleSession.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
-        // res.json({
-        //     rows: result.rows
-        // });
         res.render("console/partial/resultsTable", {
             result: result
         });
-    }).catch(next);
+    }).catch(function(error) {
+        res.status(500).json({
+            message: error.toString()
+        });
+    });
 };

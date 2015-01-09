@@ -4,15 +4,14 @@
             var xhr = new XMLHttpRequest();
 
             xhr.addEventListener("load", function(e) {
-                console.debug(this);
+                var stuff = this.response;
+                if (this.response && this.response[0] === "{") {
+                    stuff = JSON.parse(this.response);
+                }
                 if (this.status >= 400) {
-                    reject(this.response);
+                    reject(stuff);
                 } else {
-                    if (this.response && this.response[0] === "{") {
-                        resolve(JSON.parse(this.response));
-                    } else {
-                        resolve(this.response);
-                    }
+                    resolve(stuff);
                 }
             });
 
@@ -21,7 +20,7 @@
             });
 
             xhr.open(method, url);
-            xhr.setRequestHeader("X-Requested-With", "xhr");
+            xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
             xhr.setRequestHeader("Content-Type", "application/json");
 
             if (body) {
