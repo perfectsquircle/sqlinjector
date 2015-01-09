@@ -1,36 +1,43 @@
-sqlinjector
-======
+SQL Injector is a web-based database console intended for developers.  
 
-Example database: http://www.commandprompt.com/ppbook/booktown.sql
+Installing
+==========
 
-Ideas
+
+
+TODO
 ====
-* Double-post protection / CSRF
-* Users
+## Minimum Viable Product
+* Parameters
+* Error handling
+* Ask before leaving page
+* Schema browser (owner and est. row count info)
+  * Table information (column definitions)
+* Raw output
+* Max field length (preference?)
+* Design logo (blocky font with syringe?)
+
+## Enhancements
 * Preconfigured database connections
 * Query timer
+* Smart syntax errors
+* Query history per user (view, edit, delete)
+* Permissions (detect insert/update/delete)
+* Canned Reports
+  * Export to csv
+  * Export to HTML (like pgadmin)
+* Administration
+
+## Wishlist
+* Double-post protection / CSRF protection
 * Auto-limit
-* Parameters
 * Sortable results
   * http://www.datatables.net/
-* Error handling
-* Inline error tooltip?
-* Ask before leaving page
-* Query history per user (view, edit, delete)
 * Long running queries
   * Queue 
   * Notify when done
 * Syntax highlighting?
   * http://codemirror.net/
   * http://ace.c9.io/
-* Schema browser (owner and est. row count info)
 * Plugins
-* Permissions (detect insert/update/delete)
-* Canned Reports
-  * Export to csv
-  * Export to HTML (like pgadmin)
-* Raw output
-* Max field length (preference?)
-* Administration
-* Design logo (blocky font with syringe?)
 
