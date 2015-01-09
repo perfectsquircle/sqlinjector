@@ -1,10 +1,8 @@
 var crypto = require("crypto");
-var _ = require("underscore");
 var config = require("../config");
 var ConsoleSession = require("../lib/ConsoleSession");
 var WebSocketServer = require("ws").Server;
 var logger = require("../lib/logger");
-var express = require("express");
 
 var webSocketServer = new WebSocketServer({
     port: config.consoleWebSocketPort,
