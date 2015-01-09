@@ -27,6 +27,8 @@ TODO
   * Export to csv
   * Export to HTML (like pgadmin)
 * Administration
+* Easy install 
+  * [cli](https://github.com/rlidwka/sinopia/blob/master/lib/cli.js)
 
 ## Wishlist
 * Double-post protection / CSRF protection
