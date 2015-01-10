@@ -31,7 +31,8 @@ TODO
   * [cli](https://github.com/rlidwka/sinopia/blob/master/lib/cli.js)
 * Non-scrolling console interface (i.e. jsfiddle)
 
-## Wishlist
+## Wishlist  
+* Easily see all databases on a server (like pgadmin)
 * Double-post protection / CSRF protection
 * Auto-limit
 * Sortable results

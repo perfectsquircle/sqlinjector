@@ -18,11 +18,13 @@ block content
         .statement-area
             form.pure-form.pure-form-stacked.statement-form.pure-g(action="~", method="post")
                 fieldset.pure-u-4-5
+                    legend Statement
                     textarea.mono.console-input(name="query", rows=10, cols=80, placeholder="Statement" required, autofocus)=query
                 fieldset.pure-u-1-5
-                    input.mono(type="text", placeholder="Parameter 1")
-                    input.mono(type="text", placeholder="Parameter 2")
-                    input.mono(type="text", placeholder="Parameter 3")
+                    legend Parameters
+                    input.param.mono(type="text", placeholder="Parameter 1", name="param")
+                    input.param.mono(type="text", placeholder="Parameter 2", name="param")
+                    input.param.mono(type="text", placeholder="Parameter 3", name="param")
                 fieldset.pure-u-1
                     input.pure-button.pure-button-primary(type="submit", value="Execute", title="Execute (ctrl+enter)")
         .result-area

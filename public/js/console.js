@@ -1,5 +1,6 @@
 window.onload = function() {
     $ = document.querySelector.bind(document);
+    $$ = document.querySelectorAll.bind(document);
     EventTarget.prototype.on = EventTarget.prototype.addEventListener;
 
     //wsInit();
@@ -18,13 +19,19 @@ function ajaxInit() {
         }
     }
 
-    var consoleInput = $(".console-input");
+    var consoleInput = $(".statement-form .console-input");
+    var params = $$(".statement-form .param");
     $(".statement-form").on("submit", function(e) {
         e.preventDefault();
         console.debug("form submit", consoleInput.value);
+        var queryParams = [].map.call(params, function(param) {
+            return param.value;
+        }).filter(function(param) {
+            return param.length;
+        });
         ajax("post", "/consoleSession/" + App.consoleSessionKey + "/query", {
             queryText: consoleInput.value,
-            queryParams: []
+            queryParams: queryParams
         }).then(handleResultsHtml).catch(handleError);
 
     });
