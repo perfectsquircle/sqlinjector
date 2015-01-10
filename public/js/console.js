@@ -8,30 +8,52 @@ window.onload = function() {
 };
 
 function ajaxInit() {
+    var resultArea = $(".result-area");
+
     function handleResultsHtml(resultHtml) {
-        //stopTimer();
-        $(".result-area").innerHTML = resultHtml;
+        stopTimer();
+        resultArea.innerHTML = resultHtml;
+        populateResultCount();
     }
 
     function handleError(error) {
-        console.error(error);
+        stopTimer();
         if (error && error.message) {
-            $(".result-area").innerHTML = "<pre>" + error.message + "</pre>";
+            resultArea.innerHTML = "<pre>" + error.message + "</pre>";
+            populateResultCount();
         }
     }
 
-    var timer = $(".timer");
-    var timerStart;
+    var timer = $(".result-stats .timer");
+    var timerStart = null;
+
     function startTimer() {
-        timerStart = Date.now();
-        requestAnimationFrame(function step(timestamp) {
-            timer.innerText = (Date.now() - timerStart) + "ms"; // TODO: DEFINITELY don't use Date.now()
+        timerStart = 0;
+        var animationRequest = requestAnimationFrame(function step(timestamp) {
+            if (timerStart === null) {
+                return;
+            } else if (timerStart === 0) {
+                timerStart = timestamp;
+            }
+            timer.innerText = Math.floor(timestamp - timerStart) + "ms";
             requestAnimationFrame(step);
         }, timer);
     }
 
     function stopTimer() {
+        timerStart = null;
+    }
 
+    var resultCount = $(".result-stats .result-count");
+
+    function populateResultCount() {
+        var count = $$(".result-area tr").length;
+
+        if (count === 1) {
+            resultCount.innerText = "1 result";
+        } else {
+            resultCount.innerText = count + " results";
+        }
     }
 
     var consoleInput = $(".statement-form .console-input");

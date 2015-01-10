@@ -28,8 +28,9 @@ block content
                 fieldset.pure-u-1
                     input.pure-button.pure-button-primary(type="submit", value="Execute", title="Execute (ctrl+enter)")
         .result-stats
-            .timer 0ms
-            .resultCount 0 results
+            span.timer 0ms
+            |  &bull;  
+            span.result-count 0 results
         .result-area
             if error
                 div.error
