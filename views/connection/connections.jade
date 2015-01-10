@@ -5,7 +5,7 @@ block content
         each connection in connections
             .connection.pure-u-1-4.block
                 .block-heading #{connection.username}@#{connection.hostname}/#{connection.database}
-                .block-body
+                .block-body.pure-g
                     .pure-u-1-2
                         strong Hostname
                     .pure-u-1-2
@@ -18,6 +18,7 @@ block content
                         strong Username
                     .pure-u-1-2
                         span.mono=connection.username
+                    hr
                     .pure-u-1
                         a(href="/connection/" + connection.connectionId + "/console") console
                         |  &mdash;  

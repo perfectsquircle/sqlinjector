@@ -14,6 +14,7 @@ block content
         center.progress-area
             div Establishing Connection
             progress(value=12, max=100)
+    h2 #{connection.username}@#{connection.hostname}/#{connection.database}
     .console(hidden=async)
         .statement-area
             form.pure-form.pure-form-stacked.statement-form.pure-g(action="~", method="post")
