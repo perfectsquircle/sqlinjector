@@ -9,6 +9,7 @@ window.onload = function() {
 
 function ajaxInit() {
     function handleResultsHtml(resultHtml) {
+        //stopTimer();
         $(".result-area").innerHTML = resultHtml;
     }
 
@@ -19,9 +20,24 @@ function ajaxInit() {
         }
     }
 
+    var timer = $(".timer");
+    var timerStart;
+    function startTimer() {
+        timerStart = Date.now();
+        requestAnimationFrame(function step(timestamp) {
+            timer.innerText = (Date.now() - timerStart) + "ms"; // TODO: DEFINITELY don't use Date.now()
+            requestAnimationFrame(step);
+        }, timer);
+    }
+
+    function stopTimer() {
+
+    }
+
     var consoleInput = $(".statement-form .console-input");
     var params = $$(".statement-form .param");
     $(".statement-form").on("submit", function(e) {
+        startTimer();
         e.preventDefault();
         console.debug("form submit", consoleInput.value);
         var queryParams = [].map.call(params, function(param) {
