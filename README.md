@@ -9,6 +9,7 @@ TODO
 ====
 ## Minimum Viable Product
 * Parameters
+  * Auto-grow and auto-prune
 * Error handling
 * Ask before leaving page
 * Schema browser (owner and est. row count info)
@@ -16,6 +17,14 @@ TODO
 * Raw output
 * Max field length (preference?)
 * Design logo (blocky font with syringe?)
+* Cleanup backend
+  * Don't generate infinite sessions
+* Front-end infrastructure
+* Hard limit on rows?
+* Key combinations
+* Session storage
+* Show rows affected on non-selects
+
 
 ## Enhancements
 * Preconfigured database connections
