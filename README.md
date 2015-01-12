@@ -24,6 +24,7 @@ TODO
 * Key combinations
 * Session storage
 * Show rows affected on non-selects
+* SQL errors shouldn't be AJAX errors
 
 
 ## Enhancements
