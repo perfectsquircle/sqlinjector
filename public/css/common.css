@@ -24,6 +24,7 @@ html, button, input, select, textarea,
     box-shadow: #ddd 1px 1px 8px;
     border-radius: 6px;
     border: 1px solid #aaa;
+    margin: 8px;
 }
 
 .block .block-heading {

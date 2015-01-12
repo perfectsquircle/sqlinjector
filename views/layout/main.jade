@@ -16,6 +16,9 @@ html
             #nav.pure-u-1
                 .pure-menu.pure-menu-open.pure-menu-horizontal
                     a.pure-menu-heading(href="/") SQL Injector
+                    if pageTitle
+                        ul
+                            li: a=pageTitle
             #main.pure-u-1
                 .l-box
                     block content

@@ -1,3 +1,4 @@
+var util = require("util");
 var db = require("../lib/example-db");
 var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
@@ -39,7 +40,8 @@ exports.getConnectionConsole = function(req, res, next) {
         res.render("console/console", {
             connection: connection.toJSON(),
             consoleSessionKey: consoleSessionKey,
-            async: false
+            async: false,
+            pageTitle: util.format("%s@%s/%s", connection.get("username"), connection.get("hostname"), connection.get("database"))
         });
     }).catch(function(error) {
         next(error);

@@ -53,7 +53,7 @@ function ajaxInit() {
     var resultCount = $(".result-stats .result-count");
 
     function populateResultCount() {
-        var count = $$(".result-area tr").length;
+        var count = $$(".result-area tbody tr").length;
 
         if (count === 1) {
             resultCount.innerText = "1 result";
