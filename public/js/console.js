@@ -24,8 +24,9 @@ function ajaxInit() {
 
     function handleError(error) {
         stopTimer();
-        if (error && error.message) {
-            resultArea.innerHTML = "<pre>" + error.message + "</pre>";
+        var message = (error && error.message) || error;
+        if (message) {
+            resultArea.innerHTML = "<pre>" + message + "</pre>";
             populateResultCount();
         }
     }

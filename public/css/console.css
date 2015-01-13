@@ -8,3 +8,10 @@
 .result-area {
     margin-top: 10px;
 }
+
+.result-area .result-rows td {
+    white-space: pre;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 300px;
+}

@@ -59,12 +59,15 @@ exports.postConsoleSessionQuery = function(req, res, next) {
     }
 
     consoleSession.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
+        if (result && result.rows) {
+            if (result.rows.length > 10000) {
+                result.rows.splice(10000, Infinity); // TODO: limit this earlier
+            }
+        }
+        return result;
+    }).then(function(result) {
         res.render("console/partial/resultsTable", {
             result: result
         });
-    }).catch(function(error) {
-        res.status(500).json({
-            message: error.toString()
-        });
-    });
+    }).catch(next);
 };
