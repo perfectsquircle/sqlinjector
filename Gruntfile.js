@@ -31,11 +31,26 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            dist: ["dist", "<%= pkg.name %>-<%= pkg.version %>.tgz"]
+            dist: [
+                "sqlinjector.log",
+                "dist",
+                "<%= pkg.name %>-<%= pkg.version %>.tgz"
+            ]
         },
         copy: {
             all: {
-                src: ["**/*", "!Gruntfile", "!node_modules/**", "!bower_components/**"],
+                src: [
+                    "lib",
+                    "model",
+                    "public",
+                    "routes",
+                    "views",
+                    "app.js",
+                    "config.js",
+                    "LICENSE",
+                    "package.json",
+                    "README.md",
+                ],
                 dest: "./dist",
                 expand: true
             }
@@ -54,6 +69,23 @@ module.exports = function(grunt) {
         jsbeautifier: {
             files: ["**/*.js", "!node_modules/**", "!bower_components/**"],
             options: {}
+        },
+        browserify: {
+            dist: {
+                files: {
+                    'dist/public/js/console.js': ['lib/client/console.js'],
+                }
+            }
+        },
+        uglify: {
+            dist: {
+                files: [{
+                    cwd: "dist/public/js",
+                    expand: true,
+                    src: "**/*.js",
+                    dest: "dist/public/js"
+                }]
+            }
         }
     });
 
@@ -62,9 +94,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-compress");
     grunt.loadNpmTasks("grunt-jsbeautifier");
+    grunt.loadNpmTasks("grunt-browserify");
+    grunt.loadNpmTasks("grunt-contrib-uglify");
 
     grunt.registerTask("default", ["jshint"]);
-    grunt.registerTask("dist", ["default", "clean", "copy"]);
+    grunt.registerTask("dist", ["clean", "default", "copy", "browserify", "uglify"]);
     grunt.registerTask("package", ["dist", "compress"]);
 
     grunt.registerTask("format", ["jshint", "jsbeautifier"]);
