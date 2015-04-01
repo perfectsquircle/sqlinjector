@@ -3,7 +3,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             options: {
-                //undef: true
+                undef: true
             },
             client: {
                 src: ["lib/client/**/*.js"],
@@ -12,7 +12,8 @@ module.exports = function(grunt) {
                     browser: true,
 
                     globals: {
-                        App: true
+                        App: true,
+                        fetch: true
                     }
                 }
             },
