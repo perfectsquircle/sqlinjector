@@ -2,7 +2,32 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
-            files: ["**/*.js", "!node_modules/**", "!bower_components/**"]
+            options: {
+                //undef: true
+            },
+            client: {
+                src: ["lib/client/**/*.js"],
+                options: {
+                    node: true,
+                    browser: true,
+
+                    globals: {
+                        App: true
+                    }
+                }
+            },
+            server: {
+                src: [
+                    "**/*.js",
+                    "!node_modules/**",
+                    "!bower_components/**",
+                    "!lib/client/**",
+                    "!public/**"
+                ],
+                options: {
+                    node: true
+                }
+            }
         },
         clean: {
             dist: ["dist", "<%= pkg.name %>-<%= pkg.version %>.tgz"]
