@@ -8,20 +8,19 @@ Installing
 TODO
 ====
 ## Minimum Viable Product
+* Key combos
 * Parameters
   * Auto-grow and auto-prune
 * Error handling
-* Ask before leaving page
 * Schema browser (owner and est. row count info)
   * Table information (column definitions)
+  * Show sampling of rows
 * Raw output
 * Max field length (preference?)
 * Design logo (blocky font with syringe?)
 * Cleanup backend
   * Don't generate infinite sessions
-* Front-end infrastructure
 * Hard limit on rows?
-* Key combinations
 * Session storage
 * Show rows affected on non-selects
 * SQL errors shouldn't be AJAX errors
