@@ -9,6 +9,9 @@ TODO
 ====
 ## Minimum Viable Product
 * Key combos
+  * Submit query
+  * Change Indent
+  * Keep indent on newline
 * Parameters
   * Auto-grow and auto-prune
 * Error handling
