@@ -8,10 +8,12 @@ Installing
 TODO
 ====
 ## Minimum Viable Product
-* Key combos
-  * Submit query
-  * Change Indent
+* Console Features
+  * Key combos
+    * Submit query
+    * Change Indent
   * Keep indent on newline
+  * Run only query under selection
 * Parameters
   * Auto-grow and auto-prune
 * Error handling
