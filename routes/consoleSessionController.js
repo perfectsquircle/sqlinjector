@@ -10,9 +10,9 @@ module.exports = {
 
         var session = new ConsoleSession(key, connection, user);
         consoleSessions.put(
-            key, 
-            session, 
-            config.consoleSessionTimeout, 
+            key,
+            session,
+            config.consoleSessionTimeout,
             closeSession(session)
         );
 
@@ -22,8 +22,8 @@ module.exports = {
         var session = consoleSessions.get(key);
         if (session) {
             consoleSessions.put(
-                key, 
-                session, 
+                key,
+                session,
                 config.consoleSessionTimeout,
                 closeSession(session)
             );
@@ -34,7 +34,7 @@ module.exports = {
 
 function closeSession(session) {
     return function() {
-        logger.debug("Closing session ", session)
+        logger.debug("Closing session ", session);
         session.close();
-    }
+    };
 }
