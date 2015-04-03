@@ -16,7 +16,7 @@ block content
             progress(value=12, max=100)
     .console(hidden=async)
         .statement-area
-            form.pure-form.pure-form-stacked.statement-form.pure-g(action="~", method="post")
+            form.pure-form.pure-form-stacked.statement-form.pure-g(method="post")
                 fieldset.pure-u-4-5
                     legend Statement
                     textarea.mono.console-input(name="query", rows=20, cols=80, placeholder="Statement", spellcheck="false", required, autofocus)=query
