@@ -14,6 +14,7 @@ TODO
     * Change Indent
   * Keep indent on newline
   * Run only query under selection
+  * Run only query under cursor
 * Parameters
   * Auto-grow and auto-prune
 * Error handling
