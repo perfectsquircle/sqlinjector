@@ -16,7 +16,7 @@ block content
             progress(value=12, max=100)
     .console(hidden=async)
         .statement-area
-            form.pure-form.pure-form-stacked.statement-form.pure-g(method="post")
+            .pure-form.pure-form-stacked.statement-form.pure-g
                 fieldset.pure-u-4-5
                     legend Statement
                     textarea.mono.console-input(name="query", rows=20, cols=80, placeholder="Statement", spellcheck="false", required, autofocus)=query
@@ -26,7 +26,7 @@ block content
                     input.param.mono(type="text", placeholder="Parameter 2", name="param")
                     input.param.mono(type="text", placeholder="Parameter 3", name="param")
                 fieldset.pure-u-1
-                    input.pure-button.pure-button-primary(type="submit", value="Execute", title="Execute (ctrl+enter)")
+                    input.pure-button.pure-button-primary.execute-statement-button(type="submit", value="Execute", title="Execute (ctrl+enter)", tabindex=-1)
         .result-stats
             span.timer 0ms
             |  &bull;  
