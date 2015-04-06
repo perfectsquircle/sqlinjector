@@ -69,7 +69,8 @@ ConsoleView.prototype = {
 
     postConsole: function() {
         this.startTimer();
-        console.debug("form submit", this.consoleInputView.getValue());
+        var statement = this.consoleInputView.getValue();
+        console.debug("form submit", statement);
         var queryParams = this.params.map(function(param) {
             return param.value;
         }).filter(function(param) {
@@ -83,7 +84,7 @@ ConsoleView.prototype = {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    queryText: this.consoleInputView.getValue(),
+                    queryText: statement,
                     queryParams: queryParams
                 })
             }).then(function(response) {
