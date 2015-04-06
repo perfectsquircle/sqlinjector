@@ -1,4 +1,5 @@
 var $ = require("domtastic");
+var StatementParser = require("../../lib/parser/StatementParser");
 
 var BasicConsoleInputView = module.exports = function($el, submit) {
     this.$el = $el;
@@ -29,24 +30,11 @@ BasicConsoleInputView.prototype = {
     getValue: function() {
         var textArea = this.$el[0];
         var value = textArea.value;
-
         var selectionStart = textArea.selectionStart;
         var selectionEnd = textArea.selectionEnd;
-        if (selectionStart != selectionEnd) {
-            return value.substring(selectionStart, selectionEnd);
-        } else {
-            var startSubstring = 0;
-            while (true) {
-                var indexOfSemicolon = value.indexOf(";", startSubstring);
-                if (indexOfSemicolon === -1) {
-                    return value.substring(startSubstring, value.length);
-                } else if (indexOfSemicolon < selectionStart) {
-                    startSubstring = indexOfSemicolon + 1;
-                } else {
-                    return value.substring(startSubstring, indexOfSemicolon);
-                }
-            }
-        }
+
+        var statementParser = new StatementParser(value);
+        return statementParser.getStatementUnderCaret(selectionStart, selectionEnd);
     }
 
 };

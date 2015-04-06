@@ -6,7 +6,7 @@ module.exports = function(grunt) {
                 undef: true
             },
             client: {
-                src: ["lib/client/**/*.js"],
+                src: ["client/**/*.js"],
                 options: {
                     node: true,
                     browser: true,
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                     "**/*.js",
                     "!node_modules/**",
                     "!bower_components/**",
-                    "!lib/client/**",
+                    "!client/**",
                     "!public/**"
                 ],
                 options: {
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
         browserify: {
             dist: {
                 files: {
-                    'dist/public/js/console.js': ['lib/client/console.js'],
+                    'dist/public/js/console.js': ['client/console.js'],
                 }
             }
         },
@@ -86,6 +86,9 @@ module.exports = function(grunt) {
                     dest: "dist/public/js"
                 }]
             }
+        },
+        nodeunit: {
+            all: ["test/**/*.js"]
         }
     });
 
@@ -96,8 +99,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-browserify");
     grunt.loadNpmTasks("grunt-contrib-uglify");
+    grunt.loadNpmTasks("grunt-contrib-nodeunit");
 
-    grunt.registerTask("default", ["jshint"]);
+    grunt.registerTask("test", ["nodeunit"]);
+    grunt.registerTask("default", ["jshint", "test"]);
     grunt.registerTask("dist", ["clean", "default", "copy", "browserify", "uglify"]);
     grunt.registerTask("package", ["dist", "compress"]);
 
