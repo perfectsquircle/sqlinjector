@@ -2,16 +2,19 @@
 .console-input {
     width: 100%;
     resize: none;
-    font-size: 11pt; /* TODO: Make this configurable */
+    font-size: 10pt; /* TODO: Make this configurable */
 }
 
 .result-area {
     margin-top: 10px;
 }
 
+.result-area > .scroll {
+    max-height: 300px;
+}
+
 .result-area .result-rows td {
-    white-space: pre;
-    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
     max-width: 300px;
 }

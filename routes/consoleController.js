@@ -40,7 +40,6 @@ exports.getConnectionConsole = function(req, res, next) {
         res.render("console/console", {
             connection: connection.toJSON(),
             consoleSessionKey: consoleSessionKey,
-            async: false,
             pageTitle: util.format("%s@%s/%s", connection.get("username"), connection.get("hostname"), connection.get("database"))
         });
     }).catch(function(error) {

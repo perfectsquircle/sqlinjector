@@ -10,16 +10,12 @@ block append js
     script(src="/js/console.js")
 
 block content
-    if async
-        center.progress-area
-            div Establishing Connection
-            progress(value=12, max=100)
-    .console(hidden=async)
+    .console
         .statement-area
             .pure-form.pure-form-stacked.statement-form.pure-g
                 fieldset.pure-u-4-5
                     legend Statement
-                    textarea.mono.console-input(name="query", rows=20, cols=80, placeholder="Statement", spellcheck="false", required, autofocus)=query
+                    textarea.mono.console-input(name="query", rows=15, cols=80, placeholder="Statement", spellcheck="false", required, autofocus)=query
                 fieldset.pure-u-1-5
                     legend Parameters
                     input.param.mono(type="text", placeholder="Parameter 1", name="param")
