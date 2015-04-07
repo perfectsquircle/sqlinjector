@@ -15,6 +15,7 @@ TODO
 * Parameters
   * Auto-grow and auto-prune
 * Error handling
+  * SQL errors shouldn't be AJAX errors
 * Schema browser (owner and est. row count info)
   * Table information (column definitions)
   * Show sampling of rows
@@ -23,11 +24,15 @@ TODO
 * Design logo (blocky font with syringe?)
 * Cleanup backend
   * Don't generate infinite sessions
+  * Allow columns with same name
 * Hard limit on rows?
+  * Progressive loading of rows when > limit
 * Session storage
 * Show rows affected on non-selects
-* SQL errors shouldn't be AJAX errors
-
+* Browserify (development?) middleware
+* Click on result selects entire text
+* Keep console in Local Storage
+* CRUD list of connections
 
 ## Enhancements
 * Preconfigured database connections
