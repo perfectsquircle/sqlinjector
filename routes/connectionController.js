@@ -1,6 +1,4 @@
-var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
-var User = require("../model/User");
 
 exports.getConnections = function(req, res, next) {
     var user = req.session.user;

@@ -1,6 +1,4 @@
-var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
-
 
 exports.getConnectionSchema = function(req, res, next) {
     var user = req.session.user;

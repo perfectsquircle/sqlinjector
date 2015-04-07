@@ -1,6 +1,6 @@
-var bookshelf = require("../lib/bookshelf");
+var bookshelf = require("./bookshelf");
 var knex = require("knex");
-var schema = require("../lib/schema");
+var schema = require("../lib/database/schema");
 
 var Connection = bookshelf.Model.extend({
     tableName: "connection",

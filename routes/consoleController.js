@@ -1,29 +1,7 @@
 var util = require("util");
-var db = require("../lib/example-db");
 var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
-var knex = require("knex");
-var Bluebird = require("bluebird");
-var consoleSessionController = require("./consoleSessionController");
-
-exports.getConsole = function(req, res, next) {
-    res.render("console/demoConsole");
-};
-
-exports.postConsole = function(req, res, next) {
-    var query = req.body.query;
-
-    if (query) {
-        db.query(query, [], function(error, result) {
-            logger.debug(result);
-            res.render("console/demoConsole", {
-                error: error,
-                query: query,
-                result: result
-            });
-        });
-    }
-};
+var consoleSessionController = require("../lib/consoleSession/consoleSessionController");
 
 exports.getConnectionConsole = function(req, res, next) {
     var user = req.session.user;

@@ -33,6 +33,10 @@ TODO
 * Click on result selects entire text
 * Keep console in Local Storage
 * CRUD list of connections
+* A way to destroy all active connections
+* Parser
+  * Comments between statements?
+  * isLikelyASelect()
 
 ## Enhancements
 * Preconfigured database connections

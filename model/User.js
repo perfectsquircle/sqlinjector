@@ -1,8 +1,7 @@
-var db = require("../lib/db");
 var Bluebird = require("bluebird");
 var bcrypt = Bluebird.promisifyAll(require("bcryptjs"));
 var logger = require("../lib/logger");
-var bookshelf = require("../lib/bookshelf");
+var bookshelf = require("./bookshelf");
 var config = require("../config");
 
 var User = bookshelf.Model.extend({

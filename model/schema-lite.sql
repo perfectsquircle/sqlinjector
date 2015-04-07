@@ -5,6 +5,11 @@ create table User (
     preferences json,
     inactiveDate timestamp with timezone
 );
+insert into User
+(userId, username, password)
+values
+  (-1, 'admin', '$2a$10$U38qsK9BUXXZydr1/MYXP.2xR.nyjWdwm/7FQsfMb6cu7Aqf7NPC2') --password is "admin"
+;
 
 create table Permission (
     permissionId integer primary key autoincrement,

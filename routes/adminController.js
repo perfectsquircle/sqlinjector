@@ -15,7 +15,6 @@ exports.getAdminPage = function(req, res, next) {
     User.forge({
         inactiveDate: null
     }).fetchAll().then(function(users) {
-        logger.debug(users);
         res.render("admin/admin", {
             users: users.toJSON(),
             //connections: connections,

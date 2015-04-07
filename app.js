@@ -37,12 +37,6 @@ var errorController = require("./routes/errorController");
 app.get("/login", authController.getLogin);
 app.post("/login", authController.postLogin);
 
-if (app.get("env") === "development") {
-    // fake routes:
-    app.get("/console", consoleController.getConsole);
-    app.post("/console", consoleController.postConsole);
-}
-
 app.use(authController.authMiddleware);
 
 app.get("/", connectionController.getConnections);

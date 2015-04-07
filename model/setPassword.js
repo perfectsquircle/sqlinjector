@@ -9,7 +9,7 @@ if (args.length != 4) {
 var username = args[2];
 var password = args[3];
 
-var User = require("../model/User");
+var User = require("./User");
 
 User.setPassword(username, password).then(function(user) {
     console.log("Password set to: ", user.get("password"));
