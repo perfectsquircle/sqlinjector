@@ -46,5 +46,7 @@ exports.postConsoleSessionQuery = function(req, res, next) {
         res.render("console/partial/resultsTable", {
             result: result
         });
-    }).catch(next);
+    }).catch(function(e) {
+        res.send(e.message);
+    });
 };

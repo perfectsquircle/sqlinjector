@@ -80,7 +80,7 @@ ConsoleView.prototype = {
         fetch("/consoleSession/" + App.consoleSessionKey + "/query", {
                 method: "post",
                 headers: {
-                    'Accept': 'application/json',
+                    'Accept': 'text/*',
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
