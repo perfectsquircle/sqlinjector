@@ -2,7 +2,7 @@
 .console-input {
     width: 100%;
     resize: none;
-    font-size: 10pt; /* TODO: Make this configurable */
+    font-size: 11pt; /* TODO: Make this configurable */
 }
 
 .result-area {
