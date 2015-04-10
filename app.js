@@ -26,7 +26,6 @@ app.use(session({
     secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0"
 }));
 
-var indexController = require("./routes/indexController");
 var authController = require("./routes/authController");
 var consoleController = require("./routes/consoleController");
 var adminController = require("./routes/adminController");
