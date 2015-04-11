@@ -1,4 +1,3 @@
-var util = require("util");
 var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
 var consoleSessionController = require("../lib/consoleSession/consoleSessionController");
@@ -14,11 +13,11 @@ exports.getConnectionConsole = function(req, res, next) {
     }).fetch({
         required: true
     }).then(function(connection) {
-        var consoleSessionKey = consoleSessionController.createSession(connection, user);
+        var consoleSession = consoleSessionController.createSession(connection, user);
         res.render("console/console", {
             connection: connection.toJSON(),
-            consoleSessionKey: consoleSessionKey,
-            pageTitle: util.format("%s@%s/%s", connection.get("username"), connection.get("hostname"), connection.get("database"))
+            consoleSessionKey: consoleSession.consoleSessionKey,
+            pageTitle: connection.getTitle()
         });
     }).catch(function(error) {
         next(error);
@@ -36,13 +35,6 @@ exports.postConsoleSessionQuery = function(req, res, next) {
     }
 
     consoleSession.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
-        if (result && result.rows) {
-            if (result.rows.length > 10000) {
-                result.rows.splice(10000, Infinity); // TODO: limit this earlier
-            }
-        }
-        return result;
-    }).then(function(result) {
         res.render("console/partial/resultsTable", {
             result: result
         });

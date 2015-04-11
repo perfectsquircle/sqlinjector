@@ -70,23 +70,6 @@ module.exports = function(grunt) {
             files: ["**/*.js", "!node_modules/**", "!bower_components/**"],
             options: {}
         },
-        browserify: {
-            dist: {
-                files: {
-                    'dist/public/js/console.js': ['client/console.js'],
-                }
-            }
-        },
-        uglify: {
-            dist: {
-                files: [{
-                    cwd: "dist/public/js",
-                    expand: true,
-                    src: "**/*.js",
-                    dest: "dist/public/js"
-                }]
-            }
-        },
         nodeunit: {
             all: ["test/**/*.js"]
         }
@@ -97,8 +80,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-compress");
     grunt.loadNpmTasks("grunt-jsbeautifier");
-    grunt.loadNpmTasks("grunt-browserify");
-    grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-nodeunit");
 
     grunt.registerTask("test", ["nodeunit"]);

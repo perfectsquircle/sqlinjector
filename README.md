@@ -3,10 +3,13 @@ SQL Injector is a web-based database console intended for developers.
 Installing
 ==========
 
-
-
-TODO
+To do
 ====
+## In Progress
+* Schema browser (owner and est. row count info)
+  * Table information (column definitions)
+  * Show sampling of rows
+
 ## Minimum Viable Product
 * Console Features
   * Key combos
@@ -17,9 +20,6 @@ TODO
   * Auto-grow and auto-prune
 * Error handling
   * SQL errors shouldn't be AJAX errors
-* Schema browser (owner and est. row count info)
-  * Table information (column definitions)
-  * Show sampling of rows
 * Raw output
 * Cleanup backend
   * Don't generate infinite sessions
