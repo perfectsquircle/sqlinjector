@@ -24,7 +24,6 @@ TODO
 * Cleanup backend
   * Don't generate infinite sessions
 * Show rows affected on non-selects
-* Browserify (development?) middleware
 * Click on result selects entire text
 * Keep console input between page loads
 * CRUD list of connections
@@ -59,6 +58,8 @@ TODO
 * Administration
 * Easy install 
   * [cli](https://github.com/rlidwka/sinopia/blob/master/lib/cli.js)
+  * home folder
+  * db migration
 * Progressive loading of rows when > limit
 * Preconfigured database connections
 * Smart syntax errors

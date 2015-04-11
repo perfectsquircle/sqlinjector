@@ -5,6 +5,7 @@ var session = require("cookie-session");
 var path = require("path");
 var logger = require("./lib/logger");
 var compression = require("compression");
+var browserify = require('browserify-middleware');
 
 var app = express();
 
@@ -18,6 +19,7 @@ app.use(express.static(path.join(__dirname, "public"), {
 app.use("/vendor", express.static(path.join(__dirname, "bower_components"), {
     maxAge: config.staticAssetMaxAge
 }));
+app.use("/js/console.js", browserify("./client/console.js"));
 app.use(bodyParser.urlencoded({
     extended: true
 }));
