@@ -1,6 +1,6 @@
 var logger = require("../lib/logger");
 var Connection = require("../model/Connection");
-var consoleSessionController = require("../lib/consoleSession/consoleSessionController");
+var consoleSession = require("../lib/consoleSession");
 
 exports.getConnectionConsole = function(req, res, next) {
     var user = req.session.user;
@@ -13,10 +13,10 @@ exports.getConnectionConsole = function(req, res, next) {
     }).fetch({
         required: true
     }).then(function(connection) {
-        var consoleSession = consoleSessionController.createSession(connection, user);
+        var session = consoleSession.createSession(connection, user);
         res.render("console/console", {
             connection: connection.toJSON(),
-            consoleSessionKey: consoleSession.consoleSessionKey,
+            consoleSessionKey: session.consoleSessionKey,
             pageTitle: connection.getTitle()
         });
     }).catch(function(error) {
@@ -29,12 +29,12 @@ exports.postConsoleSessionQuery = function(req, res, next) {
         return next("Malformed request");
     }
     var consoleSessionKey = req.params.consoleSessionKey;
-    var consoleSession = consoleSessionController.getSession(consoleSessionKey);
-    if (!consoleSession) {
+    var session = consoleSession.getSession(consoleSessionKey);
+    if (!session) {
         return next("No such console session");
     }
 
-    consoleSession.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
+    session.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
         res.render("console/partial/resultsTable", {
             result: result
         });

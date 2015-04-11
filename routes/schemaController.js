@@ -1,5 +1,5 @@
 var Connection = require("../model/Connection");
-var consoleSessionController = require("../lib/consoleSession/consoleSessionController");
+var consoleSession = require("../lib/consoleSession");
 
 exports.getConnectionSchema = function(req, res, next) {
     var user = req.session.user;
@@ -12,11 +12,11 @@ exports.getConnectionSchema = function(req, res, next) {
     }).fetch({
         required: true
     }).then(function(connection) {
-        var consoleSession = consoleSessionController.createSession(connection, user);
-        return [consoleSession, connection, consoleSession.getSchema()];
-    }).spread(function(consoleSession, connection, schema) {
+        var session = consoleSession.createSession(connection, user);
+        return [consoleSession, connection, session.getSchema()];
+    }).spread(function(session, connection, schema) {
         res.render("schema/schema", {
-            consoleSessionKey: consoleSession.consoleSessionKey,
+            consoleSessionKey: session.consoleSessionKey,
             connection: connection.toJSON(),
             schema: schema,
             pageTitle: connection.getTitle()

@@ -1,5 +1,4 @@
 var bookshelf = require("./bookshelf");
-var schema = require("../lib/database/schema");
 var DatabaseClient = require("../lib/database/DatabaseClient");
 var util = require("util");
 
