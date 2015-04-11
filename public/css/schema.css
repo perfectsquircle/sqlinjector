@@ -1,0 +1,10 @@
+.relations {
+	overflow: hidden;
+	/*transition: padding-left 0.2s ease;*/
+}
+
+.relations.collapsed {
+	height: 0;
+	padding: 0;
+	margin: 0;
+}
