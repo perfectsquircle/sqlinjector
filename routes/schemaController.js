@@ -18,7 +18,7 @@ exports.getConnectionSchema = function(req, res, next) {
         res.render("schema/schema", {
             consoleSessionKey: session.consoleSessionKey,
             connection: connection.toJSON(),
-            schema: schema,
+            schemata: schema,
             pageTitle: connection.getTitle()
         });
     }).catch(function(error) {

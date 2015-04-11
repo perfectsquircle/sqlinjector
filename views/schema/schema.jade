@@ -1,17 +1,28 @@
 extend ../layout/main
 
+block append style
+    link(rel="stylesheet", href="/css/schema.css")
+
+block append js
+    script.
+        App.connectionId = #{connection.connectionId};
+        App.consoleSessionKey = "#{consoleSessionKey}";
+    script(src="/js/schema.js")
+
 block content
-    h2 #{connection.username}@#{connection.hostname}/#{connection.database}
-    ul.schemas
-        li Schemas (#{schema.length})
-            ul.schema
-                each schemak in schema
-                    li.schemak=schemak.name
-                        ul.relations(style="padding-left: 15px;")
-                            each array, key in schemak
-                                if key == "name" 
-                                    - continue;
-                                li #{key} (#{array.length})
-                                    ul.relations(style="padding-left: 15px")
-                                        each relation in array
-                                            li.relation #{relation.name}
+    h2 Schema &mdash; #{pageTitle}
+    ul.everything
+        li Schemata (#{schemata.length})
+        ul.schemata
+            each schema in schemata
+                - var schemaIdentifier = "schema-" + schema.name;
+                li: a.schema(href="#" + schemaIdentifier)=schema.name
+                ul.relations.collapsed(id=schemaIdentifier)
+                    each array, key in schema
+                        if key == "name" 
+                            - continue;
+                        - var relationIdentifier = schemaIdentifier + "-" + key
+                        li: a.relation-type(href="#" + relationIdentifier) #{key} (#{array.length})
+                        ul.relations.collapsed(id=relationIdentifier)
+                            each relation in array
+                                li: a.relation(href="#") #{relation.name}
