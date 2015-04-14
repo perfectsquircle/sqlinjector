@@ -10,19 +10,9 @@ block append js
     script(src="/js/schema.js")
 
 block content
-    h2 Schema &mdash; #{pageTitle}
-    ul.everything
-        li Schemata (#{schemata.length})
-        ul.schemata
-            each schema in schemata
-                - var schemaIdentifier = "schema-" + schema.name;
-                li: a.schema(href="#" + schemaIdentifier)=schema.name
-                ul.relations.collapsed(id=schemaIdentifier)
-                    each array, key in schema
-                        if key == "name" 
-                            - continue;
-                        - var relationIdentifier = schemaIdentifier + "-" + key
-                        li: a.relation-type(href="#" + relationIdentifier) #{key} (#{array.length})
-                        ul.relations.collapsed(id=relationIdentifier)
-                            each relation in array
-                                li: a.relation(href="#") #{relation.name}
+    .pure-g
+        .pure-u-1-2
+            include ./partial/tree
+        .pure-u-1-2
+            .relation-information
+            //include ./partial/relation

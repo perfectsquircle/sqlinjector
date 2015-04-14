@@ -43,9 +43,13 @@ app.use(authController.authMiddleware);
 
 app.get("/", connectionController.getConnections);
 app.get("/connections", connectionController.getConnections);
+
 app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
 app.post("/consoleSession/:consoleSessionKey/query", consoleController.postConsoleSessionQuery);
+
 app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
+app.get("/connection/:connectionId/schema/:consoleSessionKey", schemaController.getRelationInformation);
+
 app.get("/admin", adminController.getAdminPage);
 
 app.use(errorController.errorHandler);

@@ -1,8 +1,9 @@
 var $ = require("domtastic");
 
-var SchemaView = module.exports = function($el) {
+var SchemaView = module.exports = function($el, relationSelected) {
     $el.find(".schema,.relation-type").on("click", this.handleSchemaClick.bind(this));
     $el.find(".relation").on("click", this.handleRelationClick.bind(this));
+    this.relationSelected = relationSelected;
 };
 
 SchemaView.prototype = {
@@ -13,5 +14,6 @@ SchemaView.prototype = {
 
     handleRelationClick: function(e) {
         e.preventDefault();
+        this.relationSelected(e.currentTarget.dataset.schema, e.currentTarget.dataset.relation);
     }
 };
