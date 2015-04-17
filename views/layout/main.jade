@@ -12,13 +12,12 @@ html
             script.
                 var App = {};
     body
-        #layout.content.pure-g
-            #nav.pure-u-1
-                .pure-menu.pure-menu-open.pure-menu-horizontal
-                    a.pure-menu-heading(href="/") SQL Injector
-                    if pageTitle
-                        ul
-                            li: a=pageTitle
-            #main.pure-u-1
-                .l-box
-                    block content
+        #nav
+            .home-menu.pure-menu.pure-menu-horizontal
+                a.pure-menu-heading(href="/") SQL Injector
+                if pageTitle
+                    ul.pure-menu-list
+                        li.pure-menu-item: a.pure-menu-link(href="#")=pageTitle
+        block content
+                
+        

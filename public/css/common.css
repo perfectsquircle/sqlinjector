@@ -1,3 +1,38 @@
+/*  LAYOUT  */
+
+.flex {
+    display: flex;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-1 {
+    flex: 1;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.flex-3 {
+    flex: 3;
+}
+
+.flex-4 {
+    flex: 4;
+}
+
+.flex-5 {
+    flex: 5;
+}
+
+.flex-6 {
+    flex: 6;
+}
+
 /*  FONTS  */
 
 html, button, input, select, textarea,
@@ -11,30 +46,105 @@ html, button, input, select, textarea,
     font-family: "Ubuntu Mono", monospace;
 }
 
+/*  MENU  */
+
+.home-menu {
+    height: 32px;
+    box-shadow: 0 1px 1px rgba(0,0,0, 0.10);
+    background: #2d3e50;
+}
+
+.home-menu .pure-menu-heading {
+    color: white;
+}
+
+.home-menu .pure-menu-selected a {
+    color: white;
+}
+
+.home-menu a {
+    color: #6FBEF3;
+}
+.home-menu li a:hover,
+.home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #AECFE5;
+}
+
+
 /*  MIXINS  */
+
+.relative {
+    position: relative;
+}
 
 .scroll {
     overflow: auto;
 }
 
-.l-box {
-    padding: 1em;
+.pad {
+    padding: 0.5em;
 }
 
-.block {
-    box-shadow: #ddd 1px 1px 8px;
+.margin-right {
+    margin-right: 0.5em;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+/*  PANELS  */
+
+.panels {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.panel {
+    box-shadow: #aaa 2px 1px 8px;
     border-radius: 6px;
     border: 1px solid #aaa;
     margin: 8px;
+    flex: 1;
+    flex-basis: 300px;
+    overflow: hidden;
 }
 
-.block .block-heading {
+.panel .panel-heading,
+.panel .panel-footer {
     padding: 0.5em 1em;
+}
+
+.panel .panel-heading {
     border-bottom: 1px solid #aaa;
 }
 
-.block .block-body {
+.panel .panel-footer {
+    border-top: 1px solid #aaa;
+}
+
+.panel .panel-body {
     padding: 1em;
     font-size: 9pt;
 }
 
+
+/*  RESULTS  */
+
+.result-rows th,
+.result-rows td {
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 400px;
+}

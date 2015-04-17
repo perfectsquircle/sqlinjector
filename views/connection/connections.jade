@@ -1,30 +1,29 @@
 extend ../layout/main
 
 block content
-    section.connections
+    section.connections.panels
         each connection in connections
-            .connection.pure-u-1-3.block
-                .block-heading #{connection.username}@#{connection.hostname}/#{connection.database}
-                .block-body.pure-g
-                    .pure-u-1-2
+            .connection.panel
+                .panel-heading #{connection.username}@#{connection.hostname}/#{connection.database}
+                .panel-body.pure-g
+                    .pure-u-1-4
                         strong Hostname
-                    .pure-u-1-2
+                    .pure-u-3-4
                         span.mono=connection.hostname
-                    .pure-u-1-2
+                    .pure-u-1-4
                         strong Database
-                    .pure-u-1-2
+                    .pure-u-3-4
                         span.mono=connection.database
-                    .pure-u-1-2
+                    .pure-u-1-4
                         strong Username
-                    .pure-u-1-2
+                    .pure-u-3-4
                         span.mono=connection.username
-                    hr
-                    .pure-u-1
-                        a(href="/connection/" + connection.connectionId + "/console") console
-                        |  &mdash;  
-                        a(href="/connection/" + connection.connectionId + "/schema") schema
-                        |  &mdash;  
-                        a(href="/connection/" + connection.connectionId + "/queries") queries
-                        |  &mdash;  
-                        a(href="/connection/" + connection.connectionId + "/reports") reports
+                .panel-footer
+                    a(href="/connection/" + connection.connectionId + "/console") console
+                    |  &mdash;  
+                    a(href="/connection/" + connection.connectionId + "/schema") schema
+                    |  &mdash;  
+                    a(href="/connection/" + connection.connectionId + "/queries") queries
+                    |  &mdash;  
+                    a(href="/connection/" + connection.connectionId + "/reports") reports
                         

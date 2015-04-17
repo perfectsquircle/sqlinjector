@@ -2,7 +2,7 @@ var $ = require("domtastic");
 var BasicConsoleInputView = require("./BasicConsoleInputView");
 
 var ConsoleView = module.exports = function() {
-    this.resultArea = $(".result-area");
+    this.resultArea = $(".results");
     this.timer = $(".result-stats .timer");
     this.params = $(".statement-form .param");
     this.resultCount = $(".result-stats .result-count");
@@ -10,18 +10,16 @@ var ConsoleView = module.exports = function() {
     //$(".statement-form").on("submit", this.handleStatementFormSubmit.bind(this));
     $(".execute-statement-button").on("mousedown", this.handleExecuteStatementClick.bind(this));
 
-    this.consoleInputView = new BasicConsoleInputView($(".statement-form .console-input"), this.postConsole.bind(this));
+    this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input"), this.postConsole.bind(this));
 };
 
 ConsoleView.prototype = {
     handleResultsHtml: function(resultHtml) {
-        this.stopTimer();
         this.resultArea.html(resultHtml);
         this.populateResultCount();
     },
 
     handleError: function(error) {
-        this.stopTimer();
         var message = (error && error.message) || error;
         if (message) {
             this.resultArea.html("<pre>" + message + "</pre>");
@@ -68,6 +66,7 @@ ConsoleView.prototype = {
     },
 
     postConsole: function() {
+        var self = this;
         this.startTimer();
         var statement = this.consoleInputView.getValue();
         console.debug("form submit", statement);
@@ -89,8 +88,17 @@ ConsoleView.prototype = {
                 })
             }).then(function(response) {
                 return response.text();
-            }).then(this.handleResultsHtml.bind(this))
-            .catch(this.handleError.bind(this));
+            }).then(function(text) {
+                if (text.trim().startsWith("<")) {
+                    self.handleResultsHtml(text);
+                } else {
+                    self.handleError(text);
+                }
+            })
+            .catch(this.handleError.bind(this))
+            .then(function() {
+                self.stopTimer();
+            });
 
     }
 };
