@@ -31,7 +31,6 @@ To do
 * Parser
   * Comments between statements?
   * isLikelyASelect()
-* Non-scrolling console interface (i.e. jsfiddle)
 * Cancel currently running query
 
 ## Enhancements
@@ -49,14 +48,14 @@ To do
 * Easily see all databases on a server (like pgadmin)
 * Auto-limit
 * Long running queries
-  * Queue 
+  * Queue
   * Notify when done
 * Plugins
 * Canned Reports
   * Export to csv
   * Export to HTML (like pgadmin)
 * Administration
-* Easy install 
+* Easy install
   * [cli](https://github.com/rlidwka/sinopia/blob/master/lib/cli.js)
   * home folder
   * db migration
