@@ -9,9 +9,14 @@ To do
 * Schema browser (owner and est. row count info)
   * View definition
   * Function definition
-  * Tree view selection
+  * Tree view selection (persist and better color)
 
 ## Minimum Viable Product
+* Cleanup backend
+  * Don't generate infinite sessions
+* Keep console input between page loads
+* Bug: empty queries cause bad juju
+* CRUD list of connections
 * Console Features
   * Key combos
     * Change Indent
@@ -22,16 +27,13 @@ To do
 * Error handling
   * SQL errors shouldn't be AJAX errors
 * Raw output
-* Cleanup backend
-  * Don't generate infinite sessions
 * Show rows affected on non-selects
-* Click on result selects entire text
-* Keep console input between page loads
-* CRUD list of connections
+* Click on result selects entire text (or copy gets the whole thing)
 * A way to destroy all active connections
 * Parser
   * Comments between statements?
   * isLikelyASelect()
+  * Functions ($$), strings, etc.
 * Cancel currently running query
 
 ## Enhancements
