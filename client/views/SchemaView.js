@@ -9,11 +9,11 @@ var SchemaView = module.exports = function($el, relationSelected) {
 SchemaView.prototype = {
     handleSchemaClick: function(e) {
         e.preventDefault();
-        $($(e.currentTarget).attr("href")).toggleClass("collapsed");
+        $($(e.currentTarget).attr("rel")).toggleClass("collapsed");
     },
 
     handleRelationClick: function(e) {
         e.preventDefault();
-        this.relationSelected(e.currentTarget.dataset.schema, e.currentTarget.dataset.relation);
+        this.relationSelected(e.currentTarget.dataset.schema, e.currentTarget.dataset.relation, e.currentTarget.dataset.relationType);
     }
 };

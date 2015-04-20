@@ -5,7 +5,7 @@ var SchemaView = require("./views/SchemaView");
 $(document).ready(function() {
     var relationInformationView = new RelationInformationView($(".relation-information"));
 
-    var schemaView = new SchemaView($(".everything"), function(schema, relation) {
-        relationInformationView.handleRelationSelected(schema, relation);
+    var schemaView = new SchemaView($(".everything"), function(schema, relation, relationType) {
+        relationInformationView.handleRelationSelected(schema, relation, relationType);
     });
 });

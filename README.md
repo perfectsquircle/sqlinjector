@@ -7,8 +7,9 @@ To do
 ====
 ## In Progress
 * Schema browser (owner and est. row count info)
-  * Table information (column definitions)
-  * Show sampling of rows
+  * View definition
+  * Function definition
+  * Tree view selection
 
 ## Minimum Viable Product
 * Console Features

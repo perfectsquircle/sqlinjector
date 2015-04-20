@@ -8,3 +8,18 @@
 	padding: 0;
 	margin: 0;
 }
+
+.list {
+	margin-left: 12px;
+	padding-left: 12px;
+	border-left: 1px solid #aaa;
+}
+
+.list-item {
+	padding: 0.5em;
+	cursor: pointer;
+}
+
+.list-item:hover {
+	background-color: #eef;
+}

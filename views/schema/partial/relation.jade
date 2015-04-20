@@ -1,2 +1,43 @@
 h2=title
+.owner(title="owner")
+    span.fa.fa-user 
+    |  
+    span=owner
+    
+    
+h3 #{columns.length} #{columns.length === 1 ? "Column" : "Columns"}
+.scroll    
+    table.pure-table 
+        thead
+            tr
+                th Name
+                th Type
+                th Default
+                th Constraints
+        tbody
+            each column in columns
+                tr
+                    td=column.name
+                    td=column.type
+                    td=column.default
+                    td
+                        if column.primarykey
+                            span.fa.fa-key(title="Primary Key")
+                            |  
+                        if column.uniquekey
+                            span.fa(title="Unique") 1
+                            |  
+                        if column.notnull
+                            span.fa.fa-dot-circle-o(title="Not Null")
+                            |  
+                        if column.foreignkey
+                            span.fa.fa-external-link(title="Foreign Key")
+                
+if sample.rowCount < count                
+    h3 #{sample.rowCount} of #{count} Rows:    
+else if sample.rowCount === 1
+    h3 1 Row:
+else
+    h3 #{count} Rows: 
+- var result = sample; 
 include ../../console/partial/resultsTable

@@ -19,7 +19,8 @@ exports.getConnectionSchema = function(req, res, next) {
             consoleSessionKey: session.consoleSessionKey,
             connection: connection.toJSON(),
             schemata: schema,
-            pageTitle: connection.getTitle()
+            pageTitle: connection.getTitle(),
+            databaseName: connection.get("database")
         });
     }).catch(function(error) {
         next(error);
@@ -36,11 +37,16 @@ exports.getRelationInformation = function(req, res, next) {
 
     var schema = req.query.schema;
     var relation = req.query.relation;
+    var relationType = req.query.relationType || "table";
 
     session.getRelationInformation(schema, relation).then(function(info) {
         res.render("schema/partial/relation", {
             title: info.schema + "." + info.relation,
-            result: info.result
+            sample: info.sample,
+            count: info.count,
+            columns: info.columns,
+            owner: info.owner,
+            tablespace: info.tablespace
         });
     }).catch(function(e) {
         res.send(e.message);
