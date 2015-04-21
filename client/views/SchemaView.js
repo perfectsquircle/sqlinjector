@@ -14,6 +14,6 @@ SchemaView.prototype = {
 
     handleRelationClick: function(e) {
         e.preventDefault();
-        this.relationSelected(e.currentTarget.dataset.schema, e.currentTarget.dataset.relation, e.currentTarget.dataset.relationType);
+        this.relationSelected(e.currentTarget.dataset.schema, e.currentTarget.dataset.relation, e.currentTarget.dataset.kind);
     }
 };

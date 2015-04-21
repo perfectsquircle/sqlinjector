@@ -19,7 +19,7 @@ h2 Schema
                         span #{key} (#{array.length})
                     .list.relations.collapsed(id=relationIdentifier)
                         each relation in array
-                            .list-item.relation(data-schema=schema.name, data-relation=relation.name, data-relation-type=relation.kind)
+                            .list-item.relation(data-schema=schema.name, data-relation=relation.name, data-kind=relation.kind)
                                 span.fa.fa-table
                                 |  
                                 span(href="#" + relationIdentifier + "-info") #{relation.name}

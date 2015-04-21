@@ -5,18 +5,11 @@ exports.getConnectionSchema = function(req, res, next) {
     var user = req.session.user;
     var connectionId = req.params.connectionId;
 
-    Connection.forge({
-        connectionId: connectionId,
-        ownerId: user.userId,
-        inactiveDate: null
-    }).fetch({
-        required: true
-    }).then(function(connection) {
-        var session = consoleSession.createSession(connection, user);
+    Connection.getConnection(connectionId, user.userId).then(function(connection) {
+        var session = consoleSession.getSession(connection, user);
         return [session, connection, session.getSchema()];
     }).spread(function(session, connection, schema) {
         res.render("schema/schema", {
-            consoleSessionKey: session.consoleSessionKey,
             connection: connection.toJSON(),
             schemata: schema,
             pageTitle: connection.getTitle(),
@@ -29,17 +22,16 @@ exports.getConnectionSchema = function(req, res, next) {
 
 exports.getRelationInformation = function(req, res, next) {
     var user = req.session.user;
-    var consoleSessionKey = req.params.consoleSessionKey;
-    var session = consoleSession.getSession(consoleSessionKey);
-    if (!session) {
-        return next("No such console session");
-    }
+    var connectionId = req.params.connectionId;
 
     var schema = req.query.schema;
     var relation = req.query.relation;
-    var relationType = req.query.relationType || "table";
+    var kind = req.query.kind || "table";
 
-    session.getRelationInformation(schema, relation).then(function(info) {
+    Connection.getConnection(connectionId, user.userId).then(function(connection) {
+        var session = consoleSession.getSession(connection, user);
+        return session.getRelationInformation(schema, relation);
+    }).then(function(info) {
         res.render("schema/partial/relation", {
             title: info.schema + "." + info.relation,
             sample: info.sample,

@@ -3,7 +3,8 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             options: {
-                undef: true
+                undef: true,
+                laxcomma: true
             },
             client: {
                 src: ["client/**/*.js"],

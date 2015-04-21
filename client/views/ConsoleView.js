@@ -4,7 +4,7 @@ var BasicConsoleInputView = require("./BasicConsoleInputView");
 var ConsoleView = module.exports = function() {
     this.resultArea = $(".results");
     this.timer = $(".result-stats .timer");
-    this.params = $(".statement-form .param");
+    this.params = $(".statement-area .param");
     this.resultCount = $(".result-stats .result-count");
 
     //$(".statement-form").on("submit", this.handleStatementFormSubmit.bind(this));
@@ -76,7 +76,7 @@ ConsoleView.prototype = {
             return param.length;
         });
 
-        fetch("/consoleSession/" + App.consoleSessionKey + "/query", {
+        fetch("/connection/" + App.connectionId + "/query", {
                 method: "post",
                 headers: {
                     'Accept': 'text/*',

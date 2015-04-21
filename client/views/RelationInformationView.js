@@ -5,13 +5,13 @@ var RelationInformationView = module.exports = function($el) {
 };
 
 RelationInformationView.prototype = {
-    handleRelationSelected: function(schema, relation, relationType) {
+    handleRelationSelected: function(schema, relation, kind) {
         var self = this;
-        var url = "/connection/" + App.connectionId + "/schema/" + App.consoleSessionKey;
+        var url = "/connection/" + App.connectionId + "/relation";
         url += "?" + querystring.stringify({
             schema: schema,
             relation: relation,
-            relationType: relationType
+            kind: kind
         });
         fetch(url).then(function(response) {
             return response.text();

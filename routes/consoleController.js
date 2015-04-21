@@ -6,17 +6,10 @@ exports.getConnectionConsole = function(req, res, next) {
     var user = req.session.user;
     var connectionId = req.params.connectionId;
 
-    Connection.forge({
-        connectionId: connectionId,
-        ownerId: user.userId,
-        inactiveDate: null
-    }).fetch({
-        required: true
-    }).then(function(connection) {
-        var session = consoleSession.createSession(connection, user);
+    Connection.getConnection(connectionId, user.userId).then(function(connection) {
+        var session = consoleSession.getSession(connection, user);
         res.render("console/console", {
             connection: connection.toJSON(),
-            consoleSessionKey: session.consoleSessionKey,
             pageTitle: connection.getTitle()
         });
     }).catch(function(error) {
@@ -25,16 +18,16 @@ exports.getConnectionConsole = function(req, res, next) {
 };
 
 exports.postConsoleSessionQuery = function(req, res, next) {
-    if (!req.body) {
+    if (!req.body || !req.body.queryText) {
         return next("Malformed request");
     }
-    var consoleSessionKey = req.params.consoleSessionKey;
-    var session = consoleSession.getSession(consoleSessionKey);
-    if (!session) {
-        return next("No such console session");
-    }
 
-    session.handleQuery(req.body.queryText, req.body.queryParams).then(function(result) {
+    var user = req.session.user;
+    var connectionId = req.params.connectionId;
+    Connection.getConnection(connectionId, user.userId).then(function(connection) {
+        var session = consoleSession.getSession(connection, user);
+        return session.handleQuery(req.body.queryText, req.body.queryParams);
+    }).then(function(result) {
         res.render("console/partial/resultsTable", {
             result: result
         });

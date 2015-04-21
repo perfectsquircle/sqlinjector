@@ -26,6 +26,20 @@ var Connection = bookshelf.Model.extend({
                 user: this.get("username"),
                 password: this.get("password")
             });
+    },
+}, {
+
+    getConnection: function(connectionId, userId) {
+        return this.forge({
+            connectionId: connectionId,
+            ownerId: userId,
+            inactiveDate: null
+        }).fetch().then(function(connection) {
+            if (!connection) {
+                throw new Error("No such connection");
+            }
+            return connection;
+        });
     }
 });
 

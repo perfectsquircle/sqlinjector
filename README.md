@@ -7,13 +7,12 @@ To do
 ====
 ## In Progress
 * Schema browser (owner and est. row count info)
+  * Tree view selection (persist and better color)
   * View definition
   * Function definition
-  * Tree view selection (persist and better color)
 
 ## Minimum Viable Product
-* Cleanup backend
-  * Don't generate infinite sessions
+
 * Keep console input between page loads
 * Bug: empty queries cause bad juju
 * CRUD list of connections
@@ -35,6 +34,7 @@ To do
   * isLikelyASelect()
   * Functions ($$), strings, etc.
 * Cancel currently running query
+* Client code: events
 
 ## Enhancements
 * Permissions (detect insert/update/delete)
@@ -46,6 +46,9 @@ To do
   * http://ace.c9.io/
 * Sortable results
   * http://www.datatables.net/
+* Schema View
+  * Default values
+  * Table constraints
 
 ## Wishlist  
 * Easily see all databases on a server (like pgadmin)
