@@ -1,5 +1,6 @@
 var Connection = require("../model/Connection");
 var consoleSession = require("../lib/consoleSession");
+var _ = require("lodash");
 
 exports.getConnectionSchema = function(req, res, next) {
     var user = req.session.user;
@@ -30,16 +31,25 @@ exports.getRelationInformation = function(req, res, next) {
 
     Connection.getConnection(connectionId, user.userId).then(function(connection) {
         var session = consoleSession.getSession(connection, user);
-        return session.getRelationInformation(schema, relation);
+        return session.getRelationInformation(schema, relation, kind);
     }).then(function(info) {
-        res.render("schema/partial/relation", {
+        var options = {
             title: info.schema + "." + info.relation,
-            sample: info.sample,
-            count: info.count,
-            columns: info.columns,
             owner: info.owner,
             tablespace: info.tablespace
-        });
+        };
+
+        switch (kind) {
+            case "table":
+                res.render("schema/partial/table", _.extend({
+                    sample: info.sample,
+                    count: info.count,
+                    columns: info.columns
+                }, options));
+                break;
+            default:
+                return next("Not Implemented");
+        }
     }).catch(function(e) {
         res.send(e.message);
     });

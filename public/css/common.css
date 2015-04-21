@@ -4,6 +4,11 @@
     display: flex;
 }
 
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
 .flex-column {
     display: flex;
     flex-direction: column;
@@ -31,6 +36,15 @@
 
 .flex-6 {
     flex: 6;
+}
+
+
+body > .wrapper {
+	position: absolute;
+	top: 32px;
+	bottom: 0;
+	left: 0;
+	right: 0;
 }
 
 /*  FONTS  */
@@ -99,10 +113,11 @@ html, button, input, select, textarea,
     float: right;
 }
 
-.clear {
-    clear: both;
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
 }
-
 /*  PANELS  */
 
 .panels {

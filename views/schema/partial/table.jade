@@ -1,25 +1,21 @@
-h2=title
-.owner(title="owner")
-    span.fa.fa-user 
-    |  
-    span=owner
-    
+- var iconClass = "fa-table"
+include ./title    
     
 h3 #{columns.length} #{columns.length === 1 ? "Column" : "Columns"}
 .scroll    
-    table.pure-table 
+    table.pure-table.mono 
         thead
             tr
                 th Name
                 th Type
-                th Default
+                //- th Default
                 th Constraints
         tbody
             each column in columns
                 tr
-                    td=column.name
+                    td: strong=column.name
                     td=column.type
-                    td=column.default
+                    //- td=column.default
                     td
                         if column.primarykey
                             span.fa.fa-key(title="Primary Key")
@@ -34,10 +30,11 @@ h3 #{columns.length} #{columns.length === 1 ? "Column" : "Columns"}
                             span.fa.fa-external-link(title="Foreign Key")
                 
 if sample.rowCount < count                
-    h3 #{sample.rowCount} of #{count} Rows:    
+    h3 #{sample.rowCount} of #{count} Rows
 else if sample.rowCount === 1
-    h3 1 Row:
+    h3 1 Row
 else
-    h3 #{count} Rows: 
+    h3 #{count} Rows 
 - var result = sample; 
-include ../../console/partial/resultsTable
+.scroll
+    include ../../console/partial/resultsTable

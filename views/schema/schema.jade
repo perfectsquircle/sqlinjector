@@ -9,10 +9,9 @@ block append js
     script(src="/js/schema.js")
 
 block content
-    .pad
-        .pure-g
-            .pure-u-1-2
-                include ./partial/tree
-            .pure-u-1-2
-                .relation-information
-                    //include ./partial/relation
+    .wrapper.console.flex-row
+        .flex-1.pad.scroll
+            include ./partial/tree
+        .flex-2.pad.scroll
+            .relation-information
+                //-include ./partial/relation

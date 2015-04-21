@@ -1,12 +1,11 @@
 - var fields = result.fields;
 - var rows = result.rows;
-.scroll
-    table.result-rows.pure-table.pure-table-horizontal.mono
-        thead
-            each field in fields
-                th #{field.name}
-        tbody
-            each row in rows
-                tr
-                    for value, key in row
-                        td(tabindex=1)=value
+table.result-rows.pure-table.pure-table-horizontal.mono
+    thead
+        each field in fields
+            th #{field.name}
+    tbody
+        each row in rows
+            tr
+                for value, key in row
+                    td(tabindex=1)=value
