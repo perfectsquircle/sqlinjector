@@ -12,6 +12,7 @@ To do
 
 ## Minimum Viable Product
 
+* Show rows affected on non-selects
 * Keep console input between page loads
 * Bug: empty queries cause bad juju
 * CRUD list of connections
@@ -25,7 +26,6 @@ To do
 * Error handling
   * SQL errors shouldn't be AJAX errors
 * Raw output
-* Show rows affected on non-selects
 * Click on result selects entire text (or copy gets the whole thing)
 * A way to destroy all active connections
 * Parser
