@@ -19,10 +19,14 @@
 .list-item {
 	padding: 0.5em;
 	cursor: pointer;
-}
+}	
 
 .list-item:hover {
-	background-color: #eef;
+	background-color: rgba(255, 200, 100, 0.5);
+}
+
+.list-item.selected {
+	background-color: rgba(255, 200, 100, 1);
 }
 
 /* TABLE VIEW */

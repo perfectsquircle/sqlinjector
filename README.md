@@ -7,7 +7,6 @@ To do
 ====
 ## In Progress
 * Schema browser (owner and est. row count info)
-  * Tree view selection (persist and better color)
   * View definition
   * Function definition
 
