@@ -1,5 +1,14 @@
-h2 Schema 
+mixin relationIcon(kind)
+    if kind === "table"
+        span.fa.fa-table
+    else if kind === "view"
+        span.fa.fa-binoculars
+    else if kind === "function"
+        span.fa.fa-code
+    else
+        span.fa.fa-cube
 
+h2 Schema 
 .everything
     .list-item.database 
         span.fa.fa-database 
@@ -20,6 +29,6 @@ h2 Schema
                     .list.relations.collapsed(id=relationIdentifier)
                         each relation in array
                             .list-item.relation(data-schema=schema.name, data-relation=relation.name, data-kind=relation.kind)
-                                span.fa.fa-table
+                                +relationIcon(relation.kind)
                                 |  
                                 span(href="#" + relationIdentifier + "-info") #{relation.name}

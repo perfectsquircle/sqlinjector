@@ -1,0 +1,9 @@
+if sample.rowCount < count                
+    h3 #{sample.rowCount} of #{count} Rows
+else if sample.rowCount === 1
+    h3 1 Row
+else
+    h3 #{count} Rows 
+- var result = sample; 
+.scroll
+    include ../../console/partial/resultsTable

@@ -27,14 +27,14 @@ exports.getRelationInformation = function(req, res, next) {
 
     var schema = req.query.schema;
     var relation = req.query.relation;
-    var kind = req.query.kind || "table";
+    var kind = req.query.kind;
 
     Connection.getConnection(connectionId, user.userId).then(function(connection) {
         var session = consoleSession.getSession(connection, user);
         return session.getRelationInformation(schema, relation, kind);
     }).then(function(info) {
         var options = {
-            title: info.schema + "." + info.relation,
+            title: schema + "." + relation,
             owner: info.owner,
             tablespace: info.tablespace
         };
@@ -47,10 +47,20 @@ exports.getRelationInformation = function(req, res, next) {
                     columns: info.columns
                 }, options));
                 break;
+            case "view":
+                res.render("schema/partial/view", _.extend({
+                    sample: info.sample,
+                    count: info.count,
+                    definition: info.definition
+                }, options));
+                break;
+            case "function":
+                res.render("schema/partial/function", _.extend({
+                    definition: info.definition
+                }, options));
+                break;
             default:
-                return next("Not Implemented");
+                res.render("schema/partial/relation", options);
         }
-    }).catch(function(e) {
-        res.send(e.message);
-    });
+    }).catch(next);
 };

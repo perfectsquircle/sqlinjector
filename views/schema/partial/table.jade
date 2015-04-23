@@ -29,12 +29,4 @@ h3 #{columns.length} #{columns.length === 1 ? "Column" : "Columns"}
                         if column.foreignkey
                             span.fa.fa-external-link(title="Foreign Key")
                 
-if sample.rowCount < count                
-    h3 #{sample.rowCount} of #{count} Rows
-else if sample.rowCount === 1
-    h3 1 Row
-else
-    h3 #{count} Rows 
-- var result = sample; 
-.scroll
-    include ../../console/partial/resultsTable
+include ./sample

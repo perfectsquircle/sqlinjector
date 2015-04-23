@@ -6,9 +6,6 @@ Installing
 To do
 ====
 ## In Progress
-* Schema browser (owner and est. row count info)
-  * View definition
-  * Function definition
 
 ## Minimum Viable Product
 
@@ -36,6 +33,9 @@ To do
 * Client code: events
 
 ## Enhancements
+* Preferences
+  * Hide/show system schemas on schema browser
+  * Set sample size on table/view information in schema browser
 * Permissions (detect insert/update/delete)
 * Session storage
 * Max field length (preference?)
