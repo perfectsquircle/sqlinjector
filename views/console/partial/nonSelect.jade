@@ -1,0 +1,4 @@
+pre 
+    | Command #{result.command} executed successfuly 
+    if result.rowCount >= 0
+        | with #{result.rowCount} #{result.rowCount === 1 ? "row" : "rows"} affected

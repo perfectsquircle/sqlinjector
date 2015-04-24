@@ -9,7 +9,6 @@ To do
 
 ## Minimum Viable Product
 
-* Show rows affected on non-selects
 * Keep console input between page loads
 * Bug: empty queries cause bad juju
 * CRUD list of connections

@@ -28,9 +28,15 @@ exports.postConsoleSessionQuery = function(req, res, next) {
         var session = consoleSession.getSession(connection, user);
         return session.handleQuery(req.body.queryText, req.body.queryParams);
     }).then(function(result) {
-        res.render("console/partial/resultsTable", {
-            result: result
-        });
+        if (result.command === "SELECT" || (result.rows && result.rows.length)) {
+            res.render("console/partial/resultsTable", {
+                result: result
+            });
+        } else {
+            res.render("console/partial/nonSelect", {
+                result: result
+            });
+        }
     }).catch(function(e) {
         res.send(e.message);
     });
