@@ -23,9 +23,13 @@ exports.postLogin = function(req, res, next) {
 };
 
 exports.authMiddleware = function(req, res, next) {
-    if (!req.session.user) {
-        res.redirect("/login");
-    } else {
+    if (req.session.user) {
         return next();
+    } else {
+        if (req.xhr) {
+            res.send(401, "No session")
+        } else {
+            res.redirect("/login");
+        }
     }
 };
