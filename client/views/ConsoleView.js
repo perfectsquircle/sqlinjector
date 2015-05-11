@@ -77,6 +77,7 @@ ConsoleView.prototype = {
         });
 
         fetch("/connection/" + App.connectionId + "/query", {
+                credentials: "same-origin",
                 method: "post",
                 headers: {
                     'Accept': 'text/*',
