@@ -163,3 +163,10 @@ html, button, input, select, textarea,
     overflow: hidden;
     max-width: 400px;
 }
+
+
+/* ICONS */
+
+.fa-unique:before {
+    content: "\2744";
+}
