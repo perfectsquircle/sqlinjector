@@ -8,4 +8,7 @@ table.result-rows.pure-table.pure-table-horizontal.mono
         each row in rows
             tr
                 for value, key in row
-                    td(tabindex=1)=value
+                    - var typeofValue = typeof value;
+                    - var primitive = typeofValue === 'string' || typeofValue === 'number' || typeofValue == 'boolean'
+                    - var valueString = primitive ? value : util.inspect(value);
+                    td(tabindex=1)=valueString

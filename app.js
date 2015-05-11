@@ -28,6 +28,11 @@ app.use(bodyParser.json());
 app.use(session({
     secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0"
 }));
+app.use(function(req, res, next) {
+    res.locals.util = require("util");
+    res.locals._ = require("lodash");
+    return next();
+});
 
 var authController = require("./routes/authController");
 var consoleController = require("./routes/consoleController");
