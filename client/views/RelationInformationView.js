@@ -13,7 +13,9 @@ RelationInformationView.prototype = {
             relation: relation,
             kind: kind
         });
-        fetch(url, { credentials: "same-origin" }).then(function(response) {
+        fetch(url, {
+            credentials: "same-origin"
+        }).then(function(response) {
             return response.text();
         }).then(function(responseHtml) {
             self.handleInformation(responseHtml);

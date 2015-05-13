@@ -1,11 +1,15 @@
 extend ../layout/main
 
 block content
-    section.connections.panels
+    section.connections.panels.flex-column
         each connection in connections
-            .connection.panel
-                .panel-heading #{connection.username}@#{connection.hostname}/#{connection.database}
-                .panel-body.pure-g
+            .connection.panel.flex-1
+                .panel-heading.break-all 
+                    i.fa.fa-database
+                    |  #{connection.username}@#{connection.hostname}/#{connection.database}
+                    a.right(href="/connections/edit/" + connection.connectionId)
+                        i.fa.fa-pencil(title="Edit")
+                .panel-body.pure-g.break-all
                     .pure-u-1-4
                         strong Hostname
                     .pure-u-3-4
@@ -26,4 +30,10 @@ block content
                     a(href="/connection/" + connection.connectionId + "/queries") queries
                     |  &mdash;  
                     a(href="/connection/" + connection.connectionId + "/reports") reports
+        .panel.new-connection.text-center.flex-1
+            .panel-body
+                a(href="/connections/create")
+                    i.fa.fa-plus
+                    |  Add connection
+            
                         

@@ -40,11 +40,11 @@
 
 
 body > .wrapper {
-	position: absolute;
-	top: 32px;
-	bottom: 0;
-	left: 0;
-	right: 0;
+    position: absolute;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
 /*  FONTS  */
@@ -58,6 +58,10 @@ html, button, input, select, textarea,
 
 .mono {
     font-family: "Ubuntu Mono", monospace;
+}
+
+.break-all {
+    word-break: break-all;
 }
 
 /*  MENU  */
@@ -118,6 +122,17 @@ html, button, input, select, textarea,
   display: table;
   clear: both;
 }
+
+.text-center {
+  text-align: center;
+}
+
+.center {
+    position: relative;
+    margin: 1em auto;
+    max-width: 480px;
+}
+
 /*  PANELS  */
 
 .panels {
@@ -131,7 +146,7 @@ html, button, input, select, textarea,
     border-radius: 6px;
     border: 1px solid #aaa;
     margin: 8px;
-    flex: 1;
+    flex: 2;
     flex-basis: 300px;
     overflow: hidden;
 }

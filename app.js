@@ -6,6 +6,8 @@ var path = require("path");
 var logger = require("./lib/logger");
 var compression = require("compression");
 var browserify = require('browserify-middleware');
+var util = require("util");
+var _ = require("lodash");
 
 var app = express();
 
@@ -29,8 +31,10 @@ app.use(session({
     secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0"
 }));
 app.use(function(req, res, next) {
-    res.locals.util = require("util");
-    res.locals._ = require("lodash");
+    res.locals.util = util;
+    res.locals._ = _;
+    res.locals.config = config;
+    console.log(res.locals.config);
     return next();
 });
 
@@ -48,6 +52,10 @@ app.use(authController.authMiddleware);
 
 app.get("/", connectionController.getConnections);
 app.get("/connections", connectionController.getConnections);
+app.get("/connections/create", connectionController.createConnection);
+app.post("/connections/create", connectionController.createConnectionPost);
+app.get("/connections/edit/:connectionId", connectionController.editConnection);
+app.post("/connections/edit/:connectionId", connectionController.editConnectionPost);
 
 app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
 app.post("/connection/:connectionId/query", consoleController.postConsoleSessionQuery);
