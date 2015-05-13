@@ -34,7 +34,6 @@ app.use(function(req, res, next) {
     res.locals.util = util;
     res.locals._ = _;
     res.locals.config = config;
-    console.log(res.locals.config);
     return next();
 });
 
