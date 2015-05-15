@@ -55,6 +55,7 @@ app.get("/connections/create", connectionController.createConnection);
 app.post("/connections/create", connectionController.createConnectionPost);
 app.get("/connections/edit/:connectionId", connectionController.editConnection);
 app.post("/connections/edit/:connectionId", connectionController.editConnectionPost);
+app.post("/connections/delete/:connectionId", connectionController.editConnectionDelete);
 
 app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
 app.post("/connection/:connectionId/query", consoleController.postConsoleSessionQuery);

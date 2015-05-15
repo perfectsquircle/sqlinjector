@@ -16,7 +16,7 @@ exports.getConnections = function(req, res, next) {
 };
 
 exports.createConnection = function(req, res, next) {
-    res.render("connection/create", {
+    res.render("connection/edit", {
         connection: {}
     });
 };
@@ -38,7 +38,7 @@ exports.editConnection = function(req, res, next) {
     }).fetch({
         require: true
     }).then(function(connection) {
-        res.render("connection/create", {
+        res.render("connection/edit", {
             connection: connection.toJSON()
         });
     }).catch(next);
@@ -71,3 +71,25 @@ function saveConnection(userId, reqBody) {
 
     return Connection.forge(attributes).save();
 }
+
+exports.editConnectionDelete = function(req, res, next) {
+    var connectionId = req.params.connectionId;
+    var userId = req.session.user.userId;
+
+    Connection.forge({
+        connectionId: connectionId
+    }).fetch().then(function(connection) {
+        console.log(connection, connection.get("ownerId"), userId);
+        if (connection.get("ownerId") === userId) {
+            return connection.destroy();
+        }
+    }).then(function() {
+        if (req.xhr) {
+            res.json({
+                success: true
+            });
+        } else {
+            res.redirect("/connections");
+        }
+    }).catch(next);
+};

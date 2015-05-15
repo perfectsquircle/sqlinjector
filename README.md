@@ -9,7 +9,6 @@ To do
 * CRUD list of connections
   * Edit name
   * Edit color
-  * Delete connection
 
 ## Minimum Viable Product
 
