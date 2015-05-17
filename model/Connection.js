@@ -2,17 +2,21 @@ var bookshelf = require("./bookshelf");
 var DatabaseClient = require("../lib/database/DatabaseClient");
 var util = require("util");
 
+function getTitle(attributes) {
+    if (attributes.name) {
+        return attributes.name;
+    } else {
+        return util.format("%s@%s/%s",
+            attributes.username,
+            attributes.hostname,
+            attributes.database
+        );
+    }
+}
+
 var Connection = bookshelf.Model.extend({
     tableName: "connection",
     idAttribute: "connectionId",
-
-    getTitle: function() {
-        return util.format("%s@%s/%s",
-            this.get("username"),
-            this.get("hostname"),
-            this.get("database")
-        );
-    },
 
     /**
      * Get a client
@@ -27,6 +31,11 @@ var Connection = bookshelf.Model.extend({
                 password: this.get("password")
             });
     },
+
+    parse: function(attributes) {
+        attributes.title = getTitle(attributes);
+        return attributes;
+    }
 }, {
 
     getConnection: function(connectionId, userId) {

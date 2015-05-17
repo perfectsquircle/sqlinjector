@@ -1,5 +1,4 @@
 exports.staticAssetMaxAge = 0;
-exports.dbConnectionString = "postgres://calvin:postgres@localhost/sqlinjector";
 exports.passwordHashRounds = 10;
 exports.consoleSessionTimeout = 3600000;
 exports.maxSessions = 50;
@@ -10,11 +9,11 @@ exports.databaseTypes = {
 };
 
 exports.connectionColors = {
-    "CA4653": "Red",
-    "E99240": "Orange",
-    "E5E16D": "Yellow",
-    "65B553": "Green",
-    "099EA1": "Blue"
+    "C7AAFF": "Purple",
+    "E89F9B": "Red",
+    "FFE9B7": "Yellow",
+    "B7E89B": "Green",
+    "B1FBFF": "Blue"
 };
 
 if (process.env.NODE_ENV === "production") {

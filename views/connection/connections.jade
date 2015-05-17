@@ -4,9 +4,9 @@ block content
     section.connections.panels.flex-column
         each connection in connections
             .connection.panel.flex-1
-                .panel-heading.break-all 
+                .panel-heading.break-all(style="background-color:##{connection.color}") 
                     i.fa.fa-database
-                    |  #{connection.username}@#{connection.hostname}/#{connection.database}
+                    |  #{connection.title}
                     a.right(href="/connections/edit/" + connection.connectionId)
                         i.fa.fa-pencil(title="Edit")
                 .panel-body.pure-g.break-all

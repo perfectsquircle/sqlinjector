@@ -85,7 +85,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask("test", ["nodeunit"]);
     grunt.registerTask("default", ["jshint", "test"]);
-    grunt.registerTask("dist", ["clean", "default", "copy", "browserify", "uglify"]);
+    grunt.registerTask("dist", ["clean", "default", "copy"]);
     grunt.registerTask("package", ["dist", "compress"]);
 
     grunt.registerTask("format", ["jshint", "jsbeautifier"]);

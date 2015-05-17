@@ -58,6 +58,8 @@ function saveConnection(userId, reqBody) {
     assert(b && b.databaseType && b.hostname && b.database && b.username && b.password, "Malformed POST body");
 
     var attributes = {
+        name: b.name,
+        color: b.color,
         databaseType: b.databaseType,
         hostname: b.hostname,
         database: b.database,
@@ -79,7 +81,6 @@ exports.editConnectionDelete = function(req, res, next) {
     Connection.forge({
         connectionId: connectionId
     }).fetch().then(function(connection) {
-        console.log(connection, connection.get("ownerId"), userId);
         if (connection.get("ownerId") === userId) {
             return connection.destroy();
         }
