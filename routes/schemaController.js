@@ -13,7 +13,7 @@ exports.getConnectionSchema = function(req, res, next) {
         res.render("schema/schema", {
             connection: connection.toJSON(),
             schemata: schema,
-            pageTitle: connection.getTitle(),
+            pageTitle: connection.get("title"),
             databaseName: connection.get("database")
         });
     }).catch(function(error) {
