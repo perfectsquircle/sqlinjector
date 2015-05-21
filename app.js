@@ -21,8 +21,7 @@ app.use(express.static(path.join(__dirname, "public"), {
 app.use("/vendor", express.static(path.join(__dirname, "bower_components"), {
     maxAge: config.staticAssetMaxAge
 }));
-app.use("/js/console.js", browserify("./client/console.js"));
-app.use("/js/schema.js", browserify("./client/schema.js"));
+app.use("/js", browserify("./client"));
 app.use(bodyParser.urlencoded({
     extended: true
 }));

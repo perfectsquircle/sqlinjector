@@ -1,8 +1,11 @@
 extends ../layout/modal
 
+block append js
+    script(src="/js/connectionEdit.js")
+
 block inner
     - var isNew = Boolean(connection);
-    .panel
+    #connection-edit-view.panel
         .panel-heading
             if connection
                 | Edit Connection
@@ -53,6 +56,6 @@ block inner
                             |  Delete
             .right
                 a.pure-button(href="/connections") Cancel
-                button.pure-button.pure-button-primary(type="submit", form="connection-form", value="Save")
+                button.pure-button.pure-button-primary.save-button(type="submit", form="connection-form", value="Save")
                     i.fa.fa-floppy-o
                     |  Save
