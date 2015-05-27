@@ -1,5 +1,4 @@
 SQL Injector is a web-based database console intended for developers.  
-
 Installing
 ==========
 
@@ -32,6 +31,8 @@ To do
   * Functions ($$), strings, etc.
 * Cancel currently running query
 * Client code: events
+* Pretty URLs
+  * http://hashids.org/
 
 ## Enhancements
 * Preferences
