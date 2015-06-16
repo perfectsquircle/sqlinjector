@@ -68,7 +68,7 @@ ConsoleView.prototype = {
     postConsole: function() {
         var self = this;
         this.startTimer();
-        var statement = this.consoleInputView.getValue();
+        var statement = this.getConsoleInputValue();
         console.debug("form submit", statement);
         var queryParams = this.params.map(function(param) {
             return param.value;
@@ -101,5 +101,9 @@ ConsoleView.prototype = {
                 self.stopTimer();
             });
 
+    },
+
+    getConsoleInputValue: function() {
+        return this.consoleInputView ? this.consoleInputView.getValue() : "";
     }
 };
