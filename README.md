@@ -5,12 +5,10 @@ Installing
 To do
 ====
 ## In Progress
-* CRUD list of connections
-  * Edit name
-  * Edit color
 
 ## Minimum Viable Product
 
+* Reorder list of connections
 * Keep console input between page loads
 * Bug: empty queries cause bad juju
 * Console Features
