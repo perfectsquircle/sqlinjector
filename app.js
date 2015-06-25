@@ -8,6 +8,7 @@ var compression = require("compression");
 var browserify = require('browserify-middleware');
 var util = require("util");
 var _ = require("lodash");
+var slug = require("./lib/slug");
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use(function(req, res, next) {
     res.locals.util = util;
     res.locals._ = _;
     res.locals.config = config;
+    res.locals.slug = slug;
     return next();
 });
 
@@ -49,18 +51,17 @@ app.post("/login", authController.postLogin);
 app.use(authController.authMiddleware);
 
 app.get("/", connectionController.getConnections);
-app.get("/connections", connectionController.getConnections);
-app.get("/connections/create", connectionController.createConnection);
-app.post("/connections/create", connectionController.createConnectionPost);
-app.get("/connections/edit/:connectionId", connectionController.editConnection);
-app.post("/connections/edit/:connectionId", connectionController.editConnectionPost);
-app.post("/connections/delete/:connectionId", connectionController.editConnectionDelete);
+app.get("/create", connectionController.createConnection);
+app.post("/create", connectionController.createConnectionPost);
+app.get("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnection);
+app.post("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnectionPost);
+app.post("/delete/:connectionId", connectionController.connectionMiddleware, connectionController.editConnectionDelete);
 
-app.get("/connection/:connectionId/console", consoleController.getConnectionConsole);
-app.post("/connection/:connectionId/query", consoleController.postConsoleSessionQuery);
+app.get("/console/:connectionId/:connectionName?", connectionController.connectionMiddleware, consoleController.getConnectionConsole);
+app.post("/console/:connectionId/:connectionName?", connectionController.connectionMiddleware, consoleController.postConsoleSessionQuery);
 
-app.get("/connection/:connectionId/schema", schemaController.getConnectionSchema);
-app.get("/connection/:connectionId/relation", schemaController.getRelationInformation);
+app.get("/schema/:connectionId/:connectionName?", connectionController.connectionMiddleware, schemaController.getConnectionSchema);
+app.get("/relation/:connectionId/:connectionName?", connectionController.connectionMiddleware, schemaController.getRelationInformation);
 
 app.get("/admin", adminController.getAdminPage);
 

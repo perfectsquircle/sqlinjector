@@ -29,8 +29,6 @@ To do
   * Functions ($$), strings, etc.
 * Cancel currently running query
 * Client code: events
-* Pretty URLs
-  * http://hashids.org/
 
 ## Enhancements
 * Preferences

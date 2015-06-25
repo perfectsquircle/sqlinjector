@@ -7,7 +7,7 @@ block content
                 .panel-heading.break-all(style="background-color:##{connection.color}") 
                     i.fa.fa-database
                     |  #{connection.title}
-                    a.right(href="/connections/edit/" + connection.connectionId)
+                    a.right(href="/edit/" + connection.connectionId + "/" + connection.urlTitle)
                         i.fa.fa-pencil(title="Edit")
                 .panel-body.pure-g.break-all
                     .pure-u-1-4
@@ -23,16 +23,16 @@ block content
                     .pure-u-3-4
                         span.mono=connection.username
                 .panel-footer
-                    a(href="/connection/" + connection.connectionId + "/console") console
+                    a(href="/console/" + connection.connectionId + "/" + connection.urlTitle) console
                     |  &mdash;  
-                    a(href="/connection/" + connection.connectionId + "/schema") schema
-                    |  &mdash;  
-                    a(href="/connection/" + connection.connectionId + "/queries") queries
-                    |  &mdash;  
-                    a(href="/connection/" + connection.connectionId + "/reports") reports
+                    a(href="/schema/" + connection.connectionId + "/" + connection.urlTitle) schema
+                    //- |  &mdash;
+                    //- a(href="/connection/" + connection.connectionId + "/queries") queries
+                    //- |  &mdash;
+                    //- a(href="/connection/" + connection.connectionId + "/reports") reports
         .panel.new-connection.text-center.flex-1
             .panel-body
-                a(href="/connections/create")
+                a(href="/create")
                     i.fa.fa-plus
                     |  Add connection
             

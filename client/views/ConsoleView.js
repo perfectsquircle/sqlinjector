@@ -69,14 +69,13 @@ ConsoleView.prototype = {
         var self = this;
         this.startTimer();
         var statement = this.getConsoleInputValue();
-        console.debug("form submit", statement);
         var queryParams = this.params.map(function(param) {
             return param.value;
         }).filter(function(param) {
             return param.length;
         });
 
-        fetch("/connection/" + App.connectionId + "/query", {
+        fetch("/console/" + App.connectionId, {
                 credentials: "same-origin",
                 method: "post",
                 headers: {

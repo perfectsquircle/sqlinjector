@@ -1,6 +1,10 @@
 var bookshelf = require("./bookshelf");
 var DatabaseClient = require("../lib/database/DatabaseClient");
 var util = require("util");
+var hashids = require("../lib/hashids");
+var _ = require("lodash");
+var logger = require("../lib/logger");
+var slug = require("../lib/slug");
 
 function getTitle(attributes) {
     if (attributes.name) {
@@ -34,6 +38,8 @@ var Connection = bookshelf.Model.extend({
 
     parse: function(attributes) {
         attributes.title = getTitle(attributes);
+        attributes.connectionId = hashids.encode(attributes.connectionId);
+        attributes.urlTitle = slug(attributes.title);
         return attributes;
     }
 }, {
@@ -49,6 +55,13 @@ var Connection = bookshelf.Model.extend({
             }
             return connection;
         });
+    },
+
+    getConnections: function(userId) {
+        return Connection.forge({
+            inactiveDate: null,
+            ownerId: userId
+        }).fetchAll();
     }
 });
 

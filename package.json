@@ -1,6 +1,6 @@
 {
   "name": "sqlinjector",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
@@ -14,6 +14,7 @@
     "domtastic": "~0.10.1",
     "express": "~4.10.2",
     "express-session": "~1.9.3",
+    "hashids": "^1.0.1",
     "jade": "~1.7.0",
     "knex": "^0.7.6",
     "lodash": "~2.4.1",

@@ -1,14 +1,12 @@
 var Connection = require("../model/Connection");
 var assert = require("assert");
 var logger = require("../lib/logger");
+var hashids = require("../lib/hashids");
 
 exports.getConnections = function(req, res, next) {
     var user = req.session.user;
 
-    Connection.forge({
-        inactiveDate: null,
-        ownerId: user.userId
-    }).fetchAll().then(function(connections) {
+    Connection.getConnections(user.userId).then(function(connections) {
         res.render("connection/connections", {
             connections: connections.toJSON()
         });
@@ -25,19 +23,13 @@ exports.createConnectionPost = function(req, res, next) {
     var user = req.session.user;
 
     saveConnection(user.userId, req.body).then(function(model) {
-        res.redirect("/connections");
+        res.redirect("/");
     });
 };
 
 exports.editConnection = function(req, res, next) {
     var user = req.session.user;
-    Connection.forge({
-        connectionId: req.params.connectionId,
-        inactiveDate: null,
-        ownerId: user.userId
-    }).fetch({
-        require: true
-    }).then(function(connection) {
+    Connection.getConnection(req.params.connectionId, user.userId).then(function(connection) {
         res.render("connection/edit", {
             connection: connection.toJSON()
         });
@@ -48,7 +40,7 @@ exports.editConnectionPost = function(req, res, next) {
     var user = req.session.user;
 
     saveConnection(user.userId, req.body).then(function(model) {
-        res.redirect("/connections");
+        res.redirect("/");
     });
 };
 
@@ -68,7 +60,7 @@ function saveConnection(userId, reqBody) {
         ownerId: userId
     };
     if (b.connectionId) {
-        attributes.connectionId = b.connectionId;
+        attributes.connectionId = hashids.decode(b.connectionId)[0];
     }
 
     return Connection.forge(attributes).save();
@@ -82,6 +74,7 @@ exports.editConnectionDelete = function(req, res, next) {
         connectionId: connectionId
     }).fetch().then(function(connection) {
         if (connection.get("ownerId") === userId) {
+            connection.set("connectionId", connectionId);
             return connection.destroy();
         }
     }).then(function() {
@@ -90,7 +83,17 @@ exports.editConnectionDelete = function(req, res, next) {
                 success: true
             });
         } else {
-            res.redirect("/connections");
+            res.redirect("/");
         }
     }).catch(next);
+};
+
+exports.connectionMiddleware = function(req, res, next) {
+    logger.debug(req.params);
+    if (req.params && req.params.connectionId) {
+        req.params.encodedConnectionId = req.params.connectionId;
+        req.params.connectionId = hashids.decode(req.params.connectionId)[0];
+        logger.debug(req.params.encodedConnectionId, "=>", req.params.connectionId);
+    }
+    return next();
 };

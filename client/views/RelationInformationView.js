@@ -7,7 +7,7 @@ var RelationInformationView = module.exports = function($el) {
 RelationInformationView.prototype = {
     handleRelationSelected: function(schema, relation, kind) {
         var self = this;
-        var url = "/connection/" + App.connectionId + "/relation";
+        var url = "/relation/" + App.connectionId;
         url += "?" + querystring.stringify({
             schema: schema,
             relation: relation,

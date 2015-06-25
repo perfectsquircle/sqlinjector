@@ -5,7 +5,7 @@ block append style
 
 block append js
     script.
-        App.connectionId = #{connection.connectionId};
+        App.connectionId = "#{connection.connectionId}";
     script(src="/js/schema.js")
 
 block content

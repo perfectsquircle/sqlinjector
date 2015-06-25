@@ -54,7 +54,7 @@ block inner
         .panel-footer.clearfix
             if connection.connectionId
                 .left
-                    form#delete-form(method="post", action="/connections/delete/" + connection.connectionId)
+                    form#delete-form(method="post", action="/delete/" + connection.connectionId)
                         button.pure-button.pure-button-error(type="submit", form="delete-form", value="Delete")
                             i.fa.fa-trash-o
                             |  Delete
