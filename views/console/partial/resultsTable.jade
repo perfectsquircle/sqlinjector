@@ -10,5 +10,5 @@ table.result-rows.pure-table.pure-table-horizontal.mono
                 for value, key in row
                     - var typeofValue = typeof value;
                     - var primitive = typeofValue === 'string' || typeofValue === 'number' || typeofValue == 'boolean'
-                    - var valueString = primitive ? value : util.inspect(value, { depth: 100 });
+                    - var valueString = primitive ? value : JSON.stringify(value)
                     td(tabindex=1)=valueString
