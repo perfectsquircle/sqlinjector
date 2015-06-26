@@ -29,6 +29,10 @@ To do
   * Functions ($$), strings, etc.
 * Cancel currently running query
 * Client code: events
+* Top nav bar
+  * Dropdown menu for current connection
+  * Preferences
+  * Logout
 
 ## Enhancements
 * Preferences
