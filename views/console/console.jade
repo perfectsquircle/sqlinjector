@@ -1,6 +1,7 @@
 extend ../layout/main
 
 block append style
+    link(rel="stylesheet", href="/module/codemirror/lib/codemirror.css")
     link(rel="stylesheet", href="/css/console.css")
 
 block append js
@@ -25,7 +26,7 @@ block content
             .execute      
                 fieldset
                     input.pure-button.pure-button-primary.execute-statement-button(type="submit", value="Execute", title="Execute (ctrl+enter)", tabindex=-1)
-        .result-area.flex-4.pad.scroll
+        .result-area.flex-4.pad.scroll(style="flex-basis:400px")
             .result-stats
                 span.timer 0ms
                 |  &bull;  

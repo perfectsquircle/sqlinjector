@@ -1,5 +1,6 @@
 var $ = require("domtastic");
 var BasicConsoleInputView = require("./BasicConsoleInputView");
+var AdvancedConsoleInputView = require("./AdvancedConsoleInputView");
 
 var ConsoleView = module.exports = function() {
     this.resultArea = $(".results");
@@ -10,7 +11,8 @@ var ConsoleView = module.exports = function() {
     //$(".statement-form").on("submit", this.handleStatementFormSubmit.bind(this));
     $(".execute-statement-button").on("mousedown", this.handleExecuteStatementClick.bind(this));
 
-    this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input"), this.postConsole.bind(this));
+    //this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input"), this.postConsole.bind(this));
+    this.consoleInputView = new AdvancedConsoleInputView($(".statement-area .console-input"), this.postConsole.bind(this));
 };
 
 ConsoleView.prototype = {

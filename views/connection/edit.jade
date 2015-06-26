@@ -36,6 +36,11 @@ block inner
                             .color(class=connection.color ? "" : "selected")
                             each colorName, color in config.connectionColors
                                 .color(style="background-color:#" + color, value=color, class=connection.color === color ? "selected" : "")
+                        //-.colors.clearfix.inline-block
+                            each colorName, color in config.connectionColors
+                                .color(style="background-color:#" + color )
+                                    label=colorName
+                                        input(type="radio", name="color", checked=connection.color === color)
                 fieldset
                     .pure-control-group
                         label(for="hostname") Hostname
