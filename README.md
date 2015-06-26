@@ -5,17 +5,20 @@ Installing
 To do
 ====
 ## In Progress
+* Syntax highlighting?
+  * http://codemirror.net/
+  * http://ace.c9.io/
+* Console Features
+  * Key combos
+    * Change Indent
+    * Tab key?
+  * Keep indent on newline
 
 ## Minimum Viable Product
 
 * Reorder list of connections
 * Keep console input between page loads
 * Bug: empty queries cause bad juju
-* Console Features
-  * Key combos
-    * Change Indent
-    * Tab key?
-  * Keep indent on newline
 * Parameters
   * Auto-grow and auto-prune
 * Error handling
@@ -38,9 +41,6 @@ To do
 * Session storage
 * Max field length (preference?)
 * Design logo (blocky font with syringe?)
-* Syntax highlighting?
-  * http://codemirror.net/
-  * http://ace.c9.io/
 * Sortable results
   * http://www.datatables.net/
 * Schema View
