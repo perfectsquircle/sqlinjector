@@ -11,7 +11,7 @@ block append js
 block content
     .wrapper.console.flex-column
         .statement-area.pure-form.flex-6.flex-column.pad
-            .flex.flex-1
+            .console-input-outer.flex.flex-1
                 .flex-5.relative.margin-right
                     fieldset
                         legend Statement
@@ -25,7 +25,7 @@ block content
             .execute      
                 fieldset
                     input.pure-button.pure-button-primary.execute-statement-button(type="submit", value="Execute", title="Execute (ctrl+enter)", tabindex=-1)
-        .result-area.flex-4.pad.scroll
+        .result-area.flex-4.pad.scroll(style="flex-basis:400px")
             .result-stats
                 span.timer 0ms
                 |  &bull;  

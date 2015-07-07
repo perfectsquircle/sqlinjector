@@ -4,13 +4,11 @@ var BasicConsoleInputView = require("./BasicConsoleInputView");
 var ConsoleView = module.exports = function() {
     this.resultArea = $(".results");
     this.timer = $(".result-stats .timer");
-    this.params = $(".statement-area .param");
     this.resultCount = $(".result-stats .result-count");
 
-    //$(".statement-form").on("submit", this.handleStatementFormSubmit.bind(this));
     $(".execute-statement-button").on("mousedown", this.handleExecuteStatementClick.bind(this));
 
-    this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input"), this.postConsole.bind(this));
+    this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
 };
 
 ConsoleView.prototype = {
@@ -69,11 +67,7 @@ ConsoleView.prototype = {
         var self = this;
         this.startTimer();
         var statement = this.getConsoleInputValue();
-        var queryParams = this.params.map(function(param) {
-            return param.value;
-        }).filter(function(param) {
-            return param.length;
-        });
+        var queryParams = this.getConsoleInputParams();
 
         fetch("/console/" + App.connectionId, {
                 credentials: "same-origin",
@@ -104,5 +98,9 @@ ConsoleView.prototype = {
 
     getConsoleInputValue: function() {
         return this.consoleInputView ? this.consoleInputView.getValue() : "";
+    },
+
+    getConsoleInputParams: function() {
+        return this.consoleInputView ? this.consoleInputView.getParams() : "";
     }
 };
