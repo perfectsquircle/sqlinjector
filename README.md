@@ -17,9 +17,9 @@ To do
 ## Minimum Viable Product
 
 * Reorder list of connections
-* Keep console input between page loads
 * Bug: empty queries cause bad juju
 * Parameters
+  * Support $1 style params
   * Auto-grow and auto-prune
 * Error handling
   * SQL errors shouldn't be AJAX errors
@@ -32,8 +32,17 @@ To do
   * Functions ($$), strings, etc.
 * Cancel currently running query
 * Client code: events
+* Top nav bar
+  * Dropdown menu for current connection
+  * Preferences
+  * Logout
+* Edit port number for connection
+* Configurable row limit
+* Find memory leak when limiting rows
 
 ## Enhancements
+
+* Support ? style params
 * Preferences
   * Hide/show system schemas on schema browser
   * Set sample size on table/view information in schema browser

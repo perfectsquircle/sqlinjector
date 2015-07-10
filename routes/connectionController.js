@@ -89,11 +89,10 @@ exports.editConnectionDelete = function(req, res, next) {
 };
 
 exports.connectionMiddleware = function(req, res, next) {
-    logger.debug(req.params);
     if (req.params && req.params.connectionId) {
         req.params.encodedConnectionId = req.params.connectionId;
         req.params.connectionId = hashids.decode(req.params.connectionId)[0];
-        logger.debug(req.params.encodedConnectionId, "=>", req.params.connectionId);
+        logger.debug("Decoding hashid", req.params.encodedConnectionId, "=>", req.params.connectionId);
     }
     return next();
 };
