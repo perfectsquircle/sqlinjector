@@ -1,38 +1,34 @@
 var $ = require("domtastic");
-//var StatementParser = require("../../lib/parser/StatementParser");
+var _ = require("lodash");
+var util = require("util");
 var CodeMirror = require("codemirror");
 require("codemirror/mode/sql/sql");
 
-var BasicConsoleInputView = module.exports = function($el, submit) {
-    this.$el = $el;
-    //this.$el.on("keydown", this.handleKeydown.bind(this));
-    //this.$el.on("input", this.handleInput.bind(this));
+var BasicConsoleInputView = require("./BasicConsoleInputView");
+var StatementParser = require("../../lib/parser/StatementParser");
 
-    this.editor = CodeMirror.fromTextArea($el[0], {
+var AdvancedConsoleInputView = module.exports = function($el, submit) {
+    var textarea = $el.find(".console-input");
+    var editor = this.editor = CodeMirror.fromTextArea(textarea[0], {
         lineNumbers: true,
         mode: "text/x-sql"
     });
+    editor.setOption("extraKeys", {
+        "Ctrl-Enter": submit,
+        "Cmd-Enter": submit,
+        "F5": submit
+    });
+    editor.on("change", this.handleInput.bind(this));
 
-    this.submit = submit;
+    BasicConsoleInputView.apply(this, arguments);
 };
 
-BasicConsoleInputView.prototype = {
+util.inherits(AdvancedConsoleInputView, BasicConsoleInputView);
 
-    handleKeydown: function(e) {
-        switch (e.keyCode) {
-            case 13:
-            {
-                if (e.ctrlKey || e.metaKey) {
-                    e.preventDefault();
-                    this.submit();
-                }
-                break;
-            }
-        }
-    },
+AdvancedConsoleInputView.prototype = _.extend(AdvancedConsoleInputView.prototype, {
 
-    handleInput: function(e) {
-        //console.debug(e);
+    getRawValue: function() {
+        return this.editor.getValue();
     },
 
     getValue: function() {
@@ -44,7 +40,10 @@ BasicConsoleInputView.prototype = {
         //var statementParser = new StatementParser(value);
         //return statementParser.getStatementUnderCaret(selectionStart, selectionEnd);
         return this.editor.getValue();
+    },
+
+    setValue: function(value) {
+        this.editor.setValue(value);
     }
 
-
-};
+});
