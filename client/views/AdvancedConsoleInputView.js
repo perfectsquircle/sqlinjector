@@ -32,14 +32,18 @@ AdvancedConsoleInputView.prototype = _.extend(AdvancedConsoleInputView.prototype
     },
 
     getValue: function() {
-        //var textArea = this.$el[0];
-        //var value = textArea.value;
-        //var selectionStart = textArea.selectionStart;
-        //var selectionEnd = textArea.selectionEnd;
+        var value = this.editor.getValue();
 
-        //var statementParser = new StatementParser(value);
-        //return statementParser.getStatementUnderCaret(selectionStart, selectionEnd);
-        return this.editor.getValue();
+        var selection = this.editor.getSelection();
+        if (selection) {
+            value = selection;
+        } else {
+            var cursor = this.editor.getCursor();
+            var statementParser = new StatementParser(value);
+            return statementParser.getStatementAtPosition(cursor.line, cursor.ch);
+        }
+
+        return value;
     },
 
     setValue: function(value) {
