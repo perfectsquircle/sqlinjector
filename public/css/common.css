@@ -123,6 +123,10 @@ html, button, input, select, textarea,
   clear: both;
 }
 
+.inline-block {
+    display: inline-block;
+}
+
 .text-center {
   text-align: center;
 }

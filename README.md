@@ -15,6 +15,11 @@ To do
     * Change Indent
     * Tab key?
   * Keep indent on newline
+
+## Minimum Viable Product
+
+* Reorder list of connections
+* Bug: empty queries cause bad juju
 * Parameters
   * Support $1 style params
   * Auto-grow and auto-prune
@@ -47,9 +52,6 @@ To do
 * Session storage
 * Max field length (preference?)
 * Design logo (blocky font with syringe?)
-* Syntax highlighting?
-  * http://codemirror.net/
-  * http://ace.c9.io/
 * Sortable results
   * http://www.datatables.net/
 * Schema View

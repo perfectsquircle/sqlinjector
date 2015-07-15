@@ -80,7 +80,4 @@ BasicConsoleInputView.prototype = {
             }
         });
     }
-
-}
-
-;
+};
