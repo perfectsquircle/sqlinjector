@@ -5,9 +5,11 @@ Installing
 To do
 ====
 ## In Progress
-* Syntax highlighting?
-  * http://codemirror.net/
-  * http://ace.c9.io/
+
+## Minimum Viable Product
+
+* Reorder list of connections
+* Bug: empty queries cause bad juju
 * Console Features
   * Key combos
     * Change Indent
