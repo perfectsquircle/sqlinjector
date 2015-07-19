@@ -2,6 +2,7 @@ var Connection = require("../model/Connection");
 var assert = require("assert");
 var logger = require("../lib/logger");
 var hashids = require("../lib/hashids");
+var _ = require("lodash");
 
 exports.getConnections = function(req, res, next) {
     var user = req.session.user;
@@ -9,6 +10,18 @@ exports.getConnections = function(req, res, next) {
     Connection.getConnections(user.userId).then(function(connections) {
         res.render("connection/connections", {
             connections: connections.toJSON()
+        });
+    }).catch(next);
+};
+
+exports.sortConnectionsPost = function(req, res, next) {
+    var user = req.session.user;
+    var connectionIds = req.body;
+    assert(connectionIds && connectionIds.length, "Malformed POST body");
+
+    Connection.sort(connectionIds, user.userId).then(function() {
+        res.json({
+            success: true
         });
     }).catch(next);
 };

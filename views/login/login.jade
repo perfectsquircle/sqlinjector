@@ -1,11 +1,18 @@
-extend ../layout/main
+extend ../layout/modal
 
-block content
-    if error    
-        pre=error
-    form.pure-form.pure-form-stacked(method="post", action="/login")
-        label Username
-            input(type="text", name="username", value=username, required, autofocus)
-        label Password
-            input(type="password", name="password", required)
-        input.pure-btn(type="submit", value="Login")
+block inner
+    #login.panel
+        .panel-heading
+            | SQL Injector
+        .panel-body
+            if error    
+                pre=error
+            form.pure-form.pure-form-aligned(method="post", action="/login")
+                .pure-control-group
+                    label(for="username") Username
+                    input#username(type="text", name="username", value=username, required, autofocus)
+                .pure-control-group
+                    label(for="password") Password
+                    input#password(type="password", name="password", required)
+                .pure-controls 
+                    input#login-button.pure-button.pure-button-primary(type="submit", value="Login")

@@ -5,6 +5,7 @@ var hashids = require("../lib/hashids");
 var _ = require("lodash");
 var logger = require("../lib/logger");
 var slug = require("../lib/slug");
+var Bluebird = require("bluebird");
 
 function getTitle(attributes) {
     if (attributes.name) {
@@ -58,10 +59,30 @@ var Connection = bookshelf.Model.extend({
     },
 
     getConnections: function(userId) {
-        return Connection.forge({
-            inactiveDate: null,
-            ownerId: userId
+
+        return this.query({
+            where: {
+                inactiveDate: null,
+                ownerId: userId
+            },
+            orderBy: "position"
         }).fetchAll();
+    },
+
+    sort: function(connectionIds, userId) {
+        var self = this;
+        return this.getConnections(userId).then(function(connections) {
+            return Bluebird.all(connections.map(function(connection) {
+                logger.debug(connection.id, connectionIds.indexOf(connection.id));
+                var position = connectionIds.indexOf(connection.id);
+                var qb = self.query();
+                return qb.where({
+                    connectionId: hashids.decode(connection.id)[0]
+                }).update({
+                    position: position
+                });
+            }));
+        });
     }
 });
 

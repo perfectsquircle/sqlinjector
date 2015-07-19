@@ -1,14 +1,17 @@
 extend ../layout/main
 
+block append js
+    script(src="/js/connections.js")
+
 block content
-    section.connections.panels.flex-column
+    section.connections.panels.center
         each connection in connections
-            .connection.panel.flex-1
-                .panel-heading.break-all(style="background-color:##{connection.color}") 
+            .connection.panel(data-id=connection.connectionId)
+                .panel-heading.break-all.clearfix(style="background-color:##{connection.color}") 
+                    a.right.icon-button.pure-button-primary(href="/edit/" + connection.connectionId + "/" + connection.urlTitle)
+                        i.fa.fa-pencil(title="Edit")
                     i.fa.fa-database
                     |  #{connection.title}
-                    a.right(href="/edit/" + connection.connectionId + "/" + connection.urlTitle)
-                        i.fa.fa-pencil(title="Edit")
                 .panel-body.pure-g.break-all
                     .pure-u-1-4
                         strong Hostname

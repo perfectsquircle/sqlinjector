@@ -57,6 +57,8 @@ To do
 * Schema View
   * Default values
   * Table constraints
+* Admin page
+  * Console for app db
 
 ## Wishlist  
 * Easily see all databases on a server (like pgadmin)

@@ -7,13 +7,13 @@ block append style
     link(rel="stylesheet", href="/css/connection.css")
 
 block inner
-    - var isNew = Boolean(connection);
+    - var isNew = !Boolean(connection.connectionId);
     #connection-edit-view.panel
         .panel-heading
-            if connection
-                | Edit Connection
+            if isNew
+                | Create Connection
             else
-                | Create Connection 
+                | Edit Connection 
         .panel-body
             form#connection-form.pure-form.pure-form-aligned(method="post")
                 fieldset
@@ -52,7 +52,7 @@ block inner
                     //-.pure-control-group.text-center
                         button.pure-button Test Connection  
         .panel-footer.clearfix
-            if connection.connectionId
+            if !isNew
                 .left
                     form#delete-form(method="post", action="/delete/" + connection.connectionId)
                         button.pure-button.pure-button-error(type="submit", form="delete-form", value="Delete")

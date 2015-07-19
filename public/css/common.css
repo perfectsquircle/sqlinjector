@@ -38,6 +38,13 @@
     flex: 6;
 }
 
+body {
+    background-color: #f5f5f5;
+    background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.2) 50%);
+    background-size: 50px 50px;
+    color: #616161  ;
+}
+
 
 body > .wrapper {
     position: absolute;
@@ -45,6 +52,7 @@ body > .wrapper {
     bottom: 0;
     left: 0;
     right: 0;
+    background-color: white;
 }
 
 /*  FONTS  */
@@ -137,27 +145,29 @@ html, button, input, select, textarea,
     max-width: 480px;
 }
 
+.shadow {
+    box-shadow: rgba(0,0,0,0.2) 0 2px 2px;
+}
+
 /*  PANELS  */
 
 .panels {
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    width: 480px;
 }
 
 .panel {
-    box-shadow: #aaa 2px 1px 8px;
-    border-radius: 6px;
+    box-shadow: rgba(0,0,0,0.2) 0 2px 2px;
+    border-radius: 4px;
     border: 1px solid #aaa;
-    margin: 8px;
+    margin-bottom: 1em;
     flex: 2;
-    flex-basis: 300px;
     overflow: hidden;
+    background: white;
 }
 
 .panel .panel-heading,
 .panel .panel-footer {
-    padding: 0.5em 1em;
+    padding: 0.5em;
 }
 
 .panel .panel-heading {
@@ -169,10 +179,9 @@ html, button, input, select, textarea,
 }
 
 .panel .panel-body {
-    padding: 1em;
+    padding: 0.5em;
     font-size: 9pt;
 }
-
 
 /*  RESULTS  */
 
@@ -188,4 +197,23 @@ html, button, input, select, textarea,
 
 .fa-unique:before {
     content: "\2744";
+}
+
+.icon-button {
+    width: 24px;
+    height: 18px;
+    border-radius: 18px;
+    line-height: 18px;
+    font-size: 12px;
+    text-align: center;
+}
+
+a.icon-button {
+    text-decoration: none;
+}
+
+/* SORTABLE */
+
+.sortable-ghost {
+    visibility: hidden;
 }

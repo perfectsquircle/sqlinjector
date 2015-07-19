@@ -54,6 +54,7 @@ app.post("/login", authController.postLogin);
 app.use(authController.authMiddleware);
 
 app.get("/", connectionController.getConnections);
+app.post("/sort/connections", connectionController.sortConnectionsPost);
 app.get("/create", connectionController.createConnection);
 app.post("/create", connectionController.createConnectionPost);
 app.get("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnection);
