@@ -12,7 +12,6 @@ var ConnectionsView = module.exports = function($el) {
             },
             set: function(sortable) {
                 var order = sortable.toArray();
-                console.debug(order);
 
                 fetch("/sort/connections", {
                     credentials: "same-origin",
@@ -24,8 +23,8 @@ var ConnectionsView = module.exports = function($el) {
                     body: JSON.stringify(order)
                 }).then(function(response) {
                     return response.json();
-                }).then(function(text) {
-                    console.log(text);
+                }).catch(function(error) {
+                    throw error;
                 });
             }
         }

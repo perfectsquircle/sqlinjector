@@ -3,6 +3,7 @@ var bcrypt = Bluebird.promisifyAll(require("bcryptjs"));
 var logger = require("../lib/logger");
 var bookshelf = require("./bookshelf");
 var config = require("../config");
+var assert = require("assert");
 
 var User = bookshelf.Model.extend({
     tableName: "user",
@@ -10,7 +11,7 @@ var User = bookshelf.Model.extend({
 
 }, {
     authenticate: Bluebird.method(function(username, password) {
-        if (!username || !password) throw new Error('Email and password are both required');
+        assert(username && password, "Username and password are both required");
         return this.forge({
             inactiveDate: null,
             username: username
@@ -31,7 +32,7 @@ var User = bookshelf.Model.extend({
     }),
 
     setPassword: function(username, password) {
-        if (!username || !password) throw new Error("Email and password are both required");
+        assert(username && password, "Username and password are both required");
         var userPromise = this.forge({
             username: username
         }).fetch({

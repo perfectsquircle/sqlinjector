@@ -3,14 +3,23 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         jshint: {
             options: {
-                undef: true,
-                laxcomma: true
+                bitwise: true,
+                curly: true,
+                eqeqeq: true,
+                funcscope: true,
+                latedef: "nofunc",
+                maxcomplexity: 10,
+                maxdepth: 3,
+                maxparams: 7,
+                maxstatements: 20,
+                nonbsp: true,
+                shadow: true,
+                undef: true
             },
             client: {
                 src: ["client/**/*.js"],
                 options: {
-                    node: true,
-                    browser: true,
+                    browserify: true,
 
                     globals: {
                         App: true,

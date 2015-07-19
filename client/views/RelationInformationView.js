@@ -20,7 +20,7 @@ RelationInformationView.prototype = {
         }).then(function(responseHtml) {
             self.handleInformation(responseHtml);
         }).catch(function(e) {
-            console.error(e);
+            throw e;
         });
     },
 

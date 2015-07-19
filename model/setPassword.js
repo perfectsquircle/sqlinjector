@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var args = process.argv;
-if (args.length != 4) {
+if (args.length !== 4) {
     console.log("Usage: node setPassword {username} {password}");
     process.exit(1);
 }
