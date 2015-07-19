@@ -9,8 +9,8 @@
     "tests"
   ],
   "dependencies": {
-    "pure": "~0.6.0",
-    "fetch": "~0.7.0",
-    "fontawesome": "~4.3.0"
+    "pure": "^0.6.0",
+    "fetch": "^0.9.0",
+    "fontawesome": "^4.3.0"
   }
 }
