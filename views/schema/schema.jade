@@ -1,12 +1,12 @@
 extend ../layout/main
 
 block append style
-    link(rel="stylesheet", href="/css/schema.css")
+    link(rel="stylesheet", href="/css/schema.css?v=" + appVersion)
 
 block append js
     script.
         App.connectionId = "#{connection.connectionId}";
-    script(src="/js/schema.js")
+    script(src="/js/schema.js?v=" + appVersion)
 
 block content
     .wrapper.console.flex-row

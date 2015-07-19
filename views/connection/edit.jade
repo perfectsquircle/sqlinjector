@@ -1,10 +1,10 @@
 extends ../layout/modal
 
 block append js
-    script(src="/js/connectionEdit.js")
+    script(src="/js/connectionEdit.js?v=" + appVersion)
     
 block append style
-    link(rel="stylesheet", href="/css/connection.css")
+    link(rel="stylesheet", href="/css/connection.css?v=" + appVersion)
 
 block inner
     - var isNew = !Boolean(connection.connectionId);

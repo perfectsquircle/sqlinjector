@@ -1,13 +1,13 @@
 extend ../layout/main
 
 block append style
-    link(rel="stylesheet", href="/module/codemirror/lib/codemirror.css")
-    link(rel="stylesheet", href="/css/console.css")
+    link(rel="stylesheet", href="/module/codemirror/lib/codemirror.css?v=" + appVersion)
+    link(rel="stylesheet", href="/css/console.css?v=" + appVersion)
 
 block append js
     script.
         App.connectionId = "#{connection.connectionId}";
-    script(src="/js/console.js")
+    script(src="/js/console.js?v=" + appVersion)
 
 block content
     .wrapper.console.flex-column
