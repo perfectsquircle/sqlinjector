@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
+        pkg: grunt.file.readJSON("package.json"),
         jshint: {
             options: {
                 bitwise: true,
@@ -33,7 +33,8 @@ module.exports = function(grunt) {
                     "!node_modules/**",
                     "!bower_components/**",
                     "!client/**",
-                    "!public/**"
+                    "!public/**",
+                    "!dist/**"
                 ],
                 options: {
                     node: true
@@ -50,12 +51,14 @@ module.exports = function(grunt) {
         copy: {
             all: {
                 src: [
-                    "lib",
-                    "model",
-                    "public",
-                    "routes",
-                    "views",
+                    "client/**",
+                    "lib/**",
+                    "model/**",
+                    "public/**",
+                    "routes/**",
+                    "views/**",
                     "app.js",
+                    "bower.json",
                     "config.js",
                     "LICENSE",
                     "package.json",
@@ -77,11 +80,44 @@ module.exports = function(grunt) {
             }
         },
         jsbeautifier: {
-            files: ["**/*.js", "!node_modules/**", "!bower_components/**"],
+            files: [
+                "**/*.js",
+                "!node_modules/**",
+                "!bower_components/**",
+                "!dist/**"
+            ],
             options: {}
         },
         nodeunit: {
             all: ["test/**/*.js"]
+        },
+        shell: {
+            bower: {
+                command: "bower install --production",
+                options: {
+                    execOptions: {
+                        cwd: "dist"
+                    }
+                }
+            },
+            npm: {
+                command: "npm install --production",
+                options: {
+                    execOptions: {
+                        cwd: "dist"
+                    }
+                }
+            }
+        },
+        cssmin: {
+            all: {
+                files: [{
+                    expand: true,
+                    cwd: "dist/public/css",
+                    src: ["*.css"],
+                    dest: "dist/public/css"
+                }]
+            }
         }
     });
 
@@ -91,10 +127,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-compress");
     grunt.loadNpmTasks("grunt-jsbeautifier");
     grunt.loadNpmTasks("grunt-contrib-nodeunit");
+    grunt.loadNpmTasks("grunt-shell");
+    grunt.loadNpmTasks("grunt-contrib-cssmin");
 
     grunt.registerTask("test", ["nodeunit"]);
     grunt.registerTask("default", ["jshint", "test"]);
-    grunt.registerTask("dist", ["clean", "default", "copy"]);
+    grunt.registerTask("dist", ["clean", "default", "copy", "shell", "cssmin"]);
     grunt.registerTask("package", ["dist", "compress"]);
 
     grunt.registerTask("format", ["jshint", "jsbeautifier"]);
