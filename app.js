@@ -26,7 +26,9 @@ app.use("/module", express.static(path.join(__dirname, "node_modules"), {
 app.use("/vendor", express.static(path.join(__dirname, "bower_components"), {
     maxAge: config.staticAssetMaxAge
 }));
-app.use("/js", browserify("./client"));
+app.use("/js", browserify("./client", {
+    transform: ["jadeify"]
+}));
 app.use(bodyParser.urlencoded({
     extended: true
 }));

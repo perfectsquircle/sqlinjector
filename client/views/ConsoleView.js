@@ -1,4 +1,7 @@
 var $ = require("domtastic");
+var _ = require("lodash");
+var resultRowsTemplate = require("../../views/console/partial/resultsTable.jade");
+var nonSelectTemplate = require("../../views/console/partial/nonSelect.jade");
 var BasicConsoleInputView = require("./BasicConsoleInputView");
 var AdvancedConsoleInputView = require("./AdvancedConsoleInputView");
 
@@ -6,17 +9,26 @@ var ConsoleView = module.exports = function() {
     this.resultArea = $(".results");
     this.timer = $(".result-stats .timer");
     this.resultCount = $(".result-stats .result-count");
+    this.executeStatementButton = $(".execute-statement-button");
 
-    $(".execute-statement-button").on("mousedown", this.handleExecuteStatementClick.bind(this));
+    this.executeStatementButton.on("mousedown", this.handleExecuteStatementClick.bind(this));
 
     this.consoleInputView = new AdvancedConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
     //this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
 };
 
 ConsoleView.prototype = {
-    handleResultsHtml: function(resultHtml) {
-        this.resultArea.html(resultHtml);
-        this.populateResultCount();
+    handleResults: function(result) {
+        this.populateResultCount(result.rowCount);
+        if (result.command === "SELECT") {
+            this.resultArea.html(resultRowsTemplate({
+                result: result
+            }));
+        } else {
+            this.resultArea.html(nonSelectTemplate({
+                result: result
+            }));
+        }
     },
 
     handleError: function(error) {
@@ -25,17 +37,22 @@ ConsoleView.prototype = {
             this.resultArea.html("<pre>" + message + "</pre>");
             this.populateResultCount();
         }
+        return error;
     },
 
     startTimer: function() {
         var self = this;
         var timerStart;
         var timer = this.timer;
+
+        this.resultArea.addClass("fade");
+        this.resultCount.val("");
+
         this.timerAnimationRequest = requestAnimationFrame(function step(timestamp) {
             if (!timerStart) {
                 timerStart = timestamp;
             }
-            timer.text(Math.floor(timestamp - timerStart) + "ms");
+            timer.val(Math.floor(timestamp - timerStart) + "ms");
             self.timerAnimationRequest = requestAnimationFrame(step);
         });
     },
@@ -44,14 +61,31 @@ ConsoleView.prototype = {
         cancelAnimationFrame(this.timerAnimationRequest);
     },
 
-    populateResultCount: function() {
-        var count = $(".result-area tbody tr").length;
-        var resultCount = this.resultCount;
+    addFade: function() {
+        this.resultArea.addClass("fade");
+    },
 
+    removeFade: function() {
+        this.resultArea.removeClass("fade");
+    },
+
+    enableButton: function() {
+        this.executeStatementButton.prop("disabled", false);
+    },
+
+    disableButton: function() {
+        this.executeStatementButton.prop("disabled", true);
+    },
+
+    populateResultCount: function(count) {
+        if (!_.isNumber(count)) {
+            count = 0;
+        }
+        var resultCount = this.resultCount;
         if (count === 1) {
-            resultCount.text("1 result");
+            resultCount.val("1 result");
         } else {
-            resultCount.text(count + " results");
+            resultCount.val(count + " results");
         }
     },
 
@@ -66,34 +100,45 @@ ConsoleView.prototype = {
     },
 
     postConsole: function() {
+        if (this.req) {
+            return;
+        }
+
         var self = this;
         this.startTimer();
+        this.addFade();
+        this.disableButton();
         var statement = this.getConsoleInputValue();
         var queryParams = this.getConsoleInputParams();
 
-        fetch("/console/" + App.connectionId, {
+        this.req = fetch("/console/" + App.connectionId, {
                 credentials: "same-origin",
                 method: "post",
                 headers: {
-                    'Accept': 'text/*',
-                    'Content-Type': 'application/json'
+                    "Accept": "application/json",
+                    "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     queryText: statement,
                     queryParams: queryParams
                 })
             }).then(function(response) {
-                return response.text();
-            }).then(function(text) {
-                if (text.trim().startsWith("<")) {
-                    self.handleResultsHtml(text);
+                if (response.status === 200) {
+                    return response.json().then(function(json) {
+                        self.handleResults(json);
+                    });
                 } else {
-                    self.handleError(text);
+                    return response.json().then(function(json) {
+                        return Promise.reject(json);
+                    });
                 }
             })
             .catch(this.handleError.bind(this))
             .then(function() {
                 self.stopTimer();
+                self.removeFade();
+                self.enableButton();
+                self.req = null;
             });
 
     },

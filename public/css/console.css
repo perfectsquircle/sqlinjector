@@ -29,5 +29,10 @@
 }
 
 .results {
-    margin-top: 0.5em;
+	transition: opacity ease 0.1s; /* Fade in quickly */
+}
+
+.results.fade {
+	transition: opacity ease 1s; /* Fade out slowly */
+	opacity: 0.1;
 }

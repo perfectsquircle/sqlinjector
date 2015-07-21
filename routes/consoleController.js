@@ -28,16 +28,33 @@ exports.postConsoleSessionQuery = function(req, res, next) {
         var session = consoleSession.getSession(connection, user);
         return session.handleQuery(req.body.queryText, req.body.queryParams);
     }).then(function(result) {
-        if (result.command === "SELECT" || (result.rows && result.rows.length)) {
-            res.render("console/partial/resultsTable", {
-                result: result
-            });
-        } else {
-            res.render("console/partial/nonSelect", {
-                result: result
-            });
-        }
+        res.format({
+            "text/html": function() {
+                if (result.command === "SELECT" || (result.rows && result.rows.length)) {
+                    res.render("console/partial/resultsTable", {
+                        result: result
+                    });
+                } else {
+                    res.render("console/partial/nonSelect", {
+                        result: result
+                    });
+                }
+            },
+            "application/json": function() {
+                res.json(result);
+            }
+        });
     }).catch(function(e) {
-        res.send(e.message);
+        logger.debug(e);
+        res.format({
+            "text/html": function() {
+                res.send(500, e.message);
+            },
+            "application/json": function() {
+                res.json(500, {
+                    message: e.message
+                });
+            }
+        });
     });
 };

@@ -17,6 +17,7 @@
     "express-session": "^1.11.3",
     "hashids": "^1.0.1",
     "jade": "^1.11.0",
+    "jadeify": "^4.4.0",
     "knex": "^0.8.6",
     "lodash": "^3.10.0",
     "lru-cache": "^2.6.1",

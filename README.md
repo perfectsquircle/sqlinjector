@@ -8,23 +8,13 @@ To do
 
 ## Minimum Viable Product
 
-* Reorder list of connections
-* Bug: empty queries cause bad juju
-* Console Features
-  * Key combos
-    * Change Indent
-    * Tab key?
-  * Keep indent on newline
-
-## Minimum Viable Product
-
-* Reorder list of connections
 * Bug: empty queries cause bad juju
 * Parameters
   * Support $1 style params
   * Auto-grow and auto-prune
 * Error handling
-  * SQL errors shouldn't be AJAX errors
+  * SQL errors shouldn't be AJAX errors?
+  * Error page
 * Raw output
 * Click on result selects entire text (or copy gets the whole thing)
 * A way to destroy all active connections
@@ -33,6 +23,7 @@ To do
   * isLikelyASelect()
   * Functions ($$), strings, etc.
 * Cancel currently running query
+  * Only run 1 query at a time
 * Client code: events
 * Top nav bar
   * Dropdown menu for current connection
@@ -40,6 +31,8 @@ To do
   * Logout
 * Edit port number for connection
 * Configurable row limit
+  * Only render first n rows?
+  * Paging?
 * Find memory leak when limiting rows
 
 ## Enhancements

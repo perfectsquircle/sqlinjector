@@ -26,9 +26,9 @@ block content
             .execute      
                 fieldset
                     input.pure-button.pure-button-primary.execute-statement-button(type="submit", value="Execute", title="Execute (ctrl+enter)", tabindex=-1)
+                    span.result-stats
+                        input.timer.mono(type="text", readonly=true, value="0ms")
+                        |  &bull;
+                        input.result-count.mono(type="text", readonly=true, value="0 results")
         .result-area.flex-4.pad.scroll(style="flex-basis:400px")
-            .result-stats
-                span.timer 0ms
-                |  &bull;  
-                span.result-count 0 results
             .results
