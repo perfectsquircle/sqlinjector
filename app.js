@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 app.use(session({
-    secret: "C18A49CE-58B2-4B1B-82C1-E3883AA624E0"
+    secret: config.sessionSecret
 }));
 app.use(function(req, res, next) {
     res.locals.util = util;

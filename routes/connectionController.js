@@ -105,7 +105,7 @@ exports.connectionMiddleware = function(req, res, next) {
     if (req.params && req.params.connectionId) {
         req.params.encodedConnectionId = req.params.connectionId;
         req.params.connectionId = hashids.decode(req.params.connectionId)[0];
-        logger.debug("Decoding hashid", req.params.encodedConnectionId, "=>", req.params.connectionId);
+        logger.silly("Decoding hashid", req.params.encodedConnectionId, "=>", req.params.connectionId);
     }
     return next();
 };

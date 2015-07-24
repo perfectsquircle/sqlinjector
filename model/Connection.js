@@ -73,7 +73,7 @@ var Connection = bookshelf.Model.extend({
         var self = this;
         return this.getConnections(userId).then(function(connections) {
             return Bluebird.all(connections.map(function(connection) {
-                logger.debug(connection.id, connectionIds.indexOf(connection.id));
+                logger.silly(connection.id, connectionIds.indexOf(connection.id));
                 var position = connectionIds.indexOf(connection.id);
                 var qb = self.query();
                 return qb.where({

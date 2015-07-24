@@ -8,7 +8,6 @@ To do
 
 ## Minimum Viable Product
 
-* Bug: empty queries cause bad juju
 * Parameters
   * Support $1 style params
   * Auto-grow and auto-prune
@@ -50,6 +49,7 @@ To do
 * Schema View
   * Default values
   * Table constraints
+  * Fancier tooltips on column constraint icons
 * Admin page
   * Console for app db
 

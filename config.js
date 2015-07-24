@@ -1,8 +1,8 @@
 exports.staticAssetMaxAge = 0;
 exports.passwordHashRounds = 10;
-exports.consoleSessionTimeout = 3600000;
-exports.maxSessions = 50;
+exports.consoleSessionTimeout = 3600; // 1 hour
 exports.prettyHtml = true;
+exports.sessionSecret = require("./config.sessionSecret.js");
 
 exports.databaseTypes = {
     pg: "PostgreSQL"

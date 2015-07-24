@@ -20,7 +20,7 @@
     "jadeify": "^4.4.0",
     "knex": "^0.8.6",
     "lodash": "^3.10.0",
-    "lru-cache": "^2.6.1",
+    "node-cache": "^3.0.0",
     "pg": "^4.4.0",
     "sortablejs": "^1.2.0",
     "sqlite3": "^3.0.4",

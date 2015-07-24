@@ -1,24 +1,63 @@
 var PostgresDatabaseClient = require("../../../lib/database/dialects/pg/PostgresDatabaseClient");
 
-exports.testPostgres = function(test) {
-    var client = new PostgresDatabaseClient({
-        rowLimit: 8
-    }, {
-        host: "localhost",
+var client;
 
-        user: "postgres",
-        password: "postgres",
-        database: "booktown",
-        port: 5432
-    });
-    test.ok(client);
-    client.raw("select * from shipments;").then(function(result) {
-        test.ok(result);
-        test.equals(result.rows.length, 8);
-    }).catch(function(e) {
-        test.ok(e);
-    }).finally(function() {
-        test.done();
+module.exports = {
+    setUp: function(done) {
+        client = new PostgresDatabaseClient({
+            rowLimit: 10000
+        }, {
+            host: "localhost",
+
+            user: "postgres",
+            password: "postgres",
+            database: "dvdrental",
+            port: 5432
+        });
+        done();
+    },
+
+    tearDown: function(done) {
         client.close();
-    });
+        done();
+    },
+
+    testSelect: function(test) {
+        test.ok(client);
+        client.raw("select * from film;").then(function(result) {
+            test.ok(result);
+            test.equals(result.rows.length, 1000);
+        }).catch(function(e) {
+            if (e.code === "ECONNREFUSED") {
+                // Postgres server isn't running locally, let's just ignore this for now
+                test.ok(e);
+            } else {
+                test.ifError(e);
+            }
+        }).finally(function() {
+            test.done();
+        });
+    },
+
+    testEmptyStatement: function(test) {
+        test.ok(client);
+        client.raw("").then(function(result) {
+            test.ifError(result);
+        }).catch(function(e) {
+            test.ok(e);
+        }).finally(function() {
+            test.done();
+        });
+    },
+
+    testEmptyStatement2: function(test) {
+        test.ok(client);
+        client.raw(";").then(function(result) {
+            test.ifError(result);
+        }).catch(function(e) {
+            test.ok(e);
+        }).finally(function() {
+            test.done();
+        });
+    }
 };
