@@ -11,19 +11,19 @@ block append js
 
 block content
     .wrapper.console.flex-column
-        .statement-area.pure-form.flex-6.flex-column.pad
+        .statement-area.pure-form.flex-6.flex-column.pad(style="flex-basis:400px")
             .console-input-outer.flex.flex-1
                 .flex-5.relative.margin-right
                     fieldset
                         legend Statement
                         textarea.mono.console-input(name="query", placeholder="Statement", spellcheck="false", required, autofocus)=query
-                .flex-1        
+                .flex-1.parameters
                     fieldset
                         legend Parameters
-                        input.param.mono(type="text", placeholder="Parameter 1", name="param")
-                        input.param.mono(type="text", placeholder="Parameter 2", name="param")
-                        input.param.mono(type="text", placeholder="Parameter 3", name="param")
-            .execute      
+                        ol.params
+                            li: input.param.mono(type="text", name="param")
+                        a.clear-button.right(href="#") clear
+            .execute
                 fieldset
                     input.pure-button.pure-button-primary.execute-statement-button(type="submit", value="Execute", title="Execute (ctrl+enter)", tabindex=-1)
                     span.result-stats

@@ -4,6 +4,7 @@ var resultRowsTemplate = require("../../views/console/partial/resultsTable.jade"
 var nonSelectTemplate = require("../../views/console/partial/nonSelect.jade");
 var BasicConsoleInputView = require("./BasicConsoleInputView");
 var AdvancedConsoleInputView = require("./AdvancedConsoleInputView");
+var ParametersView = require("./ParametersView");
 
 var ConsoleView = module.exports = function() {
     this.resultArea = $(".results");
@@ -15,6 +16,8 @@ var ConsoleView = module.exports = function() {
 
     this.consoleInputView = new AdvancedConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
     //this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
+
+    this.parametersView = new ParametersView($(".parameters"));
 };
 
 ConsoleView.prototype = {
@@ -148,6 +151,6 @@ ConsoleView.prototype = {
     },
 
     getConsoleInputParams: function() {
-        return this.consoleInputView ? this.consoleInputView.getParams() : "";
+        return this.parametersView ? this.parametersView.getParams() : [];
     }
 };

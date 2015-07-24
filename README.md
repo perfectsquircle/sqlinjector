@@ -8,13 +8,6 @@ To do
 
 ## Minimum Viable Product
 
-* Parameters
-  * Support $1 style params
-  * Auto-grow and auto-prune
-* Error handling
-  * SQL errors shouldn't be AJAX errors?
-  * Error page
-* Raw output
 * Click on result selects entire text (or copy gets the whole thing)
 * A way to destroy all active connections
 * Parser
@@ -36,7 +29,8 @@ To do
 
 ## Enhancements
 
-* Support ? style params
+* Parameters
+  * Support ? style params
 * Preferences
   * Hide/show system schemas on schema browser
   * Set sample size on table/view information in schema browser
@@ -52,6 +46,7 @@ To do
   * Fancier tooltips on column constraint icons
 * Admin page
   * Console for app db
+* Raw output
 
 ## Wishlist  
 * Easily see all databases on a server (like pgadmin)

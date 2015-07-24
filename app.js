@@ -73,6 +73,7 @@ app.get("/relation/:connectionId/:connectionName?", connectionController.connect
 
 app.get("/admin", adminController.getAdminPage);
 
+app.all("*", errorController.notFound);
 app.use(errorController.errorHandler);
 
 app.listen(3001, function() {

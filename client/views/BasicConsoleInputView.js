@@ -11,17 +11,11 @@ var BasicConsoleInputView = module.exports = function($el, submit) {
     textarea.on("keydown", this.handleKeydown.bind(this));
     textarea.on("input", this.handleInput.bind(this));
 
-    var params = this.params = $el.find(".param");
-    this.$el.on("input", ".param", this.handleInput.bind(this));
+    this.storeKey = "console-" + App.connectionId;
 
-    var consoleInput = store.getConsoleInput(App.connectionId);
-    if (consoleInput) {
-        if (_.isString(consoleInput.query)) {
-            this.setValue(consoleInput.query);
-        }
-        if (_.isArray(consoleInput.params)) {
-            this.setParams(consoleInput.params);
-        }
+    var query = store.get(this.storeKey);
+    if (_.isString(query)) {
+        this.setValue(query);
     }
 };
 
@@ -41,10 +35,7 @@ BasicConsoleInputView.prototype = {
     },
 
     handleInput: function(e) {
-        store.saveConsoleInput(App.connectionId, {
-            query: this.getRawValue(),
-            params: this.getParams()
-        });
+        store.put(this.storeKey, this.getRawValue());
     },
 
     getRawValue: function() {
@@ -63,21 +54,5 @@ BasicConsoleInputView.prototype = {
 
     setValue: function(value) {
         this.textarea.val(value);
-    },
-
-    getParams: function() {
-        return _.chain(this.params).map(function(param) {
-            return param.value;
-        }).dropRightWhile(function(param) {
-            return !param.length;
-        }).value();
-    },
-
-    setParams: function(params) {
-        this.params.each(function(param, index) {
-            if (params && params[index]) {
-                param.value = params[index];
-            }
-        });
     }
 };
