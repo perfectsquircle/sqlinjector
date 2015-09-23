@@ -1,4 +1,4 @@
-var package = require("./package.json");
+var pkg = require("./package.json");
 var config = require("./config");
 var express = require("express");
 var bodyParser = require("body-parser");
@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
     res.locals._ = _;
     res.locals.config = config;
     res.locals.slug = slug;
-    res.locals.appVersion = slug(package.version);
+    res.locals.appVersion = slug(pkg.version);
     return next();
 });
 
