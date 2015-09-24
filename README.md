@@ -6,9 +6,12 @@ To do
 ====
 ## In Progress
 
+* Results
+  * Click on result selects entire text (or copy gets the whole thing)
+  * Sticky header when scrolling results
+
 ## Minimum Viable Product
 
-* Click on result selects entire text (or copy gets the whole thing)
 * A way to destroy all active connections
 * Parser
   * Comments between statements?
@@ -37,6 +40,7 @@ To do
 * Permissions (detect insert/update/delete)
 * Session storage
 * Max field length (preference?)
+  * Truncate column width for display, provide full content on copy
 * Design logo (blocky font with syringe?)
 * Sortable results
   * http://www.datatables.net/

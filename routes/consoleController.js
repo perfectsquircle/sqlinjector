@@ -9,8 +9,7 @@ exports.getConnectionConsole = function(req, res, next) {
     Connection.getConnection(connectionId, user.userId).then(function(connection) {
         var session = consoleSession.getSession(connection, user);
         res.render("console/console", {
-            connection: connection.toJSON(),
-            pageTitle: connection.get("title")
+            connection: connection.toJSON()
         });
     }).catch(function(error) {
         next(error);

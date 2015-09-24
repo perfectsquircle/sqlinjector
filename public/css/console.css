@@ -34,10 +34,21 @@
 }
 
 .results {
+	position: relative;
 	transition: opacity ease 0.1s; /* Fade in quickly */
 }
 
 .results.fade {
 	transition: opacity ease 1s; /* Fade out slowly */
 	opacity: 0.1;
+}
+
+.results .result-rows td {
+	cursor: pointer;
+}
+
+.results .result-rows td:focus {
+	background-color: rgba(255, 200, 100, 1);
+	/*color: white;*/
+	outline: none;
 }

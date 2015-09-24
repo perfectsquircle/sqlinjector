@@ -7,17 +7,20 @@ var AdvancedConsoleInputView = require("./AdvancedConsoleInputView");
 var ParametersView = require("./ParametersView");
 
 var ConsoleView = module.exports = function() {
+    _.bindAll(this);
     this.resultArea = $(".results");
     this.timer = $(".result-stats .timer");
     this.resultCount = $(".result-stats .result-count");
     this.executeStatementButton = $(".execute-statement-button");
 
-    this.executeStatementButton.on("mousedown", this.handleExecuteStatementClick.bind(this));
+    this.executeStatementButton.on("mousedown", this.handleExecuteStatementClick);
 
-    this.consoleInputView = new AdvancedConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
-    //this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input-outer"), this.postConsole.bind(this));
+    this.consoleInputView = new AdvancedConsoleInputView($(".statement-area .console-input-outer"), this.postConsole);
+    //this.consoleInputView = new BasicConsoleInputView($(".statement-area .console-input-outer"), this.postConsole);
 
     this.parametersView = new ParametersView($(".parameters"));
+
+    this.resultArea.on("copy", this.handleCopy);
 };
 
 ConsoleView.prototype = {
@@ -152,5 +155,13 @@ ConsoleView.prototype = {
 
     getConsoleInputParams: function() {
         return this.parametersView ? this.parametersView.getParams() : [];
+    },
+
+    handleCopy: function(event) {
+        var activeElement = event.target;
+        if (activeElement) {
+            event.clipboardData.setData("text/plain", activeElement.innerText);
+        }
+        event.preventDefault();
     }
 };
