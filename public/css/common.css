@@ -98,6 +98,11 @@ html, button, input, select, textarea,
     color: #AECFE5;
 }
 
+.home-menu .pure-menu-children {
+    background: #2d3e50;
+    min-width: 100%;
+}
+
 
 /*  MIXINS  */
 

@@ -17,9 +17,15 @@ html
             #nav
                 .home-menu.pure-menu.pure-menu-horizontal
                     a.pure-menu-heading(href="/") SQL Injector
-                    if pageTitle
+                    if connection
                         ul.pure-menu-list
-                            li.pure-menu-item: a.pure-menu-link(href="#")=pageTitle
+                            li.pure-menu-item.pure-menu-has-children.pure-menu-allow-hover
+                                a.pure-menu-link=connection.title
+                                ul.pure-menu-children
+                                    li.pure-menu-item
+                                        a.pure-menu-link(href="/console/" + connection.connectionId + "/" + connection.urlTitle) console
+                                    li.pure-menu-item
+                                        a.pure-menu-link(href="/schema/" + connection.connectionId + "/" + connection.urlTitle) schema
         block content
                 
         
