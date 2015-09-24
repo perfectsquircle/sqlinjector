@@ -2,7 +2,8 @@ exports.staticAssetMaxAge = 0;
 exports.passwordHashRounds = 10;
 exports.consoleSessionTimeout = 3600; // 1 hour
 exports.prettyHtml = true;
-exports.sessionSecret = require("./config.sessionSecret.js");
+exports.home = process.env.SQLINJECTOR_HOME || __dirname;
+exports.sessionSecret = require("./config.sessionSecret.js")(exports.home);
 
 exports.databaseTypes = {
     pg: "PostgreSQL"
