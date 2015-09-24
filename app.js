@@ -54,6 +54,9 @@ var errorController = require("./routes/errorController");
 
 app.get("/login", authController.getLogin);
 app.post("/login", authController.postLogin);
+app.get("/logout", authController.getLogout);
+app.get("/register", authController.getRegister);
+app.post("/register", authController.postRegister);
 
 app.use(authController.authMiddleware);
 

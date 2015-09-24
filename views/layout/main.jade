@@ -16,6 +16,8 @@ html
         block nav
             #nav
                 .home-menu.pure-menu.pure-menu-horizontal
+                    a.pure-menu-link.right(href="/logout")
+                        i.fa.fa-sign-out(title="logout")
                     a.pure-menu-heading(href="/") SQL Injector
                     if connection
                         ul.pure-menu-list

@@ -3,16 +3,19 @@ extend ../layout/modal
 block inner
     #login.panel
         .panel-heading
-            | SQL Injector
+            a.right(href="/register") Register
+            span SQL Injector
         .panel-body
             if error    
                 pre=error
             form.pure-form.pure-form-aligned(method="post", action="/login")
-                .pure-control-group
-                    label(for="username") Username
-                    input#username(type="text", name="username", value=username, required, autofocus)
-                .pure-control-group
-                    label(for="password") Password
-                    input#password(type="password", name="password", required)
-                .pure-controls 
-                    input#login-button.pure-button.pure-button-primary(type="submit", value="Login")
+                fieldset
+                    legend Login
+                    .pure-control-group
+                        label(for="username") Username
+                        input#username(type="text", name="username", value=username, required, autofocus)
+                    .pure-control-group
+                        label(for="password") Password
+                        input#password(type="password", name="password", required)
+                    .pure-controls
+                        input#login-button.pure-button.pure-button-primary(type="submit", value="Login")

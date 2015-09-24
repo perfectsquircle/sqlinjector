@@ -43,6 +43,23 @@ var User = bookshelf.Model.extend({
             user.set("password", hash);
             return user.save();
         });
+    },
+
+    create: function(username, password) {
+        assert(username && password, "Username and password are both required");
+        var user = this.forge({
+            inactiveDate: null,
+            username: username
+        });
+        return user.fetch().then(function(dbUser) {
+            if (dbUser) {
+                throw new Error("User already exists");
+            }
+            return [user, bcrypt.hashAsync(password, config.passwordHashRounds)];
+        }).spread(function(user, hash) {
+            user.set("password", hash);
+            return user.save();
+        });
     }
 });
 

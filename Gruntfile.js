@@ -60,6 +60,7 @@ module.exports = function(grunt) {
                     "app.js",
                     "bower.json",
                     "config.js",
+                    "config.sessionSecret.js",
                     "LICENSE",
                     "package.json",
                     "README.md",
@@ -74,8 +75,9 @@ module.exports = function(grunt) {
                     archive: "<%= pkg.name %>-<%= pkg.version %>.tgz",
                     mode: "tgz"
                 },
+                expand: true,
                 cwd: "dist",
-                src: "**",
+                src: "**/*",
                 dest: "."
             }
         },
