@@ -12,6 +12,7 @@ var ConsoleView = module.exports = function() {
     this.timer = $(".result-stats .timer");
     this.resultCount = $(".result-stats .result-count");
     this.executeStatementButton = $(".execute-statement-button");
+    this.limitInput = $("#limitInput");
 
     this.executeStatementButton.on("mousedown", this.handleExecuteStatementClick);
 
@@ -116,6 +117,7 @@ ConsoleView.prototype = {
         this.disableButton();
         var statement = this.getConsoleInputValue();
         var queryParams = this.getConsoleInputParams();
+        var limit = this.getLimit();
 
         this.req = fetch("/console/" + App.connectionId, {
                 credentials: "same-origin",
@@ -126,7 +128,8 @@ ConsoleView.prototype = {
                 },
                 body: JSON.stringify({
                     queryText: statement,
-                    queryParams: queryParams
+                    queryParams: queryParams,
+                    limit: limit
                 })
             }).then(function(response) {
                 if (response.status === 200) {
@@ -155,6 +158,10 @@ ConsoleView.prototype = {
 
     getConsoleInputParams: function() {
         return this.parametersView ? this.parametersView.getParams() : [];
+    },
+
+    getLimit: function() {
+        return this.limitInput.val();
     },
 
     handleCopy: function(event) {

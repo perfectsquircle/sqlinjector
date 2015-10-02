@@ -4,6 +4,7 @@ exports.consoleSessionTimeout = 3600; // 1 hour
 exports.prettyHtml = true;
 exports.home = process.env.SQLINJECTOR_HOME || __dirname;
 exports.sessionSecret = require("./config.sessionSecret.js")(exports.home);
+exports.defaultRowLimit = 1000;
 
 exports.databaseTypes = {
     pg: "PostgreSQL"

@@ -25,6 +25,9 @@ block content
                         a.clear-button.right(href="#") clear
             .execute
                 fieldset
+                    .right
+                        label(for="limitInput") Limit&nbsp;
+                        input#limitInput(type="number", value=1000, min=1, name="limit")
                     input.pure-button.pure-button-primary.execute-statement-button(type="submit", value="Execute", title="Execute (ctrl+enter)", tabindex=-1)
                     | &nbsp;
                     span.result-stats

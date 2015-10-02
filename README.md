@@ -1,9 +1,26 @@
 SQL Injector is a web-based database console intended for developers.  
+
 Installing
 ==========
 
+    npm install -g sqlinjector
+    npm install -g forever
+    
+
+Updating
+========
+
+    npm update -g sqlinjector
+
+Running
+=======
+
+    export NODE_ENV=production
+    export SQLINJECTOR_HOME=/some/good/dir
+    forever app.js
+
 To do
-====
+=====
 ## In Progress
 
 * Results
@@ -12,23 +29,11 @@ To do
 
 ## Minimum Viable Product
 
-* A way to destroy all active connections
 * Parser
-  * Comments between statements?
-  * isLikelyASelect()
+  * Comments between statements
   * Functions ($$), strings, etc.
 * Cancel currently running query
-  * Only run 1 query at a time
-* Client code: events
-* Top nav bar
-  * Dropdown menu for current connection
-  * Preferences
-  * Logout
 * Edit port number for connection
-* Configurable row limit
-  * Only render first n rows?
-  * Paging?
-* Find memory leak when limiting rows
 
 ## Enhancements
 
@@ -44,13 +49,18 @@ To do
 * Design logo (blocky font with syringe?)
 * Sortable results
   * http://www.datatables.net/
+  * Paging
 * Schema View
   * Default values
   * Table constraints
   * Fancier tooltips on column constraint icons
 * Admin page
   * Console for app db
+  * Destroy all active connections
 * Raw output
+* Top nav bar
+  * Preferences
+* Client code: events
 
 ## Wishlist  
 * Easily see all databases on a server (like pgadmin)
@@ -65,8 +75,6 @@ To do
 * Administration
 * Easy install
   * [cli](https://github.com/rlidwka/sinopia/blob/master/lib/cli.js)
-  * home folder
-  * db migration
 * Progressive loading of rows when > limit
 * Preconfigured database connections
 * Smart syntax errors
