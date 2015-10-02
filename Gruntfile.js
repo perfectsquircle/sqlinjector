@@ -23,7 +23,8 @@ module.exports = function(grunt) {
 
                     globals: {
                         App: true,
-                        fetch: true
+                        fetch: true,
+                        Promise: true
                     }
                 }
             },
