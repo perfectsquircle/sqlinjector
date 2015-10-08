@@ -1,4 +1,7 @@
 .npmignore
-.svn
+.gitignore
+.git
 test
 Gruntfile.js
+sessionSecret
+app.db
