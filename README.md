@@ -33,7 +33,6 @@ To do
   * Comments between statements
   * Functions ($$), strings, etc.
 * Cancel currently running query
-* Edit port number for connection
 
 ## Enhancements
 
