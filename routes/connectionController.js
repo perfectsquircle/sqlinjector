@@ -67,6 +67,7 @@ function saveConnection(userId, reqBody) {
         color: b.color,
         databaseType: b.databaseType,
         hostname: b.hostname,
+		port: b.port,
         database: b.database,
         username: b.username,
         password: b.password,

@@ -41,6 +41,9 @@ block inner
                         label(for="hostname") Hostname
                         input#hostname(type=text, name="hostname", value=connection.hostname, required)
                     .pure-control-group
+                        label(for="port") Port
+                        input#port(type=text, name="port", value=connection.port)
+                    .pure-control-group
                         label(for="database") Database
                         input#database(type=text, name="database", value=connection.database, required)
                     .pure-control-group

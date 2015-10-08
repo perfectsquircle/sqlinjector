@@ -31,6 +31,7 @@ var Connection = bookshelf.Model.extend({
         return DatabaseClient.createFromType(
             this.get("databaseType"), {}, {
                 host: this.get("hostname"),
+				port: this.get("port"),
                 database: this.get("database"),
                 user: this.get("username"),
                 password: this.get("password")
