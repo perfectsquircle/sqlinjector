@@ -3,10 +3,15 @@ extend ../layout/main
 block append style
     link(rel="stylesheet", href="/module/codemirror/lib/codemirror.css?v=" + appVersion)
     link(rel="stylesheet", href="/css/console.css?v=" + appVersion)
-    style.
-        .CodeMirror-gutters {
-            background-color: ##{connection.color}
-        }
+    if connection.color
+        style.
+            .CodeMirror-gutters {
+                background-color: ##{connection.color};
+            }
+
+            .CodeMirror-linenumber {
+                color: #616161;
+            }
 
 block append js
     script.
