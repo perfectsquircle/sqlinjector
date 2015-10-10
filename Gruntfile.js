@@ -89,7 +89,9 @@ module.exports = function(grunt) {
                 "!bower_components/**",
                 "!dist/**"
             ],
-            options: {}
+            options: {
+                eol: "\n"
+            }
         },
         nodeunit: {
             all: ["test/**/*.js"]
