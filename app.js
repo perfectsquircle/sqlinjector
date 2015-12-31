@@ -67,6 +67,7 @@ app.post("/create", connectionController.createConnectionPost);
 app.get("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnection);
 app.post("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnectionPost);
 app.post("/delete/:connectionId", connectionController.connectionMiddleware, connectionController.editConnectionDelete);
+app.post("/clone/:connectionId", connectionController.connectionMiddleware, connectionController.cloneConnectionPost);
 
 app.get("/console/:connectionId/:connectionName?", connectionController.connectionMiddleware, consoleController.getConnectionConsole);
 app.post("/console/:connectionId/:connectionName?", connectionController.connectionMiddleware, consoleController.postConsoleSessionQuery);

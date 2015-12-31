@@ -57,6 +57,17 @@ exports.editConnectionPost = function(req, res, next) {
     });
 };
 
+exports.cloneConnectionPost = function(req, res, next) {
+    var user = req.session.user;
+    Connection.getConnection(req.params.connectionId, user.userId).then(function(connection) {
+        var connectionJson = connection.toJSON();
+        delete connectionJson.id;
+        res.render("connection/edit", {
+            connection: connectionJson
+        });
+    }).catch(next);
+};
+
 function saveConnection(userId, reqBody) {
     var b = reqBody;
     logger.debug(b);

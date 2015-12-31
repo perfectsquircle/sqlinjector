@@ -2,7 +2,7 @@ extends ../layout/modal
 
 block append js
     script(src="/js/connectionEdit.js?v=" + appVersion)
-    
+
 block append style
     link(rel="stylesheet", href="/css/connection.css?v=" + appVersion)
 
@@ -13,7 +13,7 @@ block inner
             if isNew
                 | Create Connection
             else
-                | Edit Connection 
+                | Edit Connection
         .panel-body
             form#connection-form.pure-form.pure-form-aligned(method="post")
                 fieldset
@@ -25,7 +25,7 @@ block inner
                         label(for="name") Name
                         input#name(type=text, name="name", value=connection.name, placeholder="username@hostname/database")
                     .pure-control-group
-                        label(for="type") Type  
+                        label(for="type") Type
                         select#type(name="databaseType", value=connection.databaseType, required)
                             each databaseTypeName, databaseTypeKey in config.databaseTypes
                                 option(value=databaseTypeKey, selected=connection.databaseType === databaseTypeKey)=databaseTypeName
@@ -53,14 +53,19 @@ block inner
                         label(for="password") Password
                         input#password(type=text, name="password", value=connection.password, required)
                     //-.pure-control-group.text-center
-                        button.pure-button Test Connection  
+                        button.pure-button Test Connection
         .panel-footer.clearfix
             if !isNew
                 .left
                     form#delete-form(method="post", action="/delete/" + connection.connectionId)
-                        button.pure-button.pure-button-error(type="submit", form="delete-form", value="Delete")
-                            i.fa.fa-trash-o
-                            |  Delete
+                    form#clone-form(method="post", action="/clone/" + connection.connectionId)
+
+                    button.pure-button(type="submit", form="delete-form", value="Delete")
+                        i.fa.fa-trash-o
+                        |  Delete
+                    button.pure-button(type="submit", form="clone-form", value="Clone")
+                        i.fa.fa-copy
+                        |  Clone
             .right
                 a.pure-button(href="/") Cancel
                 button.pure-button.pure-button-primary.save-button(type="submit", form="connection-form", value="Save")

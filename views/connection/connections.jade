@@ -7,7 +7,7 @@ block content
     section.connections.panels.center
         each connection in connections
             .connection.panel(data-id=connection.connectionId)
-                .panel-heading.break-all.clearfix(style="background-color:##{connection.color}") 
+                .panel-heading.break-all.clearfix(style="background-color:##{connection.color}")
                     a.right.icon-button.pure-button-primary(href="/edit/" + connection.connectionId + "/" + connection.urlTitle)
                         i.fa.fa-pencil(title="Edit")
                     i.fa.fa-database
@@ -27,7 +27,7 @@ block content
                         span.mono=connection.username
                 .panel-footer
                     a(href="/console/" + connection.connectionId + "/" + connection.urlTitle) console
-                    |  &mdash;  
+                    |  &mdash;
                     a(href="/schema/" + connection.connectionId + "/" + connection.urlTitle) schema
                     //- |  &mdash;
                     //- a(href="/connection/" + connection.connectionId + "/queries") queries
@@ -38,5 +38,3 @@ block content
                 a(href="/create")
                     i.fa.fa-plus
                     |  Add connection
-            
-                        
