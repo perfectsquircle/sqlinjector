@@ -1,6 +1,6 @@
 {
   "name": "sqlinjector",
-  "version": "0.12.2",
+  "version": "0.13.0",
   "description": "",
   "main": "app.js",
   "dependencies": {
@@ -20,6 +20,7 @@
     "jadeify": "^4.4.0",
     "knex": "^0.8.6",
     "lodash": "^3.10.0",
+    "mssql": "^2.6.2",
     "node-cache": "^3.0.0",
     "pg": "^4.4.0",
     "sortablejs": "^1.2.0",

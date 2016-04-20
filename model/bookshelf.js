@@ -1,6 +1,6 @@
 var config = require("../config");
 var path = require("path");
-var knex = require("knex")(require("./knexfile"));
+var knex = require("knex")(require("./knexfile")[process.env.NODE_ENV || 'development']);
 var fs = require("fs");
 var databaseFile = path.join(config.home, 'app.db');
 var logger = require("../lib/logger");
