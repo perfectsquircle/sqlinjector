@@ -4,7 +4,7 @@ block append js
     script(src="/js/connections.js?v=" + appVersion)
 
 block content
-    section.connections.panels.center
+    section.connections.panels
         each connection in connections
             .connection.panel(data-id=connection.connectionId)
                 .panel-heading.break-all.clearfix(style="background-color:##{connection.color}") 
@@ -33,9 +33,9 @@ block content
                     //- a(href="/connection/" + connection.connectionId + "/queries") queries
                     //- |  &mdash;
                     //- a(href="/connection/" + connection.connectionId + "/reports") reports
-        .panel.new-connection.text-center.flex-1
+        .panel.new-connection.text-center
             .panel-body
-                a(href="/create")
+                a(href="/create", style="line-height:8")
                     i.fa.fa-plus
                     |  Add connection
             

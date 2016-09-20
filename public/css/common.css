@@ -161,15 +161,19 @@ html, button, input, select, textarea,
 /*  PANELS  */
 
 .panels {
-    width: 480px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .panel {
+  flex: 2 1 auto;
+  max-width: 480px;
+  
     box-shadow: rgba(0,0,0,0.2) 0 2px 2px;
     border-radius: 4px;
     border: 1px solid #aaa;
-    margin-bottom: 1em;
-    flex: 2;
+    margin: 0.5em;
     overflow: hidden;
     background: white;
 }
@@ -190,6 +194,7 @@ html, button, input, select, textarea,
 .panel .panel-body {
     padding: 0.5em;
     font-size: 9pt;
+    height: calc(100%);
 }
 
 /*  RESULTS  */
