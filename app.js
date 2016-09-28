@@ -84,3 +84,6 @@ app.listen(3001, function() {
 });
 
 module.exports = app;
+
+
+require("./elec");

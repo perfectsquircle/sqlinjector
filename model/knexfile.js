@@ -3,13 +3,13 @@ var config = require("../config");
 var databaseFile = path.join(config.home, 'app.db');
 
 var options = {
-    client: 'sqlite3',
+    // client: 'sqlite3',
     connection: {
         filename: databaseFile
     },
-    migrations: {
-        tableName: 'knex_migrations'
-    }
+    // migrations: {
+    //     tableName: 'knex_migrations'
+    // }
 };
 
 module.exports = {
