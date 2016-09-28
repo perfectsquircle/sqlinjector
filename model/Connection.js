@@ -1,11 +1,13 @@
-var bookshelf = require("./bookshelf");
-var DatabaseClient = require("../lib/database/DatabaseClient");
 var util = require("util");
-var hashids = require("../lib/hashids");
 var _ = require("lodash");
 var logger = require("../lib/logger");
 var slug = require("../lib/slug");
+var config = require("../config");
+var path = require("path");
 var Bluebird = require("bluebird");
+
+var Nedb = require("nedb-promise");
+var connections = new Nedb({ filename: path.join(config.home, "connections.db"), autoload: true });
 
 function getTitle(attributes) {
     if (attributes.name) {
@@ -19,72 +21,64 @@ function getTitle(attributes) {
     }
 }
 
-var Connection = bookshelf.Model.extend({
-    tableName: "connection",
-    idAttribute: "connectionId",
-
-    /**
-     * Get a client
-     * @returns {DatabaseClient}
-     */
-    getClient: function() {
-        return DatabaseClient.createFromType(
-            this.get("databaseType"), {}, {
-                host: this.get("hostname"),
-                port: this.get("port"),
-                database: this.get("database"),
-                user: this.get("username"),
-                password: this.get("password")
-            });
-    },
-
-    parse: function(attributes) {
-        attributes.title = getTitle(attributes);
-        attributes.connectionId = hashids.encode(attributes.connectionId);
-        attributes.urlTitle = slug(attributes.title);
-        return attributes;
+function parse(attributes) {
+    if (!attributes) {
+        return;
     }
-}, {
+    attributes.title = getTitle(attributes);
+    attributes.connectionId = attributes._id;
+    attributes.urlTitle = slug(attributes.title);
+    return attributes;
+}
 
-    getConnection: function(connectionId, userId) {
-        return this.forge({
-            connectionId: connectionId,
-            ownerId: userId,
-            inactiveDate: null
-        }).fetch().then(function(connection) {
-            if (!connection) {
-                throw new Error("No such connection");
-            }
-            return connection;
-        });
+function parseAll(collection) {
+    collection.forEach(parse);
+    return collection;
+}
+
+var Connection = {
+
+    getConnection: function (connectionId, userId) {
+        return Bluebird.resolve(connections.findOne({
+            _id: connectionId,
+            ownerId: userId
+        })).then(parse);
     },
 
-    getConnections: function(userId) {
-
-        return this.query({
-            where: {
-                inactiveDate: null,
-                ownerId: userId
-            },
-            orderBy: "position"
-        }).fetchAll();
+    getConnections: function (userId) {
+        return Bluebird.resolve(connections.find({
+            ownerId: userId
+        })).then(parseAll);
     },
 
-    sort: function(connectionIds, userId) {
-        var self = this;
-        return this.getConnections(userId).then(function(connections) {
-            return Bluebird.all(connections.map(function(connection) {
-                logger.silly(connection.id, connectionIds.indexOf(connection.id));
-                var position = connectionIds.indexOf(connection.id);
-                var qb = self.query();
-                return qb.where({
-                    connectionId: hashids.decode(connection.id)[0]
-                }).update({
-                    position: position
-                });
-            }));
-        });
+    sort: function (connectionIds, userId) {
+        // var self = this;
+        // return this.getConnections(userId).then(function(connections) {
+        //     return Bluebird.all(connections.map(function(connection) {
+        //         logger.silly(connection.id, connectionIds.indexOf(connection.id));
+        //         var position = connectionIds.indexOf(connection.id);
+        //         var qb = self.query();
+        //         return qb.where({
+        //             connectionId: hashids.decode(connection.id)[0]
+        //         }).update({
+        //             position: position
+        //         });
+        //     }));
+        // });
+        return Bluebird.resolve(); // TODO: implement
+    },
+
+    create: function (attributes) {
+        return connections.insert(attributes);
+    },
+
+    update: function (attributes) {
+        return connections.update({ _id: attributes._id }, attributes);
+    },
+    
+    delete: function (connectionId, userId) {
+        return connections.remove({ _id: connectionId, ownerId: userId });
     }
-});
+};
 
 module.exports = Connection;

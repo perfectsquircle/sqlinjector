@@ -11,9 +11,9 @@ exports.getConnectionSchema = function(req, res, next) {
         return [session, connection, session.getSchema()];
     }).spread(function(session, connection, schema) {
         res.render("schema/schema", {
-            connection: connection.toJSON(),
+            connection: connection,
             schemata: schema,
-            databaseName: connection.get("database")
+            databaseName: connection.database
         });
     }).catch(function(error) {
         next(error);
