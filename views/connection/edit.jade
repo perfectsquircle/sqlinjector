@@ -39,19 +39,19 @@ block inner
                 fieldset
                     .pure-control-group
                         label(for="hostname") Hostname
-                        input#hostname(type=text, name="hostname", value=connection.hostname, required)
+                        input#hostname(type="text", name="hostname", value=connection.hostname, required)
                     .pure-control-group
                         label(for="port") Port
-                        input#port(type=text, name="port", value=connection.port)
+                        input#port(type="text", name="port", value=connection.port)
                     .pure-control-group
                         label(for="database") Database
-                        input#database(type=text, name="database", value=connection.database, required)
+                        input#database(type="text", name="database", value=connection.database, required)
                     .pure-control-group
                         label(for="username") Username
-                        input#username(type=text, name="username", value=connection.username, required)
+                        input#username(type="text", name="username", value=connection.username, required)
                     .pure-control-group
                         label(for="password") Password
-                        input#password(type=text, name="password", value=connection.password, required)
+                        input#password(type="password", name="password", value=connection.password, required)
                     //-.pure-control-group.text-center
                         button.pure-button Test Connection  
         .panel-footer.clearfix

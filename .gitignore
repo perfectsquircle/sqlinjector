@@ -1,4 +1,4 @@
 node_modules
 sessionSecret
-app.db
+*.db
 

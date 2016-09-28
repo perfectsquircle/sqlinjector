@@ -47,7 +47,6 @@ app.use(function(req, res, next) {
 
 var authController = require("./routes/authController");
 var consoleController = require("./routes/consoleController");
-var adminController = require("./routes/adminController");
 var connectionController = require("./routes/connectionController");
 var schemaController = require("./routes/schemaController");
 var errorController = require("./routes/errorController");
@@ -64,17 +63,15 @@ app.get("/", connectionController.getConnections);
 app.post("/sort/connections", connectionController.sortConnectionsPost);
 app.get("/create", connectionController.createConnection);
 app.post("/create", connectionController.createConnectionPost);
-app.get("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnection);
-app.post("/edit/:connectionId/:connectionName?", connectionController.connectionMiddleware, connectionController.editConnectionPost);
-app.post("/delete/:connectionId", connectionController.connectionMiddleware, connectionController.editConnectionDelete);
+app.get("/edit/:connectionId/:connectionName?", connectionController.editConnection);
+app.post("/edit/:connectionId/:connectionName?", connectionController.editConnectionPost);
+app.post("/delete/:connectionId", connectionController.editConnectionDelete);
 
-app.get("/console/:connectionId/:connectionName?", connectionController.connectionMiddleware, consoleController.getConnectionConsole);
-app.post("/console/:connectionId/:connectionName?", connectionController.connectionMiddleware, consoleController.postConsoleSessionQuery);
+app.get("/console/:connectionId/:connectionName?", consoleController.getConnectionConsole);
+app.post("/console/:connectionId/:connectionName?", consoleController.postConsoleSessionQuery);
 
-app.get("/schema/:connectionId/:connectionName?", connectionController.connectionMiddleware, schemaController.getConnectionSchema);
-app.get("/relation/:connectionId/:connectionName?", connectionController.connectionMiddleware, schemaController.getRelationInformation);
-
-app.get("/admin", adminController.getAdminPage);
+app.get("/schema/:connectionId/:connectionName?", schemaController.getConnectionSchema);
+app.get("/relation/:connectionId/:connectionName?", schemaController.getRelationInformation);
 
 app.all("*", errorController.notFound);
 app.use(errorController.errorHandler);

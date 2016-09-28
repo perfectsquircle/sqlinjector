@@ -7,10 +7,11 @@ exports.getConnectionConsole = function(req, res, next) {
     var user = req.session.user;
     var connectionId = req.params.connectionId;
 
-    Connection.getConnection(connectionId, user.userId).then(function(connection) {
+    Connection.getConnection(connectionId, user.userId).then(function (connection) {
+        if (!connection) return next();
         var session = consoleSession.getSession(connection, user);
         res.render("console/console", {
-            connection: connection.toJSON()
+            connection: connection
         });
     }).catch(function(error) {
         next(error);
@@ -28,12 +29,13 @@ exports.postConsoleSessionQuery = function(req, res, next) {
 
     var user = req.session.user;
     var connectionId = req.params.connectionId;
-    Connection.getConnection(connectionId, user.userId).then(function(connection) {
+    Connection.getConnection(connectionId, user.userId).then(function (connection) {
+        if (!connection) return next();        
         var session = consoleSession.getSession(connection, user);
         return session.handleQuery(queryText, queryParams, {
             rowLimit: limit
         });
-    }).then(function(result) {
+    }).then(function (result) {
         res.format({
             "text/html": function() {
                 if (result.command === "SELECT" || (result.rows && result.rows.length)) {
