@@ -50,14 +50,28 @@ var consoleController = require("./routes/consoleController");
 var connectionController = require("./routes/connectionController");
 var schemaController = require("./routes/schemaController");
 var errorController = require("./routes/errorController");
+var electron;
 
-app.get("/login", authController.getLogin);
-app.post("/login", authController.postLogin);
-app.get("/logout", authController.getLogout);
-app.get("/register", authController.getRegister);
-app.post("/register", authController.postRegister);
+try {
+    electron = require("electron");
+} catch (e) {}    
 
-app.use(authController.authMiddleware);
+if (!electron) {
+    app.get("/login", authController.getLogin);
+    app.post("/login", authController.postLogin);
+    app.get("/logout", authController.getLogout);
+    app.get("/register", authController.getRegister);
+    app.post("/register", authController.postRegister);
+
+    app.use(authController.authMiddleware);
+} else {
+    app.use(function (req, res, next) {
+        req.session.user = {
+            userId: 1, username: "electron"
+        };
+        next();
+    });
+}
 
 app.get("/", connectionController.getConnections);
 app.post("/sort/connections", connectionController.sortConnectionsPost);

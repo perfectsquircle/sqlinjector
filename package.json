@@ -2,7 +2,7 @@
   "name": "sqlinjector",
   "version": "0.14.0",
   "description": "",
-  "main": "app.js",
+  "main": "elec.js",
   "dependencies": {
     "bcryptjs": "^2.2.0",
     "bluebird": "^2.9.30",
