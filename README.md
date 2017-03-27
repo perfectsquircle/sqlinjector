@@ -1,3 +1,5 @@
+# ❗️❗️❗️ This project is all but abandoned. I suggest using [DBeaver](http://dbeaver.jkiss.org/) as an alternative. ❗️❗️❗️
+
 SQL Injector is a web-based database console intended for developers.  
 
 Installing
