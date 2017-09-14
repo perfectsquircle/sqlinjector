@@ -1,7 +1,6 @@
 var Connection = require("../model/Connection");
 var assert = require("assert");
 var logger = require("../lib/logger");
-var _ = require("lodash");
 
 exports.getConnections = function(req, res, next) {
     var user = req.session.user;
