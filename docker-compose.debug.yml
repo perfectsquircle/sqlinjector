@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+  sqlinjector:
+    image: sqlinjector
+    build: .
+    environment:
+      NODE_ENV: development
+    ports:
+      - 3001:3001
+      - 9229:9229
+    volumes:
+      - .:/usr/src/app
+    command: node --inspect app.js
