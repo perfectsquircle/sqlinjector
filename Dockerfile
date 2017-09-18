@@ -1,14 +1,27 @@
-FROM node:6-alpine
+FROM node:6-alpine as build
 
-ENV NODE_ENV production
+ENV NODE_ENV delevopment
 
 WORKDIR /usr/src/app
 
-COPY ["package.json", "npm-shrinkwrap.json*", "./"]
+COPY . . 
 
-RUN npm install --production --silent && mv node_modules ../
+RUN npm install --silent
+RUN npm install grunt-cli -g --silent
 
-COPY . .
+# -------------
+
+FROM build AS publish
+
+RUN grunt dist
+
+# -------------
+
+FROM publish AS deploy
+
+ENV NODE_ENV production
+
+COPY --from=publish  /usr/src/app/dist .
 
 EXPOSE 3001
 

@@ -1,6 +1,7 @@
 var $ = require("domtastic");
 var util = require("util");
 var Sortable = require("sortablejs");
+var fetch = require("whatwg-fetch");
 
 var ConnectionsView = module.exports = function($el) {
     var sortable = Sortable.create($el[0], {

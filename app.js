@@ -20,12 +20,6 @@ app.use(compression());
 app.use(express.static(path.join(__dirname, "public"), {
     maxAge: config.staticAssetMaxAge
 }));
-app.use("/module", express.static(path.join(__dirname, "node_modules"), {
-    maxAge: config.staticAssetMaxAge
-}));
-app.use("/vendor", express.static(path.join(__dirname, "bower_components"), {
-    maxAge: config.staticAssetMaxAge
-}));
 app.use("/js", browserify("./client", {
     transform: ["jadeify"]
 }));

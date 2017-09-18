@@ -1,4 +1,5 @@
 var querystring = require("querystring");
+var fetch = require("whatwg-fetch");
 
 var RelationInformationView = module.exports = function($el) {
     this.$el = $el;

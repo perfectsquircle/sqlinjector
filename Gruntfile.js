@@ -32,7 +32,6 @@ module.exports = function(grunt) {
                 src: [
                     "**/*.js",
                     "!node_modules/**",
-                    "!bower_components/**",
                     "!client/**",
                     "!public/**",
                     "!dist/**"
@@ -59,7 +58,6 @@ module.exports = function(grunt) {
                     "routes/**",
                     "views/**",
                     "app.js",
-                    "bower.json",
                     "config.js",
                     "config.sessionSecret.js",
                     "LICENSE",
@@ -86,7 +84,6 @@ module.exports = function(grunt) {
             files: [
                 "**/*.js",
                 "!node_modules/**",
-                "!bower_components/**",
                 "!dist/**"
             ],
             options: {
@@ -97,14 +94,6 @@ module.exports = function(grunt) {
             all: ["test/**/*.js"]
         },
         shell: {
-            bower: {
-                command: "bower install --production",
-                options: {
-                    execOptions: {
-                        cwd: "dist"
-                    }
-                }
-            },
             npm: {
                 command: "npm install --production",
                 options: {

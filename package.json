@@ -7,7 +7,6 @@
     "bcryptjs": "^2.2.0",
     "bluebird": "^2.9.30",
     "body-parser": "^1.13.2",
-    "bookshelf": "^0.8.0",
     "browserify-middleware": "^6.0.0",
     "codemirror": "^5.4.0",
     "compression": "^1.5.1",
@@ -15,14 +14,16 @@
     "domtastic": "^0.10.1",
     "express": "^4.13.1",
     "express-session": "^1.11.3",
+    "font-awesome": "^4.7.0",
     "jade": "^1.11.0",
     "jadeify": "^4.4.0",
-    "knex": "^0.8.6",
     "lodash": "^3.10.0",
     "nedb-promise": "^2.0.0",
     "node-cache": "^3.0.0",
     "pg": "^4.4.0",
+    "purecss": "^1.0.0",
     "sortablejs": "^1.2.0",
+    "whatwg-fetch": "^2.0.3",
     "winston": "^1.0.1"
   },
   "devDependencies": {
@@ -37,7 +38,8 @@
     "grunt-shell": "^1.1.2"
   },
   "scripts": {
-    "test": "grunt"
+    "test": "grunt",
+    "postinstall": "./copyToVendor.sh"
   },
   "author": "",
   "license": "MIT"
