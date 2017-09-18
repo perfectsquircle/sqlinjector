@@ -6,16 +6,21 @@ var assert = require("assert");
 var path = require("path");
 
 var Nedb = require("nedb-promise");
-var users = new Nedb({ filename: path.join(config.home, "users.db"), autoload: true });
+var users = new Nedb({
+    filename: path.join(config.home, "users.db"),
+    autoload: true
+});
 
 function parse(user) {
-    if (!user) return;
+    if (!user) {
+        return;
+    }
     user.userId = user._id;
     return user;
 }
 
 var User = {
-    getUser: function (username) {
+    getUser: function(username) {
         return Bluebird.resolve(users.findOne({
             username: username
         })).then(parse);
@@ -57,16 +62,18 @@ var User = {
                 throw new Error("User already exists");
             }
             return bcrypt.hashAsync(password, config.passwordHashRounds);
-        }).then(function (hash) {
+        }).then(function(hash) {
             return users.insert({
                 username: username,
                 password: hash
             });
-        });
+        }).then(parse);
     },
 
-    update: function (attributes) { 
-        return users.update({ _id: attributes._id }, attributes);
+    update: function(attributes) {
+        return users.update({
+            _id: attributes._id
+        }, attributes).then(parse);
     }
 };
 

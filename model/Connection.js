@@ -7,7 +7,10 @@ var path = require("path");
 var Bluebird = require("bluebird");
 
 var Nedb = require("nedb-promise");
-var connections = new Nedb({ filename: path.join(config.home, "connections.db"), autoload: true });
+var connections = new Nedb({
+    filename: path.join(config.home, "connections.db"),
+    autoload: true
+});
 
 function getTitle(attributes) {
     if (attributes.name) {
@@ -38,20 +41,20 @@ function parseAll(collection) {
 
 var Connection = {
 
-    getConnection: function (connectionId, userId) {
+    getConnection: function(connectionId, userId) {
         return Bluebird.resolve(connections.findOne({
             _id: connectionId,
             ownerId: userId
         })).then(parse);
     },
 
-    getConnections: function (userId) {
+    getConnections: function(userId) {
         return Bluebird.resolve(connections.find({
             ownerId: userId
         })).then(parseAll);
     },
 
-    sort: function (connectionIds, userId) {
+    sort: function(connectionIds, userId) {
         // var self = this;
         // return this.getConnections(userId).then(function(connections) {
         //     return Bluebird.all(connections.map(function(connection) {
@@ -68,16 +71,21 @@ var Connection = {
         return Bluebird.resolve(); // TODO: implement
     },
 
-    create: function (attributes) {
-        return connections.insert(attributes);
+    create: function(attributes) {
+        return connections.insert(attributes).then(parse);
     },
 
-    update: function (attributes) {
-        return connections.update({ _id: attributes._id }, attributes);
+    update: function(attributes) {
+        return connections.update({
+            _id: attributes._id
+        }, attributes).then(parse);
     },
-    
-    delete: function (connectionId, userId) {
-        return connections.remove({ _id: connectionId, ownerId: userId });
+
+    delete: function(connectionId, userId) {
+        return connections.remove({
+            _id: connectionId,
+            ownerId: userId
+        }).then(parse);
     }
 };
 

@@ -3,22 +3,24 @@ var Connection = require("../model/Connection");
 var consoleSession = require("../lib/consoleSession");
 var config = require("../config");
 
-exports.getConnectionConsole = function(req, res, next) {
+exports.getConnectionConsole = function (req, res, next) {
     var user = req.session.user;
     var connectionId = req.params.connectionId;
 
     Connection.getConnection(connectionId, user.userId).then(function (connection) {
-        if (!connection) return next();
+        if (!connection) {
+            return next();
+        }
         var session = consoleSession.getSession(connection, user);
         res.render("console/console", {
             connection: connection
         });
-    }).catch(function(error) {
+    }).catch(function (error) {
         next(error);
     });
 };
 
-exports.postConsoleSessionQuery = function(req, res, next) {
+exports.postConsoleSessionQuery = function (req, res, next) {
     if (!req.body || !req.body.queryText) {
         return next("Malformed request");
     }
@@ -30,14 +32,16 @@ exports.postConsoleSessionQuery = function(req, res, next) {
     var user = req.session.user;
     var connectionId = req.params.connectionId;
     Connection.getConnection(connectionId, user.userId).then(function (connection) {
-        if (!connection) return next();        
+        if (!connection) {
+            return next();
+        }
         var session = consoleSession.getSession(connection, user);
         return session.handleQuery(queryText, queryParams, {
             rowLimit: limit
         });
     }).then(function (result) {
         res.format({
-            "text/html": function() {
+            "text/html": function () {
                 if (result.command === "SELECT" || (result.rows && result.rows.length)) {
                     res.render("console/partial/resultsTable", {
                         result: result
@@ -48,17 +52,17 @@ exports.postConsoleSessionQuery = function(req, res, next) {
                     });
                 }
             },
-            "application/json": function() {
+            "application/json": function () {
                 res.json(result);
             }
         });
-    }).catch(function(e) {
+    }).catch(function (e) {
         logger.debug(e);
         res.format({
-            "text/html": function() {
+            "text/html": function () {
                 res.send(500, e.message);
             },
-            "application/json": function() {
+            "application/json": function () {
                 res.status(500).json({
                     message: e.message
                 });

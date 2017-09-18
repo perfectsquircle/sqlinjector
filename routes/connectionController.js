@@ -42,7 +42,9 @@ exports.createConnectionPost = function(req, res, next) {
 exports.editConnection = function(req, res, next) {
     var user = req.session.user;
     Connection.getConnection(req.params.connectionId, user.userId).then(function(connection) {
-        if (!connection) return next();
+        if (!connection) {
+            return next();
+        }
         res.render("connection/edit", {
             connection: connection
         });
@@ -77,7 +79,7 @@ function saveConnection(userId, reqBody) {
         attributes._id = b.connectionId;
         return Connection.update(attributes);
     } else {
-        return Connection.create(attributes);    
+        return Connection.create(attributes);
     }
 }
 
