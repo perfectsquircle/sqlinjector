@@ -95,7 +95,7 @@ module.exports = function(grunt) {
         },
         shell: {
             npm: {
-                command: "npm install --production",
+                command: "npm install --production --silent",
                 options: {
                     execOptions: {
                         cwd: "dist"

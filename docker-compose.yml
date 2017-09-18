@@ -1,8 +1,0 @@
-version: '2.1'
-
-services:
-  sqlinjector:
-    image: sqlinjector
-    build: .
-    ports:
-      - 3001:3001

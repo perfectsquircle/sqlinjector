@@ -1,4 +1,3 @@
 node_modules
-sessionSecret
-*.db
+home
 public/vendor

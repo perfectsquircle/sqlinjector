@@ -2,7 +2,7 @@ exports.staticAssetMaxAge = 0;
 exports.passwordHashRounds = 10;
 exports.consoleSessionTimeout = 3600; // 1 hour
 exports.prettyHtml = true;
-exports.home = process.env.SQLINJECTOR_HOME || __dirname;
+exports.home = process.env.SQLINJECTOR_HOME || require("path").join(__dirname, "home");
 exports.sessionSecret = require("./config.sessionSecret.js")(exports.home);
 exports.defaultRowLimit = 1000;
 
