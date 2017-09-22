@@ -39,7 +39,8 @@
   },
   "scripts": {
     "test": "grunt",
-    "postinstall": "./copyToVendor.sh"
+    "postinstall": "./copyToVendor.sh",
+    "start": "node app.js"
   },
   "author": "",
   "license": "MIT"

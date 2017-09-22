@@ -45,7 +45,7 @@ module.exports = function(grunt) {
             dist: [
                 "sqlinjector.log",
                 "dist",
-                "<%= pkg.name %>-<%= pkg.version %>.tgz"
+                "<%= pkg.name %>-<%= pkg.version %>.tgz",
             ]
         },
         copy: {
@@ -95,7 +95,15 @@ module.exports = function(grunt) {
         },
         shell: {
             npm: {
-                command: "npm install --production --silent",
+                command: "npm install --production --silent --ignore-scripts",
+                options: {
+                    execOptions: {
+                        cwd: "dist"
+                    }
+                }
+            },
+            makeHome: {
+                command: "mkdir -p home",
                 options: {
                     execOptions: {
                         cwd: "dist"
